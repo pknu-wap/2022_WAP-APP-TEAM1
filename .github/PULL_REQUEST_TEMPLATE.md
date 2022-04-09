@@ -1,3 +1,9 @@
+<!-- 선행
+- Assignees 지정
+- Labels 지정 (옵션)
+- Milestone 지정 (옵션)
+-->
+
 ## What is the PR?
 <!-- 요약
 - Resolve: #{이슈넘버} // 해결한 이슈
