@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "storemanagement"
 include ':app'
+include ':base'
