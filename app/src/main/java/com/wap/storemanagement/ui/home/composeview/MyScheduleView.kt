@@ -2,6 +2,7 @@ package com.wap.storemanagement.ui.home.composeview
 
 import android.graphics.drawable.Icon
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
@@ -12,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -63,12 +65,21 @@ fun BaseProfile(name: String) {
 fun Profile(name: String){
     val size = dimensionResource(id = R.dimen.profile_size)
     val cornerRadius = dimensionResource(id = R.dimen.profile_corner_radius)
+    val borderWidth = dimensionResource(id = R.dimen.profile_border)
+
+    val borderColor = colorResource(id = R.color.profile_border)
+    val backgroundColor = colorResource(id = R.color.profile_background)
 
     Box(
         modifier = Modifier
             .size(size)
             .clip(RoundedCornerShape(cornerRadius))
-            .background(Color.White)
+            .border(
+                width = borderWidth,
+                color = borderColor,
+                shape = RoundedCornerShape(cornerRadius)
+            )
+            .background(backgroundColor)
     ) {
         AlignTextCenterColumn{
             Text(text = name)

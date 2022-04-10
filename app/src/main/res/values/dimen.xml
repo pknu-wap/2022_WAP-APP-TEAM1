@@ -8,6 +8,7 @@
     <dimen name="home_scheduleCard_height">48dp</dimen>
 
     <dimen name="profile_size">40dp</dimen>
+    <dimen name="profile_border">2dp</dimen>
     <dimen name="profile_corner_radius">10dp</dimen>
     <dimen name="profile_top_margin">@dimen/small_margin</dimen>
     <dimen name="profile_bottom_margin">@dimen/small_margin</dimen>
