@@ -2,9 +2,6 @@
 
 ![android]![android studio]![kotlin]
 
-## 발표자료
-- [시작발표](https://www.miricanvas.com/v/1102pbc)
-
 <!-- 앱 로고, 다운로드 링크 등 생기면 추가할 공간 -->
 
 <!-- TABLE OF CONTENTS -->
