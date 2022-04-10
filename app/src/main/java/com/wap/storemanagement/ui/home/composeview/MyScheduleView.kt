@@ -12,48 +12,62 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlin.math.round
+import com.wap.storemanagement.R
+
 
 @Composable
-fun ScheduleCard() {
+fun ScheduleCard(name: String, time: String) {
+    val width = dimensionResource(id = R.dimen.home_scheduleCard_width)
+    val height = dimensionResource(id = R.dimen.home_scheduleCard_height)
+
     Row(
         modifier = Modifier
-            .width(360.dp)
-            .height(48.dp)
+            .width(width)
+            .height(height)
     ) {
-        BaseProfile(marginX = 12, marginY = 4, "은빈")
-        BaseTimeSchedule(marginY = 4, Time = "12:00 - 18:00")
+        BaseProfile(name)
+        BaseTimeSchedule(time)
         PinchButton()
     }
 }
 
 @Composable
-fun BaseProfile(marginX: Int, marginY: Int, name: String) {
+fun BaseProfile(name: String) {
+    val topMargin = dimensionResource(id = R.dimen.profile_top_margin)
+    val bottomMargin = dimensionResource(id = R.dimen.profile_bottom_margin)
+    val leftMargin = dimensionResource(id = R.dimen.profile_left_margin)
+    val rightMargin = dimensionResource(id = R.dimen.profile_right_margin)
+
     Column() {
-        Spacer(modifier = Modifier.size(marginY.dp))
+        Spacer(modifier = Modifier.size(topMargin))
 
         Row {
-            Spacer(modifier = Modifier.size(marginX.dp))
+            Spacer(modifier = Modifier.size(leftMargin))
 
             Profile(name)
 
-            Spacer(modifier = Modifier.size(marginX.dp))
+            Spacer(modifier = Modifier.size(rightMargin))
         }
 
-        Spacer(modifier = Modifier.size(marginY.dp))
+        Spacer(modifier = Modifier.size(bottomMargin))
     }
 }
 
 @Composable
 fun Profile(name: String){
+    val size = dimensionResource(id = R.dimen.profile_size)
+    val cornerRadius = dimensionResource(id = R.dimen.profile_corner_radius)
+
     Box(
         modifier = Modifier
-            .size(40.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .size(size)
+            .clip(RoundedCornerShape(cornerRadius))
             .background(Color.White)
     ) {
         AlignTextCenterColumn{
@@ -63,21 +77,26 @@ fun Profile(name: String){
 }
 
 @Composable
-fun BaseTimeSchedule(marginY: Int, Time: String) {
+fun BaseTimeSchedule(Time: String) {
+    val width = dimensionResource(id = R.dimen.home_timeSchedule_width)
+    val height = dimensionResource(id = R.dimen.home_scheduleCard_height)
+    val topMargin = dimensionResource(id = R.dimen.home_timeSchedule_top_margin)
+    val bottomMargin = dimensionResource(id = R.dimen.home_timeSchedule_bottom_margin)
+
     Column(
         modifier = Modifier
-            .width(232.dp)
-            .height(48.dp)
+            .width(width)
+            .height(height)
     ) {
-        Spacer(modifier = Modifier.size(marginY.dp))
+        Spacer(modifier = Modifier.size(topMargin))
         
         Row(
-            modifier = Modifier.height(48.dp - (marginY.dp * 2))
+            modifier = Modifier.height(height - (topMargin + bottomMargin))
         ) {
             InputTime(time = Time)
         }
         
-        Spacer(modifier = Modifier.size(marginY.dp))
+        Spacer(modifier = Modifier.size(bottomMargin))
     }
 }
 
@@ -95,8 +114,11 @@ fun InputTime(time: String){
 
 @Composable
 fun PinchButton(){
+    val size = dimensionResource(id = R.dimen.home_pinchButton_size)
+
     Surface(
-        modifier = Modifier.size(50.dp)
+        modifier = Modifier
+            .size(size)
     ){
         //Icon goes here
     }
@@ -106,5 +128,5 @@ fun PinchButton(){
 @Preview
 @Composable
 fun PreviewGreeting() {
-    ScheduleCard()
+    ScheduleCard("은빈","12:00 - 18:00")
 }
