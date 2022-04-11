@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">storemanagement</string>
+
+    <string name="home_off_member_title">이 시간에 일이 없는 사람</string>
 </resources>
