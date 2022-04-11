@@ -22,10 +22,22 @@ fun OffMemberTitle() {
     )
 }
 
+@Composable
+fun OffMemberLazyList() {
+    val scrollState = rememberLazyListState()
+
+    LazyRow(state = scrollState) {
+        // TODO: member list중 일정에 일이 없는 사람의 이름을 가져와서 profile에 적용
+
+        item { BaseProfile(name = "Dd") }
+    }
+}
+
 @Preview
 @Composable
 fun Ad() {
     Column() {
         OffMemberTitle()
+        OffMemberLazyList()
     }
 }
