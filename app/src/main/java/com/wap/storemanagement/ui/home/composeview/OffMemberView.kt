@@ -35,7 +35,7 @@ fun OffMemberLazyList() {
 
 @Preview
 @Composable
-fun Ad() {
+private fun OffMemberPreview() {
     Column() {
         OffMemberTitle()
         OffMemberLazyList()
