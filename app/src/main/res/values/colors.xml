@@ -10,9 +10,13 @@
     <color name="white">#FFFFFFFF</color>
     <color name="sky_blue">#87CEFA</color>
     <color name="gray">#939393</color>
+    <color name="dark_blue">#2F84B9</color>
 
     <color name="profile_border">@color/sky_blue</color>
     <color name="profile_background">@color/white</color>
+
+    <color name="calendar_today">@color/sky_blue</color>
+    <color name="calendar_select">@color/dark_blue</color>
 
     <color name="gray_text">@color/gray</color>
 </resources>
