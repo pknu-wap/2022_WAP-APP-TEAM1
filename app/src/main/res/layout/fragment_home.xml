@@ -17,11 +17,21 @@
             app:mcv_selectionColor="@color/dark_blue"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/schedule_title"
+            android:text="시간표"
+            android:layout_marginHorizontal="@dimen/large_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/calendar_home"
+            />
+
         <com.wap.storemanagement.ui.home.composeview.MyScheduleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/calendar_home" />
+            app:layout_constraintTop_toBottomOf="@id/schedule_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
