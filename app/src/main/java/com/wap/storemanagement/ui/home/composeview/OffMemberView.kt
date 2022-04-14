@@ -22,6 +22,13 @@ class OffMemberView @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
+        OffMemberView()
+    }
+}
+
+@Composable
+fun OffMemberView() {
+    Column() {
         OffMemberTitle()
         OffMemberLazyList()
     }
