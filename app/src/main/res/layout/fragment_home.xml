@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/schedule_title"
-            android:text="시간표"
+            android:text="@string/home_schedule_title"
             android:layout_marginHorizontal="@dimen/large_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
