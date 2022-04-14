@@ -35,7 +35,6 @@ class MyScheduleView @JvmOverloads constructor(
     override fun Content() {
         ScheduleCard(name = "이름", time = "13:00 - 14:00")
     }
-
 }
 
 @Composable
@@ -58,15 +57,12 @@ fun ScheduleCard(name: String, time: String) {
 fun BaseProfile(name: String) {
     val topMargin = dimensionResource(id = R.dimen.profile_top_margin)
     val bottomMargin = dimensionResource(id = R.dimen.profile_bottom_margin)
-    val leftMargin = dimensionResource(id = R.dimen.profile_left_margin)
     val rightMargin = dimensionResource(id = R.dimen.profile_right_margin)
 
     Column() {
         Spacer(modifier = Modifier.size(topMargin))
 
         Row {
-            Spacer(modifier = Modifier.size(leftMargin))
-
             Profile(name)
 
             Spacer(modifier = Modifier.size(rightMargin))
