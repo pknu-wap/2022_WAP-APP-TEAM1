@@ -42,6 +42,13 @@
             android:background="@color/division_line"
             app:layout_constraintTop_toBottomOf="@id/schedule"/>
 
+        <com.wap.storemanagement.ui.home.composeview.OffMemberView
+            android:id="@+id/off_member"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/division_line"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
