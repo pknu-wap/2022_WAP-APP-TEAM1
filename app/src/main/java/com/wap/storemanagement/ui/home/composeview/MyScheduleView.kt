@@ -1,6 +1,8 @@
 package com.wap.storemanagement.ui.home.composeview
 
+import android.content.Context
 import android.graphics.drawable.Icon
+import android.util.AttributeSet
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -13,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
@@ -22,6 +25,18 @@ import androidx.compose.ui.unit.sp
 import kotlin.math.round
 import com.wap.storemanagement.R
 
+class MyScheduleView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyle: Int = 0
+):AbstractComposeView(context, attrs, defStyle) {
+
+    @Composable
+    override fun Content() {
+        ScheduleCard(name = "이름", time = "13:00 - 14:00")
+    }
+
+}
 
 @Composable
 fun ScheduleCard(name: String, time: String) {
