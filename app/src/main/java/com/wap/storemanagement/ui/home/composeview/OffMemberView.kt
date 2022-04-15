@@ -14,18 +14,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.wap.storemanagement.R
 
-class OffMemberView @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyle: Int = 0
-): AbstractComposeView(context, attrs, defStyle) {
-
-    @Composable
-    override fun Content() {
-        OffMemberView()
-    }
-}
-
 @Composable
 fun OffMemberView() {
     Column() {
