@@ -9,7 +9,7 @@
         android:layout_marginHorizontal="@dimen/body_margin">
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-            android:id="@+id/calendar_home"
+            android:id="@+id/calendar_home_calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:mcv_headerTextAppearance="@style/CalendarWidgetHeader"
@@ -19,34 +19,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/schedule_title"
+            android:id="@+id/tv_home_scheduleTitle"
             android:text="@string/home_schedule_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/calendar_home"
+            app:layout_constraintTop_toBottomOf="@id/calendar_home_calendar"
             />
 
         <com.wap.storemanagement.ui.home.composeview.MyScheduleView
-            android:id="@+id/schedule"
+            android:id="@+id/compose_home_schedule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/schedule_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_home_scheduleTitle" />
 
         <View
-            android:id="@+id/division_line"
+            android:id="@+id/divider_home_divisionLine"
             android:layout_width="match_parent"
             android:layout_height="@dimen/division_line"
             android:background="@color/division_line"
-            app:layout_constraintTop_toBottomOf="@id/schedule"/>
+            app:layout_constraintTop_toBottomOf="@id/compose_home_schedule"/>
 
         <com.wap.storemanagement.ui.home.composeview.OffMemberView
-            android:id="@+id/off_member"
+            android:id="@+id/compose_home_offMember"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/division_line"/>
+            app:layout_constraintTop_toBottomOf="@id/divider_home_divisionLine"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
