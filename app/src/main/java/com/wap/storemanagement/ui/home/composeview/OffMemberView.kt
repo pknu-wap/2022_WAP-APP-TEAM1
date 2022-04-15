@@ -12,6 +12,14 @@ import androidx.compose.ui.unit.sp
 import com.wap.storemanagement.R
 
 @Composable
+fun OffMemberView() {
+    Column() {
+        OffMemberTitle()
+        OffMemberLazyList()
+    }
+}
+
+@Composable
 fun OffMemberTitle() {
     val title = stringResource(id = R.string.home_off_member_title)
     val textColor = colorResource(id = R.color.gray_text)

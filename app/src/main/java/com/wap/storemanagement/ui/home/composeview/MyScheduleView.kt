@@ -1,27 +1,19 @@
 package com.wap.storemanagement.ui.home.composeview
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlin.math.round
 import com.wap.storemanagement.R
-
 
 @Composable
 fun ScheduleCard(name: String, time: String) {
@@ -43,15 +35,12 @@ fun ScheduleCard(name: String, time: String) {
 fun BaseProfile(name: String) {
     val topMargin = dimensionResource(id = R.dimen.profile_top_margin)
     val bottomMargin = dimensionResource(id = R.dimen.profile_bottom_margin)
-    val leftMargin = dimensionResource(id = R.dimen.profile_left_margin)
     val rightMargin = dimensionResource(id = R.dimen.profile_right_margin)
 
     Column() {
         Spacer(modifier = Modifier.size(topMargin))
 
         Row {
-            Spacer(modifier = Modifier.size(leftMargin))
-
             Profile(name)
 
             Spacer(modifier = Modifier.size(rightMargin))

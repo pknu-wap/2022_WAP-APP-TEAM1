@@ -19,4 +19,5 @@
     <color name="calendar_select">@color/dark_blue</color>
 
     <color name="gray_text">@color/gray</color>
+    <color name="division_line">@color/gray</color>
 </resources>
