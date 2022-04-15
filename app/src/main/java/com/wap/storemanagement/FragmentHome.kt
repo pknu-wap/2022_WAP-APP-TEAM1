@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.wap.base.BaseFragment
 import com.wap.storemanagement.databinding.FragmentHomeBinding
+import com.wap.storemanagement.ui.home.composeview.OffMemberView
 import com.wap.storemanagement.ui.home.composeview.ScheduleCard
 
 class FragmentHome: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
@@ -16,6 +17,10 @@ class FragmentHome: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         binding.composeHomeSchedule.setContent {
             ScheduleCard("", "")
+        }
+
+        binding.composeHomeOffMember.setContent {
+            OffMemberView()
         }
     }
 
