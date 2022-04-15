@@ -27,7 +27,7 @@
             app:layout_constraintTop_toBottomOf="@id/calendar_home_calendar"
             />
 
-        <com.wap.storemanagement.ui.home.composeview.MyScheduleView
+        <androidx.compose.ui.platform.ComposeView
             android:id="@+id/compose_home_schedule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
