@@ -3,6 +3,8 @@ package com.wap.storemanagement.ui.home.composeview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -14,6 +16,17 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.wap.storemanagement.R
+import com.wap.storemanagement.data.entity.ScheduleEntity
+
+@Composable
+fun ScheduleCards(schedules: List<ScheduleEntity>) {
+
+    LazyColumn {
+        items(schedules) { schedule ->
+            ScheduleCard(name = schedule.contents, time = "hjk")
+        }
+    }
+}
 
 @Composable
 fun ScheduleCard(name: String, time: String) {
