@@ -5,6 +5,8 @@ buildscript {
         compose_version = "1.0.0"
         viewmodel_version = "2.4.1"
         hilt_version = "2.40"
+        activity_ktx_version = "1.4.0"
+        fragment_ktx_version = "1.4.1"
     }
     repositories {
         google()
