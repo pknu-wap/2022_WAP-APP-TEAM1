@@ -26,17 +26,15 @@ class ScheduleViewModel @Inject constructor(dispatcherProvider: DispatcherProvid
     @RequiresApi(Build.VERSION_CODES.O)
     fun fetchSchedules(date: CalendarDay) {
         //TODO : repository에 요청
-        var currentScheduleList: MutableList<Schedule> = mutableListOf()
+        val currentScheduleList: MutableList<Schedule> = mutableListOf()
         _schedules.value = FakeFactory.createSchedules()
 
         _schedules.value?.forEach { schedule ->
-            if (isCurrentDateSchedule(date, schedule)){
+            if (isCurrentDateSchedule(date, schedule)) {
                 currentScheduleList.add(schedule)
             }
-
-        currentDateSchedules.value = currentScheduleList
-
         }
+        currentDateSchedules.value = currentScheduleList
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
