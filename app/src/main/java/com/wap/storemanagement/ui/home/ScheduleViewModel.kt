@@ -19,7 +19,8 @@ import javax.inject.Inject
 class ScheduleViewModel @Inject constructor(dispatcherProvider: DispatcherProvider): BaseViewModel(dispatcherProvider) {
 
     private var _schedules: MutableLiveData<List<Schedule>> = MutableLiveData()
-    val currentDateSchedules:MutableLiveData<List<Schedule>> = MutableLiveData()
+    private val _currentDateSchedules: MutableLiveData<List<Schedule>> = MutableLiveData()
+    val currentDataSchedules: LiveData<List<Schedule>> = _currentDateSchedules
 
     //TODO : 달력에서 날짜를 선택했을 때 날짜에 해당하는 모든 일정을 반환
     //FIXME : 날짜 자료형 확정
@@ -34,7 +35,7 @@ class ScheduleViewModel @Inject constructor(dispatcherProvider: DispatcherProvid
                 currentScheduleList.add(schedule)
             }
         }
-        currentDateSchedules.value = currentScheduleList
+        _currentDateSchedules.value = currentScheduleList
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
