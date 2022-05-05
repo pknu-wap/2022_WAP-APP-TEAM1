@@ -16,14 +16,14 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.wap.storemanagement.R
-import com.wap.storemanagement.data.entity.ScheduleEntity
+import com.wap.storemanagement.data.entity.Schedule
 
 @Composable
-fun ScheduleCards(schedules: List<ScheduleEntity>) {
+fun ScheduleCards(schedules: List<Schedule>) {
 
     LazyColumn {
         items(schedules) { schedule ->
-            ScheduleCard(name = schedule.contents, time = "hjk")
+            ScheduleCard(name = "schedule.userID.Name?", time = "hjk")
         }
     }
 }
