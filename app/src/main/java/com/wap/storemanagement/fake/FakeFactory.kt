@@ -9,9 +9,7 @@ import java.time.LocalDateTime
 @RequiresApi(Build.VERSION_CODES.O)
 object FakeFactory {
 
-    fun createSchedules() : List<Schedule> {
-
-        return listOf(
+    fun createSchedules() = listOf(
             Schedule(
                 scheduleId = 0L,
                 startTime = LocalDateTime.of(2022, 5, 5, 12, 0),
