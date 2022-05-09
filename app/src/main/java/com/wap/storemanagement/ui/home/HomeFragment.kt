@@ -28,7 +28,7 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun setScheduleView() {
-        viewModel.schedules.observe(requireActivity()) { schedules ->
+        viewModel.currentDataSchedules.observe(requireActivity()) { schedules ->
             binding.composeHomeSchedule.setContent {
                 ScheduleCards(schedules = schedules)
             }
