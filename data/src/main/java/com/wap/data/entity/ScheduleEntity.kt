@@ -19,7 +19,7 @@ import androidx.room.PrimaryKey
     ]
 )
 data class ScheduleEntity(
-    @PrimaryKey(autoGenerate = true) val scheduleId: Long,
+    @PrimaryKey(autoGenerate = true) val scheduleId: Long = 0,
     val startTime: Long,
     val endTime: Long,
     val color: String,
