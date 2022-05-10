@@ -1,4 +1,4 @@
-package com.wap.storemanagement.data.entity
+package com.wap.domain.entity
 
 data class ToDo(
     val toDoId: Long, // 기본키
