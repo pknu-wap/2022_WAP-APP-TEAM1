@@ -12,12 +12,13 @@ jobs:
 
     steps:
       - name: Clone repo
-        uses: actions/checkout@master
+        uses: actions/checkout@develop
         with:
           fetch-depth: 1
 
       - name: ktlint
-        uses: ScaCap/action-ktlint@master
+        uses: ScaCap/action-ktlint@develop
         with:
           github_token: ${{ secrets.TOKEN }}
-          reporter: github-pr-check # Change reporter
+          reporter: github-pr-review # Change reporter
+          android: true
