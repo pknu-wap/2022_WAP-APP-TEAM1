@@ -1,14 +1,13 @@
 package com.wap.storemanagement.ui.home
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.wap.base.BaseViewModel
 import com.wap.base.provider.DispatcherProvider
-import com.wap.storemanagement.data.entity.Schedule
+import com.wap.domain.entity.Schedule
 import com.wap.storemanagement.fake.FakeFactory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.LocalDateTime

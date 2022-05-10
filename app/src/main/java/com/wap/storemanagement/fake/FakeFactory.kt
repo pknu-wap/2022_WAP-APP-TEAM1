@@ -2,8 +2,8 @@ package com.wap.storemanagement.fake
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.wap.storemanagement.data.entity.Schedule
-import com.wap.storemanagement.data.entity.WeekType
+import com.wap.domain.entity.Schedule
+import com.wap.domain.entity.WeekType
 import java.time.LocalDateTime
 
 @RequiresApi(Build.VERSION_CODES.O)

@@ -1,7 +1,7 @@
-package com.wap.storemanagement.data.local
+package com.wap.domain.local
 
-import com.wap.storemanagement.data.entity.Schedule
-import com.wap.storemanagement.data.entity.WeekType
+import com.wap.domain.entity.Schedule
+import com.wap.domain.entity.WeekType
 import java.time.LocalDateTime
 
 interface ScheduleLocalDataSource {
