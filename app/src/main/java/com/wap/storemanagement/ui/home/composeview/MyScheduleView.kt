@@ -15,8 +15,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.wap.domain.entity.Schedule
 import com.wap.storemanagement.R
-import com.wap.storemanagement.data.entity.Schedule
 
 @Composable
 fun ScheduleCards(schedules: List<Schedule>) {

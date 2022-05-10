@@ -9,3 +9,5 @@ dependencyResolutionManagement {
 rootProject.name = "storemanagement"
 include ':app'
 include ':base'
+include ':data'
+include ':domain'

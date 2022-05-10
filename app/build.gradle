@@ -41,6 +41,8 @@ android {
 
 dependencies {
     implementation project(path: ':base')
+    implementation project(path: ':data')
+    implementation project(path: ':domain')
 
     // hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
