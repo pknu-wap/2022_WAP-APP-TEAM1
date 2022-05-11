@@ -1,4 +1,4 @@
-package com.wap.data.db
+package com.wap.data.db.dao
 
 import androidx.room.*
 import com.wap.data.entity.ScheduleEntity
