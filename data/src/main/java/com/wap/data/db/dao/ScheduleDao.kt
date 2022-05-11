@@ -18,7 +18,10 @@ interface ScheduleDao {
     @Update
     fun updateSchedule(schedule: ScheduleEntity)
 
-    @Delete
-    fun deleteSchedule(schedule: ScheduleEntity)
+    @Query("DELETE FROM SCHEDULE WHERE user_id = :userId")
+    fun deleteSchedulesByUserId(userId: Long)
+
+    @Query("DELETE FROM SCHEDULE WHERE startTime =:startTime")
+    fun deleteScheduleByStartTime(startTime: Long)
 
 }
