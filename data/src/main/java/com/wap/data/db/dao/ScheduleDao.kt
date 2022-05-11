@@ -9,7 +9,7 @@ interface ScheduleDao {
     @Insert
     fun insertSchedule(schedule: ScheduleEntity)
 
-    @Query("SELECT * FROM SCHEDULE WhERE user_id = :userId")
+    @Query("SELECT * FROM SCHEDULE WHERE user_id = :userId")
     fun getScheduleByUserId(userId: Long)
 
     @Query("SELECT * FROM SCHEDULE WHERE startTime = :startTime")
