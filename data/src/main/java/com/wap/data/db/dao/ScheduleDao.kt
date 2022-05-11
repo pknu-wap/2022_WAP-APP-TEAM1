@@ -10,10 +10,10 @@ interface ScheduleDao {
     fun insertSchedule(schedule: ScheduleEntity)
 
     @Query("SELECT * FROM SCHEDULE WHERE user_id = :userId")
-    fun getScheduleByUserId(userId: Long)
+    fun findSchedulesByUserId(userId: Long): List<ScheduleEntity>?
 
     @Query("SELECT * FROM SCHEDULE WHERE startTime = :startTime")
-    fun getScheduleByDate(startTime: Long)
+    fun findSchedulesByStartDate(startTime: Long): List<ScheduleEntity>?
 
     @Update
     fun updateSchedule(schedule: ScheduleEntity)
