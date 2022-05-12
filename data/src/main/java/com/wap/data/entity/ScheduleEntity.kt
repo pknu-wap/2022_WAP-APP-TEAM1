@@ -1,10 +1,7 @@
 package com.wap.data.entity
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Entity(
@@ -16,7 +13,8 @@ import androidx.room.PrimaryKey
             childColumns = ["user_id"],
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ],
+    indices = [Index(value = ["user_id"])]
 )
 data class ScheduleEntity(
     @PrimaryKey(autoGenerate = true) val scheduleId: Long = 0,
