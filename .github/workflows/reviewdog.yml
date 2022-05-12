@@ -2,6 +2,9 @@ name: reviewdog
 
 on: [pull_request]
 
+env:
+  GITHUB_TOKEN: ${{ secrets.TOKEN}}
+
 jobs:
   ktlint:
     name: Check Code Quality
@@ -16,6 +19,5 @@ jobs:
       - name: ktlint
         uses: ScaCap/action-ktlint@master
         with:
-          github_token: ${{ secrets.TOKEN }}
           reporter: github-pr-review # Change reporter
           android: true
