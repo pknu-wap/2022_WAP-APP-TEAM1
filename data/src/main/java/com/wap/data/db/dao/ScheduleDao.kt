@@ -2,6 +2,7 @@ package com.wap.data.db.dao
 
 import androidx.room.*
 import com.wap.data.entity.ScheduleEntity
+import java.time.LocalDateTime
 
 @Dao
 interface ScheduleDao {
@@ -16,7 +17,7 @@ interface ScheduleDao {
     fun findSchedulesByUserId(userId: Long): List<ScheduleEntity>?
 
     @Query("SELECT * FROM SCHEDULE WHERE startTime = :startTime")
-    fun findSchedulesByStartDate(startTime: Long): List<ScheduleEntity>?
+    fun findSchedulesByStartDate(startTime: LocalDateTime): List<ScheduleEntity>?
 
 
     // Update
@@ -29,6 +30,6 @@ interface ScheduleDao {
     fun deleteSchedulesByUserId(userId: Long)
 
     @Query("DELETE FROM SCHEDULE WHERE startTime =:startTime")
-    fun deleteScheduleByStartTime(startTime: Long)
+    fun deleteScheduleByStartTime(startTime: LocalDateTime)
 
 }
