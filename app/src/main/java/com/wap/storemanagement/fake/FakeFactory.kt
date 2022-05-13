@@ -19,7 +19,7 @@ object FakeFactory {
             userId = 1L
         ),
         Schedule(
-            scheduleId = 0L,
+            scheduleId = 1L,
             startTime = LocalDateTime.of(2022, 5, 6, 15, 0),
             endTime = LocalDateTime.of(2022, 5, 6, 17, 0),
             color = "",
