@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.wap.storemanagement.R
 import java.time.LocalDateTime
+import java.time.LocalTime
 
 
 @Composable
@@ -30,14 +31,12 @@ fun ScheduleView() {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-private fun ScheduleCard(_startTime: LocalDateTime, _endTime: LocalDateTime) {
-    val startTime = _startTime.toLocalTime().toString()
-    val endTime = _endTime.toLocalTime().toString()
+private fun ScheduleCard(startTime: LocalTime, endTime: LocalTime) {
     val checkBoxColor = colorResource(id = R.color.schedule_check_box)
     val grayTextColor = colorResource(id = R.color.gray_text)
+    val checkedState = remember { mutableStateOf(false) }
 
     BaseSurface {
-        val checkedState = remember { mutableStateOf(false) }
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -45,14 +44,14 @@ private fun ScheduleCard(_startTime: LocalDateTime, _endTime: LocalDateTime) {
         ) {
             BaseTimeColumn {
                 Text(text = "시작", fontSize = 18.sp, color = grayTextColor)
-                Text(text = startTime, fontSize = 22.sp)
+                Text(text = startTime.toString(), fontSize = 22.sp)
             }
 
             Text(text = "-", fontSize = 22.sp)
 
             BaseTimeColumn {
                 Text(text = "종료", fontSize = 18.sp, color = grayTextColor)
-                Text(text = endTime, fontSize = 22.sp)
+                Text(text = endTime.toString(), fontSize = 22.sp)
             }
 
             Checkbox(checked = checkedState.value, onCheckedChange = {checkedState.value = it},
@@ -119,10 +118,7 @@ private fun PreviewScheduleView() {
                 .padding(12.dp)
         ) {
             AddScheduleCard()
-            ScheduleCard(LocalDateTime.of(2022, 5, 5, 12, 0),
-                LocalDateTime.of(2022, 5, 5, 15, 0))
+            ScheduleCard(LocalTime.of(12, 0), LocalTime.of(12, 20))
         }
     }
-
-
 }
