@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.wap.storemanagement.R
 
@@ -13,7 +14,7 @@ fun AddScheduleTopAppBar() {
     val backgroundColor = colorResource(id = R.color.schedule_top_appbar_background)
 
     TopAppBar(
-        title = { Text(text = "일정 추가 / 수정") },
+        title = { Text(text = stringResource(R.string.schedule_top_appbar_title)) },
         backgroundColor = backgroundColor,
         navigationIcon = {
             IconButton(onClick = { /*TODO*/ }) {
