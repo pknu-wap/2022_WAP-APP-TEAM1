@@ -20,6 +20,7 @@
 
     <color name="gray_text">@color/gray</color>
     <color name="division_line">@color/gray</color>
+    <color name="save_button_background">@color/dark_blue</color>
 
     <color name="schedule_top_appbar_background">@color/white</color>
     <color name="schedule_add_circle_icon">@color/dark_blue</color>
