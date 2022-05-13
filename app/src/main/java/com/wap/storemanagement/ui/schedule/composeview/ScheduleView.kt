@@ -26,15 +26,14 @@ import com.wap.storemanagement.R
 import com.wap.storemanagement.fake.FakeFactory
 import java.time.LocalTime
 
-
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ScheduleView(schedules: List<Schedule>) {
 
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(12.dp),
-        contentPadding = PaddingValues(vertical = 12.dp)
-
+        contentPadding = PaddingValues(vertical = 12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(
             items = schedules,
@@ -44,6 +43,7 @@ fun ScheduleView(schedules: List<Schedule>) {
             val endTime = schedule.endTime.toLocalTime()
             ScheduleCard(startTime, endTime)
         }
+        item { AddScheduleCard() }
     }
 }
 
@@ -131,9 +131,8 @@ private fun BaseTimeColumn(block: @Composable () -> Unit) {
 @Composable
 private fun PreviewScheduleView() {
     Column(
-        modifier = Modifier.fillMaxSize().padding(12.dp).background(Color.White)
-    ) {
+        modifier = Modifier.fillMaxWidth().height(80.dp)
+    ){
         ScheduleView(FakeFactory.createSchedules())
-        AddScheduleCard()
     }
 }
