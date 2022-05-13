@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.wap.storemanagement.R
-import java.time.LocalDateTime
 import java.time.LocalTime
 
 
@@ -43,14 +42,20 @@ private fun ScheduleCard(startTime: LocalTime, endTime: LocalTime) {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             BaseTimeColumn {
-                Text(text = "시작", fontSize = 18.sp, color = grayTextColor)
+                Text(
+                    text = stringResource(id = R.string.schedule_schedule_card_start_text),
+                    fontSize = 18.sp,
+                    color = grayTextColor)
                 Text(text = startTime.toString(), fontSize = 22.sp)
             }
 
             Text(text = "-", fontSize = 22.sp)
 
             BaseTimeColumn {
-                Text(text = "종료", fontSize = 18.sp, color = grayTextColor)
+                Text(
+                    text = stringResource(id = R.string.schedule_schedule_card_end_text),
+                    fontSize = 18.sp,
+                    color = grayTextColor)
                 Text(text = endTime.toString(), fontSize = 22.sp)
             }
 

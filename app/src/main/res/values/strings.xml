@@ -6,4 +6,6 @@
 
     <string name="schedule_top_appbar_title">일정 추가 / 수정</string>
     <string name="schedule_add_card_text">Add Schedule</string>
+    <string name="schedule_schedule_card_start_text">시작</string>
+    <string name="schedule_schedule_card_end_text">종료</string>
 </resources>
