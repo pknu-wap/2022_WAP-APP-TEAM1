@@ -22,7 +22,10 @@ import com.wap.storemanagement.R
 fun ScheduleCards(schedules: List<Schedule>) {
 
     LazyColumn {
-        items(schedules) { schedule ->
+        items(
+            items = schedules,
+            key = { schedule -> schedule.scheduleId }
+        ) { schedule ->
             ScheduleCard(name = "schedule.userID.Name?", time = "hjk")
         }
     }
