@@ -4,6 +4,8 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -19,13 +21,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.wap.domain.entity.Schedule
 import com.wap.storemanagement.R
+import com.wap.storemanagement.fake.FakeFactory
 import java.time.LocalTime
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScheduleView() {
+fun ScheduleView(schedules: List<Schedule>) {
 
+    LazyColumn {
+        items(
+            items = schedules,
+            key = { schedule -> schedule.scheduleId }
+        ) { schedule ->
+            val startTime = schedule.startTime.toLocalTime()
+            val endTime = schedule.endTime.toLocalTime()
+            ScheduleCard(startTime, endTime)
+        }
+    }
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -111,19 +126,5 @@ private fun BaseTimeColumn(block: @Composable () -> Unit) {
 @Preview
 @Composable
 private fun PreviewScheduleView() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-            .background(color = Color.White)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(12.dp)
-        ) {
-            AddScheduleCard()
-            ScheduleCard(LocalTime.of(12, 0), LocalTime.of(12, 20))
-        }
-    }
+    ScheduleView(FakeFactory.createSchedules())
 }
