@@ -31,7 +31,11 @@ import java.time.LocalTime
 @Composable
 fun ScheduleView(schedules: List<Schedule>) {
 
-    LazyColumn {
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        contentPadding = PaddingValues(vertical = 12.dp)
+
+    ) {
         items(
             items = schedules,
             key = { schedule -> schedule.scheduleId }
@@ -126,5 +130,10 @@ private fun BaseTimeColumn(block: @Composable () -> Unit) {
 @Preview
 @Composable
 private fun PreviewScheduleView() {
-    ScheduleView(FakeFactory.createSchedules())
+    Column(
+        modifier = Modifier.fillMaxSize().padding(12.dp).background(Color.White)
+    ) {
+        ScheduleView(FakeFactory.createSchedules())
+        AddScheduleCard()
+    }
 }
