@@ -3,6 +3,7 @@ package com.wap.storemanagement.ui.schedule.composeview
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -32,7 +33,7 @@ fun ScheduleView(schedules: List<Schedule>) {
 
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(12.dp),
-        contentPadding = PaddingValues(vertical = 12.dp),
+        contentPadding = PaddingValues(vertical = 12.dp, horizontal = 1.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(
@@ -102,13 +103,18 @@ private fun AddScheduleCard() {
 
 @Composable
 private fun BaseSurface(block: @Composable () -> Unit) {
+    val shape = RoundedCornerShape(7.dp)
+    val borderColor = colorResource(id = R.color.schedule_base_surface_border)
+
     Surface(
         elevation = 4.dp,
-        shape = RoundedCornerShape(7.dp),
+        shape = shape,
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp)
             .background(color = Color.White)
+            .border(width = 1.dp, color = borderColor, shape = shape
+            )
     ) {
         block()
     }
@@ -131,7 +137,9 @@ private fun BaseTimeColumn(block: @Composable () -> Unit) {
 @Composable
 private fun PreviewScheduleView() {
     Column(
-        modifier = Modifier.fillMaxWidth().height(80.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(80.dp)
     ){
         ScheduleView(FakeFactory.createSchedules())
     }
