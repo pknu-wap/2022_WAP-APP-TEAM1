@@ -25,4 +25,5 @@
     <color name="schedule_top_appbar_background">@color/white</color>
     <color name="schedule_add_circle_icon">@color/dark_blue</color>
     <color name="schedule_check_box">@color/dark_blue</color>
+    <color name="schedule_base_surface_border">@color/gray</color>
 </resources>
