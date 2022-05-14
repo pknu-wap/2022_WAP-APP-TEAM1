@@ -1,6 +1,5 @@
 package com.wap.storemanagement.ui.schedule.composeview
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Button
@@ -33,7 +32,7 @@ fun SaveButton() {
             contentColor = buttonContentColor
         )
     ) {
-            Text(text = buttonText, fontSize = 18.sp)
+        Text(text = buttonText, fontSize = 18.sp)
     }
 }
 

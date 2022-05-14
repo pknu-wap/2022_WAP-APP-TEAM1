@@ -28,7 +28,6 @@ fun CheckDateView(selectDay: LocalDateTime) {
 fun LocalDateTime.localDateTimeFormatter(): String =
     format(DateTimeFormatter.ofPattern("yyyy년 M월 dd일 (E)"))
 
-
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
