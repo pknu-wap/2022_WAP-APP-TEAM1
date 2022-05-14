@@ -11,27 +11,28 @@ import com.wap.storemanagement.ui.schedule.composeview.*
 import java.time.LocalDateTime
 
 @RequiresApi(Build.VERSION_CODES.O)
-class AddEditScheduleActivity: BaseActivity<ActivityScheduleBinding>(R.layout.activity_schedule) {
+class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.activity_schedule) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         binding.composeScheduleTopAppbar.setContent { AddEditScheduleTopAppBar() }
-        SetCheckDateView()
-        SetScrollScheduleView()
+        setCheckDateView()
+        setScrollScheduleView()
         binding.composeScheduleSaveButton.setContent { SaveButton() }
     }
 
-    private fun SetCheckDateView() {
+    private fun setCheckDateView() {
         binding.composeScheduleCheckDate.setContent {
             // FIXME : ViewModel 작성 후 연결
-            CheckDateView(selectDay = LocalDateTime.of(2222,2,22,22,2))
+            CheckDateView(selectDay = LocalDateTime.of(2222, 2, 22, 22, 2))
         }
     }
 
-    private fun SetScrollScheduleView() {
+    private fun setScrollScheduleView() {
         // FIXME : ViewModel 작성 후 연결
         binding.composeScheduleScrollSchedule.setContent {
-            ScheduleView(schedules = FakeFactory.createSchedules()) }
+            ScheduleView(schedules = FakeFactory.createSchedules())
+        }
     }
 }

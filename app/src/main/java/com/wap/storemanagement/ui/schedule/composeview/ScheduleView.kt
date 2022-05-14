@@ -65,7 +65,8 @@ private fun ScheduleCard(startTime: LocalTime, endTime: LocalTime) {
                 Text(
                     text = stringResource(id = R.string.schedule_schedule_card_start_text),
                     fontSize = 18.sp,
-                    color = grayTextColor)
+                    color = grayTextColor
+                )
                 Text(text = startTime.toString(), fontSize = 22.sp)
             }
 
@@ -75,12 +76,16 @@ private fun ScheduleCard(startTime: LocalTime, endTime: LocalTime) {
                 Text(
                     text = stringResource(id = R.string.schedule_schedule_card_end_text),
                     fontSize = 18.sp,
-                    color = grayTextColor)
+                    color = grayTextColor
+                )
                 Text(text = endTime.toString(), fontSize = 22.sp)
             }
 
-            Checkbox(checked = checkedState.value, onCheckedChange = {checkedState.value = it},
-            colors = CheckboxDefaults.colors(checkBoxColor))
+            Checkbox(
+                checked = checkedState.value,
+                onCheckedChange = {checkedState.value = it},
+                colors = CheckboxDefaults.colors(checkBoxColor)
+            )
         }
     }
 }
@@ -113,8 +118,7 @@ private fun BaseSurface(block: @Composable () -> Unit) {
             .fillMaxWidth()
             .height(80.dp)
             .background(color = Color.White)
-            .border(width = 1.dp, color = borderColor, shape = shape
-            )
+            .border(width = 1.dp, color = borderColor, shape = shape)
     ) {
         block()
     }

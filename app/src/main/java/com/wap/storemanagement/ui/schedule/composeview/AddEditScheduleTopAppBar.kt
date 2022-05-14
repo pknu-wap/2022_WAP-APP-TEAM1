@@ -14,7 +14,8 @@ fun AddEditScheduleTopAppBar() {
     val backgroundColor = colorResource(id = R.color.schedule_top_appbar_background)
 
     TopAppBar(
-        title = { Text(text = stringResource(R.string.schedule_top_appbar_title)) },
+        title = {
+            Text(text = stringResource(R.string.schedule_top_appbar_title)) },
         backgroundColor = backgroundColor,
         navigationIcon = {
             IconButton(onClick = { /*TODO*/ }) {
