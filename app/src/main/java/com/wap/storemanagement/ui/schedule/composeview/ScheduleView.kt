@@ -100,7 +100,7 @@ private fun AddScheduleCard() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Icon(Icons.Default.AddCircle,"add_schedule", tint = addCircleIconColor)
+            Icon(Icons.Default.AddCircle, "add_schedule", tint = addCircleIconColor)
             Text(text = addCardText)
         }
     }
@@ -143,7 +143,7 @@ private fun PreviewScheduleView() {
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp)
-    ){
+    ) {
         ScheduleView(FakeFactory.createSchedules())
     }
 }
