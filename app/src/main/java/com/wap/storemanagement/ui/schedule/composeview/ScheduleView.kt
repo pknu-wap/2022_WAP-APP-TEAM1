@@ -83,7 +83,7 @@ private fun ScheduleCard(startTime: LocalTime, endTime: LocalTime) {
 
             Checkbox(
                 checked = checkedState.value,
-                onCheckedChange = {checkedState.value = it},
+                onCheckedChange = { checkedState.value = it },
                 colors = CheckboxDefaults.colors(checkBoxColor)
             )
         }
@@ -127,8 +127,7 @@ private fun BaseSurface(block: @Composable () -> Unit) {
 @Composable
 private fun BaseTimeColumn(block: @Composable () -> Unit) {
     Column(
-        modifier = Modifier
-            .fillMaxHeight(),
+        modifier = Modifier.fillMaxHeight(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
