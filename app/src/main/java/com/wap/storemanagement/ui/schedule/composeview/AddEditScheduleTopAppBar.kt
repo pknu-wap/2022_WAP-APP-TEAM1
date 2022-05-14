@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.wap.storemanagement.R
 
 @Composable
-fun AddScheduleTopAppBar() {
+fun AddEditScheduleTopAppBar() {
     val backgroundColor = colorResource(id = R.color.schedule_top_appbar_background)
 
     TopAppBar(
@@ -30,5 +30,5 @@ fun AddScheduleTopAppBar() {
 @Preview
 @Composable
 fun PreviewAddScheduleTopAppBar(){
-    AddScheduleTopAppBar()
+    AddEditScheduleTopAppBar()
 }

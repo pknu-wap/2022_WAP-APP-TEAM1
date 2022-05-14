@@ -7,19 +7,16 @@ import com.wap.base.BaseActivity
 import com.wap.storemanagement.R
 import com.wap.storemanagement.databinding.ActivityScheduleBinding
 import com.wap.storemanagement.fake.FakeFactory
-import com.wap.storemanagement.ui.schedule.composeview.AddScheduleTopAppBar
-import com.wap.storemanagement.ui.schedule.composeview.CheckDateView
-import com.wap.storemanagement.ui.schedule.composeview.SaveButton
-import com.wap.storemanagement.ui.schedule.composeview.ScheduleView
+import com.wap.storemanagement.ui.schedule.composeview.*
 import java.time.LocalDateTime
 
 @RequiresApi(Build.VERSION_CODES.O)
-class AddScheduleActivity: BaseActivity<ActivityScheduleBinding>(R.layout.activity_schedule) {
+class AddEditScheduleActivity: BaseActivity<ActivityScheduleBinding>(R.layout.activity_schedule) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        binding.composeScheduleTopAppbar.setContent { AddScheduleTopAppBar() }
+        binding.composeScheduleTopAppbar.setContent { AddEditScheduleTopAppBar() }
         SetCheckDateView()
         SetScrollScheduleView()
         binding.composeScheduleSaveButton.setContent { SaveButton() }
