@@ -5,8 +5,8 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
 
+    <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="sky_blue">#87CEFA</color>
     <color name="gray">#939393</color>
@@ -20,4 +20,10 @@
 
     <color name="gray_text">@color/gray</color>
     <color name="division_line">@color/gray</color>
+    <color name="save_button_background">@color/dark_blue</color>
+
+    <color name="schedule_top_appbar_background">@color/white</color>
+    <color name="schedule_add_circle_icon">@color/dark_blue</color>
+    <color name="schedule_check_box">@color/dark_blue</color>
+    <color name="schedule_base_surface_border">@color/gray</color>
 </resources>
