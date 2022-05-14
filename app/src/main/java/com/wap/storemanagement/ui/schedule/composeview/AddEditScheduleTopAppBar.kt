@@ -1,6 +1,9 @@
 package com.wap.storemanagement.ui.schedule.composeview
 
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.runtime.Composable
@@ -15,11 +18,12 @@ fun AddEditScheduleTopAppBar() {
 
     TopAppBar(
         title = {
-            Text(text = stringResource(R.string.schedule_top_appbar_title)) },
+            Text(text = stringResource(R.string.schedule_top_appbar_title))
+        },
         backgroundColor = backgroundColor,
         navigationIcon = {
             IconButton(onClick = { /*TODO*/ }) {
-                    Icon(Icons.Default.ArrowBackIos, "ArrowBack")
+                Icon(Icons.Default.ArrowBackIos, "ArrowBack")
             }
         },
         actions = {
@@ -30,6 +34,6 @@ fun AddEditScheduleTopAppBar() {
 
 @Preview
 @Composable
-fun PreviewAddScheduleTopAppBar(){
+fun PreviewAddScheduleTopAppBar() {
     AddEditScheduleTopAppBar()
 }

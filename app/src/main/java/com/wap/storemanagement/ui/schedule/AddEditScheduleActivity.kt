@@ -7,7 +7,10 @@ import com.wap.base.BaseActivity
 import com.wap.storemanagement.R
 import com.wap.storemanagement.databinding.ActivityScheduleBinding
 import com.wap.storemanagement.fake.FakeFactory
-import com.wap.storemanagement.ui.schedule.composeview.*
+import com.wap.storemanagement.ui.schedule.composeview.AddEditScheduleTopAppBar
+import com.wap.storemanagement.ui.schedule.composeview.CheckDateView
+import com.wap.storemanagement.ui.schedule.composeview.SaveButton
+import com.wap.storemanagement.ui.schedule.composeview.ScheduleView
 import java.time.LocalDateTime
 
 @RequiresApi(Build.VERSION_CODES.O)
