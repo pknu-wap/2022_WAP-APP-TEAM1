@@ -93,21 +93,21 @@ private fun BaseClickableWeek(
             .graphicsLayer(shape = shape)
             .background(
                 color = (
-                        if (dayOfWeek.name == selectedOption) {
-                            onSelectedColor
-                        } else {
-                            Color.White
-                        }
+                    if (dayOfWeek.name == selectedOption) {
+                        onSelectedColor
+                    } else {
+                        Color.White
+                    }
                         ),
                 shape = shape
             )
             .border(
                 width = (
-                        if (dayOfWeek.name == selectedOption) {
-                            0.dp
-                        } else {
-                            if (isHaveSchedule) 2.dp else 0.dp
-                        }
+                    if (dayOfWeek.name == selectedOption) {
+                        0.dp
+                    } else {
+                        if (isHaveSchedule) 2.dp else 0.dp
+                    }
                         ),
                 color = borderColor,
                 shape = shape
