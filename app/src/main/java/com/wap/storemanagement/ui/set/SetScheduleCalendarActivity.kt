@@ -35,5 +35,4 @@ class SetScheduleCalendarActivity : BaseActivity<ActivitySetBinding>(R.layout.ac
             SelectedRecurSchedules(schedules = FakeFactory.createSchedules())
         }
     }
-
 }
