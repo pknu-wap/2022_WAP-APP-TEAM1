@@ -33,8 +33,7 @@ fun BaseScheduleLazyColumn(block: (LazyListScope) -> Unit) {
     ) {
         block(this)
     }
-        AddScheduleCard()
-    }
+}
 
 
 
