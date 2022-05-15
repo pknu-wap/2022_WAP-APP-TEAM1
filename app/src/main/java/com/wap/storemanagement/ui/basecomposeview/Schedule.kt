@@ -35,8 +35,6 @@ fun BaseScheduleLazyColumn(block: (LazyListScope) -> Unit) {
     }
 }
 
-
-
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ScheduleCard(startTime: LocalTime, endTime: LocalTime) {

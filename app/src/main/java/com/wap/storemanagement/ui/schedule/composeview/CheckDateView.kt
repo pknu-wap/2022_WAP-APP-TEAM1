@@ -11,7 +11,6 @@ import java.time.format.DateTimeFormatter
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CheckDateView(selectDay: LocalDateTime) {
-    
     SubTitle(text = selectDay.localDateTimeFormatter())
 }
 
