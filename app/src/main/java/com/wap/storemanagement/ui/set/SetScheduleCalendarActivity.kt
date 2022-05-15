@@ -32,7 +32,7 @@ class SetScheduleCalendarActivity : BaseActivity<ActivitySetBinding>(R.layout.ac
     private fun setSelectedDaySchedules() {
         binding.composeSetSelectedDaySchedules.setContent {
             // TODO: viewModel 작성 후 연결
-            SelectedRecurSchedules(schedules = FakeFactory.createSchedules() )
+            SelectedRecurSchedules(schedules = FakeFactory.createSchedules())
         }
     }
 
