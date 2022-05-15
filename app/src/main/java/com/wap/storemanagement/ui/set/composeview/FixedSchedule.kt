@@ -98,7 +98,7 @@ private fun BaseClickableWeek(
                     } else {
                         Color.White
                     }
-                        ),
+                    ),
                 shape = shape
             )
             .border(
@@ -108,7 +108,7 @@ private fun BaseClickableWeek(
                     } else {
                         if (isHaveSchedule) 2.dp else 0.dp
                     }
-                        ),
+                    ),
                 color = borderColor,
                 shape = shape
             ),
