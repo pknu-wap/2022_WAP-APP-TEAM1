@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/body_margin"
                 android:backgroundTint="@color/gray"
-                android:text="할 일을 입력하세요." />
+                android:text="@string/todo_write" />
 
             <TextView
                 android:id="@+id/button_insert_main"
