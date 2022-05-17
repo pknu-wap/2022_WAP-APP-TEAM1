@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler1"
             android:layout_width="match_parent"
@@ -21,6 +20,7 @@
             android:scrollbars="vertical" />
 
         <View
+            android:id="@+id/divider"
             android:background="@color/dark_blue"
             android:layout_height="4dp"
             android:layout_width="match_parent"
@@ -30,15 +30,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-
             <EditText
                 android:id="@+id/edit_insert_main"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/body_margin"
                 android:backgroundTint="@color/gray"
-                android:text="@string/todo_write" />
+                android:hint="@string/todo_write" />
 
             <TextView
                 android:id="@+id/button_insert_main"
@@ -48,9 +46,10 @@
                 android:background="@drawable/ic_circle"
                 android:backgroundTint="@color/dark_blue"
                 app:drawableStartCompat="@drawable/ic_baseline_add" />
+
         </LinearLayout>
 
-
     </LinearLayout>
+
 </layout>
 
