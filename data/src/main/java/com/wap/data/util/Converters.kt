@@ -7,12 +7,10 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 
 @RequiresApi(Build.VERSION_CODES.O)
-internal fun fromLocalDateTime(time: LocalDateTime?) = time?.toEpochSecond(ZoneOffset.of("+09:00"))
+internal fun fromLocalDateTime(time: LocalDateTime) = time.toEpochSecond(ZoneOffset.of("+09:00"))
 
 @RequiresApi(Build.VERSION_CODES.O)
-internal fun toLocalDateTime(time: Long?) = time?.let {
-    LocalDateTime.ofEpochSecond(time, 0, ZoneOffset.of("+09:00"))
-}
+internal fun toLocalDateTime(time: Long) = LocalDateTime.ofEpochSecond(time, 0, ZoneOffset.of("+09:00"))
 
 internal fun fromRecurWeek(recurWeek: WeekType?): String? = when (recurWeek) {
     WeekType.SUN -> "SUN"
