@@ -41,6 +41,9 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     kapt("androidx.room:room-compiler:$room_version")
 
+    // room in m1 mac
+    kapt "org.xerial:sqlite-jdbc:3.36.0.3"
+
     // hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
