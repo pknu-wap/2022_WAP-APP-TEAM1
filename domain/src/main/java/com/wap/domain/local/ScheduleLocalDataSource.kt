@@ -8,6 +8,8 @@ interface ScheduleLocalDataSource {
 
     fun getSchedule(scheduleId: Long): Schedule
 
+    fun findSchedulesByUserId(userId: Long): List<Schedule>
+
     fun createSchedule(schedule: Schedule)
 
     fun updateStartTime(date: LocalDateTime)
