@@ -19,7 +19,7 @@ import javax.inject.Inject
 class ScheduleViewModel @Inject constructor(
     dispatcherProvider: DispatcherProvider,
     private val scheduleLocalDataSource: ScheduleLocalDataSource
-): BaseViewModel(dispatcherProvider) {
+) : BaseViewModel(dispatcherProvider) {
 
     private var _schedules: MutableLiveData<List<Schedule>> = MutableLiveData()
     private val _currentDateSchedules: MutableLiveData<List<Schedule>> = MutableLiveData()
