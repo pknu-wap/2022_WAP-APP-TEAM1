@@ -54,7 +54,7 @@ fun ScheduleCard(startTime: LocalTime, endTime: LocalTime) {
                     fontSize = 18.sp,
                     color = grayTextColor
                 )
-                Text(text = startTime.toString(), fontSize = 22.sp)
+                Text(text = startTime.formatToString(), fontSize = 22.sp)
             }
 
             Text(text = "-", fontSize = 22.sp)
@@ -65,7 +65,7 @@ fun ScheduleCard(startTime: LocalTime, endTime: LocalTime) {
                     fontSize = 18.sp,
                     color = grayTextColor
                 )
-                Text(text = endTime.toString(), fontSize = 22.sp)
+                Text(text = endTime.formatToString(), fontSize = 22.sp)
             }
 
             Checkbox(
