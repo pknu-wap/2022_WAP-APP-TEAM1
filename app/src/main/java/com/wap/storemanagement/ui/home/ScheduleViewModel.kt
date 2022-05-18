@@ -27,16 +27,10 @@ class ScheduleViewModel @Inject constructor(
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun fetchSchedules(date: CalendarDay) {
-        val currentScheduleList: MutableList<Schedule> = mutableListOf()
         // _schedules.value = FakeFactory.createSchedules()
         _schedules.value = scheduleLocalDataSource.findSchedulesByStartTime(date.toLocalDateTime())
 
-        _schedules.value?.forEach { schedule ->
-            if (isCurrentDateSchedule(date, schedule)) {
-                currentScheduleList.add(schedule)
-            }
-        }
-        _currentDateSchedules.value = currentScheduleList
+        _currentDateSchedules.value = _schedules.value?.filter { schedule -> isCurrentDateSchedule(date, schedule) } ?: emptyList()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
