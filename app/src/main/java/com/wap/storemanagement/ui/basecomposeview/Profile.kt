@@ -15,7 +15,7 @@ import androidx.compose.ui.res.dimensionResource
 import com.wap.storemanagement.R
 
 @Composable
-fun Profile(name: String){
+fun Profile(name: String) {
     val size = dimensionResource(id = R.dimen.profile_size)
     val cornerRadius = dimensionResource(id = R.dimen.profile_corner_radius)
     val borderWidth = dimensionResource(id = R.dimen.profile_border)

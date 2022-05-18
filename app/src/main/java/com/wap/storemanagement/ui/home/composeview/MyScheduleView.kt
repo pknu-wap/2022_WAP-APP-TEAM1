@@ -47,7 +47,7 @@ fun ScheduleCards(schedules: List<Schedule>) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-private fun ScheduleCard(name: String, startTime: LocalTime, endTime: LocalTime ) {
+private fun ScheduleCard(name: String, startTime: LocalTime, endTime: LocalTime) {
     val height = dimensionResource(id = R.dimen.home_scheduleCard_height)
 
     Row(

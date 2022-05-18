@@ -23,4 +23,4 @@ fun SubTitle(text: String) {
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun LocalTime.formatToString() : String = format(DateTimeFormatter.ofPattern("HH:mm"))
+fun LocalTime.formatToString(): String = format(DateTimeFormatter.ofPattern("HH:mm"))
