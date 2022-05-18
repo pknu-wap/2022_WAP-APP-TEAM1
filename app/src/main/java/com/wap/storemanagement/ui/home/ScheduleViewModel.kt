@@ -8,26 +8,28 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.wap.base.BaseViewModel
 import com.wap.base.provider.DispatcherProvider
 import com.wap.domain.entity.Schedule
-import com.wap.storemanagement.fake.FakeFactory
+import com.wap.domain.local.ScheduleLocalDataSource
 import com.wap.storemanagement.utils.toDate
+import com.wap.storemanagement.utils.toLocalDateTime
 import com.wap.storemanagement.utils.toScheduleDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ScheduleViewModel @Inject constructor(dispatcherProvider: DispatcherProvider): BaseViewModel(dispatcherProvider) {
+class ScheduleViewModel @Inject constructor(
+    dispatcherProvider: DispatcherProvider,
+    private val scheduleLocalDataSource: ScheduleLocalDataSource
+): BaseViewModel(dispatcherProvider) {
 
     private var _schedules: MutableLiveData<List<Schedule>> = MutableLiveData()
     private val _currentDateSchedules: MutableLiveData<List<Schedule>> = MutableLiveData()
     val currentDataSchedules: LiveData<List<Schedule>> = _currentDateSchedules
 
-    //TODO : 달력에서 날짜를 선택했을 때 날짜에 해당하는 모든 일정을 반환
-    //FIXME : 날짜 자료형 확정
     @RequiresApi(Build.VERSION_CODES.O)
     fun fetchSchedules(date: CalendarDay) {
-        //TODO : repository에 요청
         val currentScheduleList: MutableList<Schedule> = mutableListOf()
-        _schedules.value = FakeFactory.createSchedules()
+        // _schedules.value = FakeFactory.createSchedules()
+        _schedules.value = scheduleLocalDataSource.findSchedulesByStartTime(date.toLocalDateTime())
 
         _schedules.value?.forEach { schedule ->
             if (isCurrentDateSchedule(date, schedule)) {

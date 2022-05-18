@@ -13,3 +13,6 @@ fun LocalDateTime.toScheduleDate(): String = format(
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun CalendarDay.toDate() = hashCode().toString()
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun CalendarDay.toLocalDateTime(): LocalDateTime = LocalDateTime.of(this.year, this.month, this.day, 0, 0)
