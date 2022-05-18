@@ -10,6 +10,8 @@ interface ScheduleLocalDataSource {
 
     fun findSchedulesByUserId(userId: Long): List<Schedule>
 
+    fun findSchedulesByStartTime(startTime: LocalDateTime): List<Schedule>
+
     fun createSchedule(schedule: Schedule)
 
     fun updateStartTime(date: LocalDateTime)
