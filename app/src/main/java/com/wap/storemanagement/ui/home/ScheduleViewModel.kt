@@ -9,9 +9,9 @@ import com.wap.base.BaseViewModel
 import com.wap.base.provider.DispatcherProvider
 import com.wap.domain.entity.Schedule
 import com.wap.storemanagement.fake.FakeFactory
+import com.wap.storemanagement.utils.toDate
+import com.wap.storemanagement.utils.toScheduleDate
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,7 +41,3 @@ class ScheduleViewModel @Inject constructor(dispatcherProvider: DispatcherProvid
     fun isCurrentDateSchedule(date: CalendarDay, schedule: Schedule) = date.toDate() == schedule.startTime.toScheduleDate()
     //FIXME : 캘린더 월이 1달씩 밀림   ex.May 5 클릭 -> Log : 4월 5일
 }
-
-@RequiresApi(Build.VERSION_CODES.O)
-fun LocalDateTime.toScheduleDate() = format(DateTimeFormatter.ofPattern("yyyyMMdd"))
-fun CalendarDay.toDate() = hashCode().toString()
