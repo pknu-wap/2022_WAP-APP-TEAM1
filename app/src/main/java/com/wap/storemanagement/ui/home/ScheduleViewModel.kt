@@ -32,7 +32,7 @@ class ScheduleViewModel @Inject constructor(
 
     fun fetchSchedules(date: CalendarDay) {
         _schedules.value = FakeFactory.createSchedules()
-        //_schedules.value = scheduleRepository.findSchedulesByStartTime(date.toLocalDateTime())
+        // _schedules.value = scheduleRepository.findSchedulesByStartTime(date.toLocalDateTime())
 
         _currentDateSchedules.value = _schedules.value?.filter { schedule -> isCurrentDateSchedule(date, schedule) } ?: emptyList()
         currentDate = date.toLocalDateTime()

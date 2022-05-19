@@ -112,5 +112,5 @@ fun PinchButton(){
 @Preview
 @Composable
 fun PreviewGreeting() {
-    //ScheduleCards(FakeFactory.createSchedules())
+    // ScheduleCards(FakeFactory.createSchedules())
 }
