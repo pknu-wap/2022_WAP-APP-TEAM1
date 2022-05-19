@@ -1,16 +1,23 @@
 package com.wap.storemanagement.di.module
 
-import com.wap.data.local.ScheduleLocalDataSourceImpl
-import com.wap.domain.local.ScheduleLocalDataSource
-import dagger.Binds
+import com.wap.data.di.module.DataSourceModule
+import com.wap.data.repository.ScheduleRepository
+import com.wap.domain.datasource.ScheduleDataSource
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-abstract class DataSourceModule {
+object RepositoryModule {
 
-    @Binds
-    abstract fun bindToDoDataSource(dataSource: ScheduleLocalDataSourceImpl): ScheduleLocalDataSource
+    @Singleton
+    @Provides
+    fun provideScheduleRepository(
+        @DataSourceModule.LocalScheduleDataSource localScheduleDataSource: ScheduleDataSource
+    ): ScheduleRepository = ScheduleRepository(
+        localScheduleDataSource
+    )
 }

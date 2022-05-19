@@ -11,7 +11,7 @@ import com.wap.domain.datasource.ScheduleDataSource
 import java.time.LocalDateTime
 import javax.inject.Inject
 
-class ScheduleDataSourceImpl @Inject constructor(
+class ScheduleLocalDataSourceImpl @Inject constructor(
     private val scheduleDao: ScheduleDao
 ) : ScheduleDataSource {
 

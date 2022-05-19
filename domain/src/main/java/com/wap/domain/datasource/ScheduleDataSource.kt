@@ -1,10 +1,10 @@
-package com.wap.domain.local
+package com.wap.domain.datasource
 
 import com.wap.domain.entity.Schedule
 import com.wap.domain.entity.WeekType
 import java.time.LocalDateTime
 
-interface ScheduleLocalDataSource {
+interface ScheduleDataSource {
 
     fun getSchedule(scheduleId: Long): Schedule
 
