@@ -38,6 +38,7 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         viewModel.currentDataSchedules.observe(requireActivity()) { schedules ->
             binding.composeHomeSchedule.setContent {
                 ScheduleCards(schedules = schedules) {
+                    viewModel.saveCurrentState()
                     startActivity(intent)
                 }
             }
