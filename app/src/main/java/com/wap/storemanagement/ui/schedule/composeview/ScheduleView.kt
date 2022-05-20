@@ -42,6 +42,6 @@ private fun PreviewScheduleView() {
             .fillMaxWidth()
             .height(150.dp)
     ) {
-        ScheduleView(FakeFactory.createSchedules())
+        // ScheduleView(FakeFactory.createSchedules())
     }
 }
