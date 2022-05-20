@@ -40,7 +40,11 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
     private fun setScrollScheduleView() {
         binding.composeScheduleScrollSchedule.setContent {
             // ScheduleView(schedules = FakeFactory.createSchedules())
-            ScheduleView(schedules = scheduleViewModel.getCurrentDateSchedules())
+            ScheduleView(
+                schedules = scheduleViewModel.getCurrentDateSchedules()
+            ) {
+
+            }
         }
     }
 }

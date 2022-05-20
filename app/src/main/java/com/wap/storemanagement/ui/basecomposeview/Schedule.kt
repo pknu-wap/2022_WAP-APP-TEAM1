@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
@@ -78,14 +79,15 @@ fun ScheduleCard(startTime: LocalTime, endTime: LocalTime) {
 }
 
 @Composable
-fun AddScheduleCard() {
+fun AddScheduleCard(onClick: () -> Unit) {
     val addCircleIconColor = colorResource(id = R.color.schedule_add_circle_icon)
     val addCardText = stringResource(id = R.string.schedule_add_card_text)
 
     BaseSurface {
         Column(
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.clickable { onClick() }
         ) {
             Icon(Icons.Default.AddCircle, "add_schedule", tint = addCircleIconColor)
             Text(text = addCardText)
