@@ -7,13 +7,13 @@ import com.wap.data.toEntity
 import com.wap.data.toSchedule
 import com.wap.domain.entity.Schedule
 import com.wap.domain.entity.WeekType
-import com.wap.domain.local.ScheduleLocalDataSource
+import com.wap.domain.datasource.ScheduleDataSource
 import java.time.LocalDateTime
 import javax.inject.Inject
 
 class ScheduleLocalDataSourceImpl @Inject constructor(
     private val scheduleDao: ScheduleDao
-) : ScheduleLocalDataSource {
+) : ScheduleDataSource {
 
     override fun getSchedule(scheduleId: Long): Schedule {
         TODO()

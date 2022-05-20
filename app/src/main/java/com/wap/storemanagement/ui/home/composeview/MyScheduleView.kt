@@ -2,6 +2,7 @@ package com.wap.storemanagement.ui.home.composeview
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
@@ -27,7 +28,7 @@ import java.time.LocalTime
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScheduleCards(schedules: List<Schedule>) {
+fun ScheduleCards(schedules: List<Schedule>, onClick: () -> Unit) {
 
     BaseScheduleLazyColumn { scope ->
         scope.items(
@@ -39,7 +40,8 @@ fun ScheduleCards(schedules: List<Schedule>) {
             ScheduleCard(
                 name = "getUserNameBySchedule",
                 startTime = startTime,
-                endTime = endTime
+                endTime = endTime,
+                onClick = onClick
             )
         }
     }
@@ -47,7 +49,7 @@ fun ScheduleCards(schedules: List<Schedule>) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-private fun ScheduleCard(name: String, startTime: LocalTime, endTime: LocalTime) {
+private fun ScheduleCard(name: String, startTime: LocalTime, endTime: LocalTime, onClick: () -> Unit) {
     val height = dimensionResource(id = R.dimen.home_scheduleCard_height)
 
     Row(
@@ -61,7 +63,7 @@ private fun ScheduleCard(name: String, startTime: LocalTime, endTime: LocalTime)
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Profile(name)
-            TimeSchedule(startTime, endTime)
+            TimeSchedule(startTime, endTime, onClick)
         }
         PinchButton()
     }
@@ -69,7 +71,7 @@ private fun ScheduleCard(name: String, startTime: LocalTime, endTime: LocalTime)
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun TimeSchedule(startTime: LocalTime, endTime: LocalTime) {
+fun TimeSchedule(startTime: LocalTime, endTime: LocalTime, onClick: () -> Unit) {
     val width = dimensionResource(id = R.dimen.home_timeSchedule_width)
     val height = dimensionResource(id = R.dimen.home_timeSchedule_height)
     val fontSize = 22.sp
@@ -77,7 +79,8 @@ fun TimeSchedule(startTime: LocalTime, endTime: LocalTime) {
     Row(
         modifier = Modifier
             .width(width)
-            .height(height),
+            .height(height)
+            .clickable { onClick() },
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -109,5 +112,5 @@ fun PinchButton(){
 @Preview
 @Composable
 fun PreviewGreeting() {
-    ScheduleCards(FakeFactory.createSchedules())
+    // ScheduleCards(FakeFactory.createSchedules())
 }
