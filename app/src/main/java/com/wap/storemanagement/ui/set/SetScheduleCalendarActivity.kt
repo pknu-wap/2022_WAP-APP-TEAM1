@@ -36,7 +36,7 @@ class SetScheduleCalendarActivity : BaseActivity<ActivitySetBinding>(R.layout.ac
             SelectedRecurSchedules(
                 schedules = FakeFactory.createSchedules()
             ) {
-                Log.i("todo","click 'add button' in set")
+                Log.i("todo", "click 'add button' in set")
             }
         }
     }

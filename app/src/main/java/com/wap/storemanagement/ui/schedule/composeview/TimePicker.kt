@@ -28,8 +28,8 @@ fun TimePickerView(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                  Text(text = "시작 시간")
-                  Text(text = "종료 시간")
+                    Text(text = "시작 시간")
+                    Text(text = "종료 시간")
                 }
                 Text(text = "Time Picker")
                 Row() {
@@ -40,5 +40,3 @@ fun TimePickerView(
         }
     }
 }
-
-

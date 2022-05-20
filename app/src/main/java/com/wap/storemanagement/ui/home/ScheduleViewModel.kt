@@ -53,11 +53,8 @@ class ScheduleViewModel @Inject constructor(
 
     private fun saveCurrentDate() = scheduleRepository.saveCurrentDate(currentDate)
 
-
-
     private var _isShowTimePicker: MutableLiveData<Boolean> = MutableLiveData(false)
     val  isShowTimePicker: LiveData<Boolean> = _isShowTimePicker
-
 
     fun showDialog() {
         _isShowTimePicker.value = true
