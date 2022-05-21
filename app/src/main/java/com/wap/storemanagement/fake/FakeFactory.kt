@@ -1,15 +1,30 @@
 package com.wap.storemanagement.fake
 
-import com.wap.storemanagement.data.entity.ScheduleEntity
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.wap.domain.entity.Schedule
+import com.wap.domain.entity.WeekType
+import java.time.LocalDateTime
 
+@RequiresApi(Build.VERSION_CODES.O)
 object FakeFactory {
 
-    fun createSchedules(): List<ScheduleEntity> = listOf(
-        ScheduleEntity(id = 1, contents = "글자 아무거나"),
-        ScheduleEntity(id = 2, contents = "글 아무거나"),
-        ScheduleEntity(id = 3, contents = "글자아무거나"),
-        ScheduleEntity(id = 4, contents = "글자 아무거나ㄴㄹㄴ"),
-        ScheduleEntity(id = 5, contents = "글자ㄴㄴ아무거나"),
-        ScheduleEntity(id = 6, contents = "글자ㄷㄷㄷㄷ무거나"),
+    fun createSchedules() = listOf(
+        Schedule(
+            scheduleId = 0L,
+            startTime = LocalDateTime.of(2022, 5, 5, 12, 0),
+            endTime = LocalDateTime.of(2022, 5, 5, 13, 0),
+            color = "",
+            recurWeek = WeekType.FRI,
+            userId = 1L
+        ),
+        Schedule(
+            scheduleId = 1L,
+            startTime = LocalDateTime.of(2022, 5, 6, 15, 0),
+            endTime = LocalDateTime.of(2022, 5, 6, 17, 0),
+            color = "",
+            recurWeek = WeekType.FRI,
+            userId = 1L
+        )
     )
 }

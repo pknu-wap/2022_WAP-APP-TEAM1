@@ -37,10 +37,16 @@ android {
     buildFeatures {
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.0.0-rc01'
+        kotlinCompilerVersion '1.5.10'
+    }
 }
 
 dependencies {
     implementation project(path: ':base')
+    implementation project(path: ':data')
+    implementation project(path: ':domain')
 
     // hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"

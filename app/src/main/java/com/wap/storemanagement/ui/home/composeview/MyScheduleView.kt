@@ -1,145 +1,116 @@
 package com.wap.storemanagement.ui.home.composeview
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Surface
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.wap.domain.entity.Schedule
 import com.wap.storemanagement.R
-import com.wap.storemanagement.data.entity.ScheduleEntity
+import com.wap.storemanagement.fake.FakeFactory
+import com.wap.storemanagement.ui.basecomposeview.BaseScheduleLazyColumn
+import com.wap.storemanagement.ui.basecomposeview.Profile
+import com.wap.storemanagement.ui.basecomposeview.formatToString
+import java.time.LocalTime
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScheduleCards(schedules: List<ScheduleEntity>) {
+fun ScheduleCards(schedules: List<Schedule>, onClick: () -> Unit) {
 
-    LazyColumn {
-        items(schedules) { schedule ->
-            ScheduleCard(name = schedule.contents, time = "hjk")
+    BaseScheduleLazyColumn { scope ->
+        scope.items(
+            items = schedules,
+            key = { schedule -> schedule.scheduleId }
+        ) { schedule ->
+            val startTime = schedule.startTime.toLocalTime()
+            val endTime = schedule.endTime.toLocalTime()
+            ScheduleCard(
+                name = "getUserNameBySchedule",
+                startTime = startTime,
+                endTime = endTime,
+                onClick = onClick
+            )
         }
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScheduleCard(name: String, time: String) {
-    val width = dimensionResource(id = R.dimen.home_scheduleCard_width)
+private fun ScheduleCard(name: String, startTime: LocalTime, endTime: LocalTime, onClick: () -> Unit) {
     val height = dimensionResource(id = R.dimen.home_scheduleCard_height)
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(height),
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Profile(name)
+            TimeSchedule(startTime, endTime, onClick)
+        }
+        PinchButton()
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+fun TimeSchedule(startTime: LocalTime, endTime: LocalTime, onClick: () -> Unit) {
+    val width = dimensionResource(id = R.dimen.home_timeSchedule_width)
+    val height = dimensionResource(id = R.dimen.home_timeSchedule_height)
+    val fontSize = 22.sp
 
     Row(
         modifier = Modifier
             .width(width)
             .height(height)
+            .clickable { onClick() },
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        BaseProfile(name)
-        BaseTimeSchedule(time)
-        PinchButton()
-    }
-}
-
-@Composable
-fun BaseProfile(name: String) {
-    val topMargin = dimensionResource(id = R.dimen.profile_top_margin)
-    val bottomMargin = dimensionResource(id = R.dimen.profile_bottom_margin)
-    val rightMargin = dimensionResource(id = R.dimen.profile_right_margin)
-
-    Column() {
-        Spacer(modifier = Modifier.size(topMargin))
-
-        Row {
-            Profile(name)
-
-            Spacer(modifier = Modifier.size(rightMargin))
-        }
-
-        Spacer(modifier = Modifier.size(bottomMargin))
-    }
-}
-
-@Composable
-fun Profile(name: String){
-    val size = dimensionResource(id = R.dimen.profile_size)
-    val cornerRadius = dimensionResource(id = R.dimen.profile_corner_radius)
-    val borderWidth = dimensionResource(id = R.dimen.profile_border)
-
-    val borderColor = colorResource(id = R.color.profile_border)
-    val backgroundColor = colorResource(id = R.color.profile_background)
-
-    Box(
-        modifier = Modifier
-            .size(size)
-            .clip(RoundedCornerShape(cornerRadius))
-            .border(
-                width = borderWidth,
-                color = borderColor,
-                shape = RoundedCornerShape(cornerRadius)
-            )
-            .background(backgroundColor)
-    ) {
-        AlignTextCenterColumn{
-            Text(text = name)
-        }
-    }
-}
-
-@Composable
-fun BaseTimeSchedule(Time: String) {
-    val width = dimensionResource(id = R.dimen.home_timeSchedule_width)
-    val height = dimensionResource(id = R.dimen.home_scheduleCard_height)
-    val topMargin = dimensionResource(id = R.dimen.home_timeSchedule_top_margin)
-    val bottomMargin = dimensionResource(id = R.dimen.home_timeSchedule_bottom_margin)
-
-    Column(
-        modifier = Modifier
-            .width(width)
-            .height(height)
-    ) {
-        Spacer(modifier = Modifier.size(topMargin))
-        
-        Row(
-            modifier = Modifier.height(height - (topMargin + bottomMargin))
-        ) {
-            InputTime(time = Time)
-        }
-        
-        Spacer(modifier = Modifier.size(bottomMargin))
-    }
-}
-
-@Composable
-fun InputTime(time: String){
-    Box(){
-        AlignTextStartColumn {
-            Text(
-                text = time,
-                fontSize = 18.sp
-            )
-        }
+        Text(text = startTime.formatToString(), fontSize = fontSize)
+        Text(text = "-", fontSize = fontSize)
+        Text(text = endTime.formatToString(), fontSize = fontSize)
     }
 }
 
 @Composable
 fun PinchButton(){
     val size = dimensionResource(id = R.dimen.home_pinchButton_size)
+    val pinchButtonColor = colorResource(id = R.color.home_pinch_button_color)
 
-    Surface(
-        modifier = Modifier
-            .size(size)
-    ){
-        //Icon goes here
+    IconButton(
+        onClick = { /*TODO*/ },
+        modifier = Modifier.size(size)
+    ) {
+        Icon(
+            imageVector = Icons.Default.Send,
+            contentDescription = "send",
+            tint = pinchButtonColor
+        )
     }
 }
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
 fun PreviewGreeting() {
-    ScheduleCard("은빈","12:00 - 18:00")
+    // ScheduleCards(FakeFactory.createSchedules())
 }

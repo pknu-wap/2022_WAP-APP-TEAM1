@@ -7,21 +7,14 @@
 
     <dimen name="body_margin">@dimen/large_margin</dimen>
 
-    <dimen name="home_scheduleCard_width">360dp</dimen>
     <dimen name="home_scheduleCard_height">48dp</dimen>
 
     <dimen name="profile_size">40dp</dimen>
     <dimen name="profile_border">@dimen/line</dimen>
     <dimen name="profile_corner_radius">10dp</dimen>
-    <dimen name="profile_top_margin">@dimen/small_margin</dimen>
-    <dimen name="profile_bottom_margin">@dimen/small_margin</dimen>
-    <dimen name="profile_left_margin">@dimen/medium_margin</dimen>
-    <dimen name="profile_right_margin">@dimen/medium_margin</dimen>
-    
+
     <dimen name="home_timeSchedule_width">246dp</dimen>
     <dimen name="home_timeSchedule_height">@dimen/home_scheduleCard_height</dimen>
-    <dimen name="home_timeSchedule_top_margin">@dimen/small_margin</dimen>
-    <dimen name="home_timeSchedule_bottom_margin">@dimen/small_margin</dimen>
 
     <dimen name="home_pinchButton_size">50dp</dimen>
 
