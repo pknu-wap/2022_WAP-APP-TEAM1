@@ -12,6 +12,11 @@
         android:background="@color/white">
 
         <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compose_schedule_time_picker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <androidx.compose.ui.platform.ComposeView
             android:id="@+id/compose_schedule_top_appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

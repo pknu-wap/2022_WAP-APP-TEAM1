@@ -26,7 +26,6 @@ class ScheduleViewModel @Inject constructor(
     private var _schedules: MutableLiveData<List<Schedule>> = MutableLiveData()
     private val _currentDateSchedules: MutableLiveData<List<Schedule>> = MutableLiveData()
     val currentDataSchedules: LiveData<List<Schedule>> = _currentDateSchedules
-
     var currentDate = scheduleRepository.currentDate
         private set
 
@@ -53,4 +52,15 @@ class ScheduleViewModel @Inject constructor(
     fun getCurrentDateSchedules() = scheduleRepository.currentDateSchedules
 
     private fun saveCurrentDate() = scheduleRepository.saveCurrentDate(currentDate)
+
+    private var _isShowTimePicker: MutableLiveData<Boolean> = MutableLiveData(false)
+    val  isShowTimePicker: LiveData<Boolean> = _isShowTimePicker
+
+    fun showDialog() {
+        _isShowTimePicker.value = true
+    }
+
+    fun closeDialog() {
+        _isShowTimePicker.value = false
+    }
 }

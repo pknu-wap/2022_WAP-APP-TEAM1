@@ -7,14 +7,9 @@ import androidx.annotation.RequiresApi
 import com.wap.base.BaseActivity
 import com.wap.storemanagement.R
 import com.wap.storemanagement.databinding.ActivityScheduleBinding
-import com.wap.storemanagement.fake.FakeFactory
 import com.wap.storemanagement.ui.home.ScheduleViewModel
-import com.wap.storemanagement.ui.schedule.composeview.AddEditScheduleTopAppBar
-import com.wap.storemanagement.ui.schedule.composeview.CheckDateView
-import com.wap.storemanagement.ui.schedule.composeview.SaveButton
-import com.wap.storemanagement.ui.schedule.composeview.ScheduleView
+import com.wap.storemanagement.ui.schedule.composeview.*
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDateTime
 
 @AndroidEntryPoint
 @RequiresApi(Build.VERSION_CODES.O)
@@ -29,6 +24,7 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
         setCheckDateView()
         setScrollScheduleView()
         binding.composeScheduleSaveButton.setContent { SaveButton() }
+        setTimePickerView()
     }
 
     private fun setCheckDateView() {
@@ -40,7 +36,21 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
     private fun setScrollScheduleView() {
         binding.composeScheduleScrollSchedule.setContent {
             // ScheduleView(schedules = FakeFactory.createSchedules())
-            ScheduleView(schedules = scheduleViewModel.getCurrentDateSchedules())
+            ScheduleView(
+                schedules = scheduleViewModel.getCurrentDateSchedules()
+            ) {
+                scheduleViewModel.showDialog()
+            }
+        }
+    }
+
+    private fun setTimePickerView() {
+        scheduleViewModel.isShowTimePicker.observe(this) { isShowTimePicker ->
+            binding.composeScheduleTimePicker.setContent {
+                TimePickerView(isShowTimePicker) {
+                    scheduleViewModel.closeDialog()
+                }
+            }
         }
     }
 }
