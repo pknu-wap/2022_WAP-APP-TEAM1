@@ -3,8 +3,10 @@ package com.wap.data.db.dao
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.wap.data.db.AppDatabase
+import com.wap.data.entity.UserEntity
 import com.wap.data.toEntity
 import com.wap.domain.entity.Schedule
+import com.wap.domain.entity.User
 import com.wap.domain.entity.WeekType
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -16,7 +18,7 @@ class ScheduleDaoTest {
 
     private lateinit var db: AppDatabase
 
-    private lateinit var dao: ScheduleDao
+    private lateinit var scheduleDao: ScheduleDao
 
     @Before
     fun createDb() {
@@ -24,7 +26,10 @@ class ScheduleDaoTest {
             .allowMainThreadQueries()
             .build()
 
-        dao = db.ScheduleDao()
+        db.UserDao()
+            .insertUser(UserEntity(1L, ""))
+
+        scheduleDao = db.ScheduleDao()
     }
 
     @After
@@ -44,10 +49,10 @@ class ScheduleDaoTest {
             userId = 1L
         ).toEntity()
 
-        dao.insertSchedule(schedule)
+        scheduleDao.insertSchedule(schedule)
 
         // When fetch Schedule
-        val schedules = dao.findSchedulesByUserId(1L)
+        val schedules = scheduleDao.findSchedulesByUserId(1L)
 
         // Then equal initial schedule
         assertEquals(listOf(schedule), schedules)
