@@ -6,7 +6,6 @@ import com.wap.data.db.AppDatabase
 import com.wap.data.entity.UserEntity
 import com.wap.data.toEntity
 import com.wap.domain.entity.Schedule
-import com.wap.domain.entity.User
 import com.wap.domain.entity.WeekType
 import org.junit.After
 import org.junit.Assert.assertEquals
