@@ -41,7 +41,7 @@ class ScheduleDaoTest {
     fun when_findSchedulesByUserId_then_success() {
         // Given insert schedule
         val schedule = Schedule(
-            scheduleId = 0L,
+            scheduleId = 1L,
             startTime = LocalDateTime.of(2022, 5, 5, 12, 0),
             endTime = LocalDateTime.of(2022, 5, 5, 13, 0),
             color = "",
