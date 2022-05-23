@@ -123,7 +123,7 @@ fun TimePickerToggle(
 @Composable
 private fun PreviewTimePicker() {
     val options: List<String> = listOf("StartTime", "EndTime")
-    val selectedOption = remember { mutableStateOf(options.first())}
+    val selectedOption = remember { mutableStateOf(options.first()) }
 
     TimePickerToggle(
         options = options,

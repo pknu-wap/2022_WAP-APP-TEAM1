@@ -29,7 +29,7 @@ fun TimePickerView(
             Column(
                 Modifier
                     .size(280.dp, 260.dp)
-                    .clip(shape = RoundedCornerShape(roundedCornerPercent/4))
+                    .clip(shape = RoundedCornerShape(roundedCornerPercent / 4))
                     .background(Color.White),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
