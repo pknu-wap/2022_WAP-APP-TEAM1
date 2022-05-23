@@ -8,7 +8,7 @@ import com.wap.domain.entity.ToDo
 interface TodoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(dto: TodoDao)
+    fun insert(dto: ToDo)
 
     @Query("select * from ToDo")
     fun list(): LiveData<MutableList<ToDo>>
@@ -17,8 +17,8 @@ interface TodoDao {
     fun selectOne(toDoId: Long): ToDo
 
     @Update
-    suspend fun update(dto: TodoDao)
+    suspend fun update(dto: ToDo)
 
     @Delete
-    fun delete(dto: TodoDao)
+    fun delete(dto: ToDo)
 }
