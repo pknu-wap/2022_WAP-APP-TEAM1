@@ -9,6 +9,7 @@ import com.wap.storemanagement.R
 import com.wap.storemanagement.databinding.ActivityScheduleBinding
 import com.wap.storemanagement.ui.home.ScheduleViewModel
 import com.wap.storemanagement.ui.schedule.composeview.*
+import com.wap.storemanagement.ui.schedule.composeview.timepicker.TimePickerView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
