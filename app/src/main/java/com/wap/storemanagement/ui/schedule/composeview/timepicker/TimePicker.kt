@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
@@ -41,7 +42,7 @@ fun TimePickerView(
                     Text(text = "시작 시간")
                     Text(text = "종료 시간")
                 }
-                 TimePickerToggle("StartTime") {
+                 TimePickerToggle(TimePickerState.StartTime) {
                  }
                 Row() {
                     Text(text = "취소")
@@ -52,14 +53,23 @@ fun TimePickerView(
     }
 }
 
+private enum class TimePickerOption {
+    Option,
+    Background
+}
+
+enum class TimePickerState {
+    StartTime,
+    EndTime
+}
 
 // 출처: https://fvilarino.medium.com/creating-an-animated-selector-in-jetpack-compose-669066dfc01b
 @Composable
 fun TimePickerToggle(
-    selectedOption: String,
-    onOptionSelect: (String) -> Unit
+    selectedOption: TimePickerState,
+    onOptionSelect: (TimePickerState) -> Unit
 ) {
-    val options: List<String> = listOf("StartTime", "EndTime")
+    val options = TimePickerState.values()
     require(options.contains(selectedOption)) { "Invalid selected option [$selectedOption]" }
 
     Layout(
@@ -70,11 +80,12 @@ fun TimePickerToggle(
             options.forEach { option ->
                 Box(
                     modifier = Modifier
+                        .layoutId(TimePickerOption.Option)
                         .clickable { onOptionSelect(option) },
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = option,
+                        text = option.name,
                         style = MaterialTheme.typography.body1,
                         color = Color.Black,
                         modifier = Modifier.padding(horizontal = 4.dp),
@@ -82,6 +93,11 @@ fun TimePickerToggle(
                         overflow = TextOverflow.Ellipsis
                     )
                 }
+                Box(
+                    modifier = Modifier
+                        .layoutId(TimePickerOption.Background)
+                        .background(Color.Gray)
+                )
             }
         }
     ) { measurables, constraints ->
@@ -94,12 +110,22 @@ fun TimePickerToggle(
         )
 
         val optionPlaceables = measurables
+            .filter { measurable -> measurable.layoutId == TimePickerOption.Option }
             .map { measurable -> measurable.measure(optionConstraints) }
+
+        val backgroundPlaceable = measurables
+            .first { measurable -> measurable.layoutId == TimePickerOption.Background }
+            .measure(optionConstraints)
 
         layout(
             width = constraints.maxWidth,
             height = constraints.maxHeight,
         ) {
+            backgroundPlaceable.placeRelative(
+                x = 0,
+                y = 0
+            )
+
             optionPlaceables.forEachIndexed { index, placeable ->
                 placeable.placeRelative(
                     x = optionWidth * index,
@@ -110,9 +136,9 @@ fun TimePickerToggle(
     }
 }
 
-@Preview(widthDp = 300, heightDp = 60)
+@Preview(widthDp = 250, heightDp = 60)
 @Composable
 private fun PreviewTimePicker() {
-    TimePickerToggle("StartTime") {
+    TimePickerToggle(TimePickerState.StartTime) {
     }
 }
