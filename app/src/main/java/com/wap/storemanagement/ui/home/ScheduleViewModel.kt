@@ -9,7 +9,6 @@ import com.wap.base.BaseViewModel
 import com.wap.base.provider.DispatcherProvider
 import com.wap.data.repository.ScheduleRepository
 import com.wap.domain.entity.Schedule
-import com.wap.domain.entity.WeekType
 import com.wap.storemanagement.fake.FakeFactory
 import com.wap.storemanagement.utils.toDate
 import com.wap.storemanagement.utils.toLocalDateTime
@@ -51,8 +50,7 @@ class ScheduleViewModel @Inject constructor(
         scheduleRepository.saveCurrentDateSchedules(currentDataSchedules.value ?: emptyList())
     }
 
-
-    fun getCurrentDateSchedules() : List<Schedule> {
+    fun getCurrentDateSchedules(): List<Schedule> {
         _currentDateSchedules.value = scheduleRepository.currentDateSchedules
         return currentDataSchedules.value ?: emptyList()
     }

@@ -32,11 +32,11 @@ import com.wap.storemanagement.fake.FakeFactory
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
-fun P() {
+private fun PeviewInputTime() {
     val schedule = FakeFactory.createSchedules()[1]
     val hour = remember { mutableStateOf(schedule.startTime.hour.toString()) }
-    val minute = remember{ mutableStateOf(schedule.startTime.minute.toString()) }
-    val ampm = remember{ mutableStateOf(timeOption.AM)}
+    val minute = remember { mutableStateOf(schedule.startTime.minute.toString()) }
+    val ampm = remember { mutableStateOf(timeOption.AM) }
 
     InputTime(hour, minute, ampm)
 }
@@ -115,8 +115,7 @@ fun InputTime(
         Column(
             modifier = Modifier
                 .weight(weight[3])
-                .fillMaxHeight()
-            ,
+                .fillMaxHeight(),
             horizontalAlignment = Alignment.End,
             verticalArrangement = Arrangement.Center
         ) {

@@ -31,12 +31,12 @@ fun TimePickerView(
         val schedule = FakeFactory.createSchedules()[1]
 
         val startHour = remember { mutableStateOf(schedule.startTime.hour.toString()) }
-        val startMinute = remember{ mutableStateOf(schedule.startTime.minute.toString()) }
-        val startAmPm = remember{ mutableStateOf(timeOption.AM)}
+        val startMinute = remember { mutableStateOf(schedule.startTime.minute.toString()) }
+        val startAmPm = remember { mutableStateOf(timeOption.AM) }
 
         val endHour = remember { mutableStateOf(schedule.endTime.hour.toString()) }
-        val endMinute = remember{ mutableStateOf(schedule.endTime.minute.toString()) }
-        val endAmPm = remember{ mutableStateOf(timeOption.AM)}
+        val endMinute = remember { mutableStateOf(schedule.endTime.minute.toString()) }
+        val endAmPm = remember { mutableStateOf(timeOption.AM) }
 
         Dialog(
             onDismissRequest = { }
@@ -52,14 +52,14 @@ fun TimePickerView(
                 TimePickerToggle(
                     roundedCornerPercent = roundedCornerPercent,
                     options = options,
-                    selectedOption = selectedOption.value,
+                    selectedOption = selectedOption.value
                 ) { option ->
                     selectedOption.value = option
                 }
                 InputTime(
                     hour = if(selectedOption.value == "StartTime") startHour else endHour,
                     minute = if(selectedOption.value == "StartTime") startMinute else endMinute,
-                    ampm = if(selectedOption.value == "StartTime") startAmPm else endAmPm,
+                    ampm = if(selectedOption.value == "StartTime") startAmPm else endAmPm
                 )
                 CancelAddButton(
                     cancelEvent = { onDismiss() },
