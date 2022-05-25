@@ -14,6 +14,7 @@ import com.wap.storemanagement.utils.toDate
 import com.wap.storemanagement.utils.toLocalDateTime
 import com.wap.storemanagement.utils.toScheduleDate
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -62,5 +63,8 @@ class ScheduleViewModel @Inject constructor(
 
     fun closeDialog() {
         _isShowTimePicker.value = false
+    }
+
+    fun addDateSchedule(hour: String, minute: String) {
     }
 }
