@@ -55,7 +55,6 @@ fun TimePickerToggle(
 
     Layout(
         modifier = Modifier
-            .clip(shape = RoundedCornerShape(roundedCornerPercent))
             .background(color = Color.White),
         content = {
             val colors = state.textColors
@@ -78,7 +77,6 @@ fun TimePickerToggle(
                 Box(
                     modifier = Modifier
                         .layoutId(TimePickerToggleOption.Background)
-                        .clip(shape = RoundedCornerShape(roundedCornerPercent))
                         .background(backgroundColor)
                 )
             }
