@@ -23,7 +23,10 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
 
         binding.composeScheduleTopAppbar.setContent { AddEditScheduleTopAppBar() }
         setCheckDateView()
+
         setScrollScheduleView()
+        fetchScrollScheduleView()
+
         binding.composeScheduleSaveButton.setContent { SaveButton() }
         setTimePickerView()
     }
@@ -45,6 +48,18 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
         }
     }
 
+    private fun fetchScrollScheduleView() {
+        scheduleViewModel.currentDataSchedules.observe(this) { schedules ->
+            binding.composeScheduleScrollSchedule.setContent {
+                ScheduleView(
+                    schedules = schedules
+                ) {
+                    scheduleViewModel.showDialog()
+                }
+            }
+        }
+    }
+
     private fun setTimePickerView() {
         scheduleViewModel.isShowTimePicker.observe(this) { isShowTimePicker ->
             binding.composeScheduleTimePicker.setContent {
@@ -53,6 +68,7 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
                     onDismiss = { scheduleViewModel.closeDialog() },
                     addSchedule = { hour, minute ->
                         scheduleViewModel.addDateSchedule(hour, minute)
+                        scheduleViewModel.closeDialog()
                     }
                 )
             }
