@@ -48,9 +48,13 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
     private fun setTimePickerView() {
         scheduleViewModel.isShowTimePicker.observe(this) { isShowTimePicker ->
             binding.composeScheduleTimePicker.setContent {
-                TimePickerView(isShowTimePicker) {
-                    scheduleViewModel.closeDialog()
-                }
+                TimePickerView(
+                    showDialog = isShowTimePicker,
+                    onDismiss = { scheduleViewModel.closeDialog() },
+                    addSchedule = { hour, minute ->
+                        scheduleViewModel.addDateSchedule(hour, minute)
+                    }
+                )
             }
         }
     }
