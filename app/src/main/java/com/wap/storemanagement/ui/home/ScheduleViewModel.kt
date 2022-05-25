@@ -9,6 +9,7 @@ import com.wap.base.BaseViewModel
 import com.wap.base.provider.DispatcherProvider
 import com.wap.data.repository.ScheduleRepository
 import com.wap.domain.entity.Schedule
+import com.wap.domain.entity.WeekType
 import com.wap.storemanagement.fake.FakeFactory
 import com.wap.storemanagement.utils.toDate
 import com.wap.storemanagement.utils.toLocalDateTime
@@ -50,7 +51,11 @@ class ScheduleViewModel @Inject constructor(
         scheduleRepository.saveCurrentDateSchedules(currentDataSchedules.value ?: emptyList())
     }
 
-    fun getCurrentDateSchedules() = scheduleRepository.currentDateSchedules
+
+    fun getCurrentDateSchedules() : List<Schedule> {
+        _currentDateSchedules.value = scheduleRepository.currentDateSchedules
+        return currentDataSchedules.value ?: emptyList()
+    }
 
     private fun saveCurrentDate() = scheduleRepository.saveCurrentDate(currentDate)
 
@@ -65,6 +70,27 @@ class ScheduleViewModel @Inject constructor(
         _isShowTimePicker.value = false
     }
 
-    fun addDateSchedule(hour: String, minute: String) {
+    fun addDateSchedule(hour: Int, minute: Int) {
+        val schedule = Schedule(
+            scheduleId = 5,
+            startTime = LocalDateTime.of(
+                currentDate.year,
+                currentDate.month,
+                currentDate.dayOfMonth,
+                hour,
+                minute
+            ),
+            endTime = LocalDateTime.of(
+                currentDate.year,
+                currentDate.month,
+                currentDate.dayOfMonth,
+                hour,
+                minute
+            ),
+            color = "",
+            recurWeek = null,
+            userId = 1L
+        )
+        _currentDateSchedules.value = _currentDateSchedules.value?.plus(schedule) ?: listOf(schedule)
     }
 }
