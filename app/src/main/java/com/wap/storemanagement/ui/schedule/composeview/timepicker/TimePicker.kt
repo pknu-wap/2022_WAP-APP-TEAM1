@@ -83,7 +83,7 @@ fun TimePickerView(
     }
 }
 
-private fun hourConvert(option: timeOption, hour: String) = when {
-    option == timeOption.AM -> hour.toInt()
+private fun hourConvert(option: timeOption, hour: String) = when (option) {
+    timeOption.AM -> hour.toInt()
     else -> hour.toInt() + 12
 }
