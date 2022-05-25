@@ -27,7 +27,7 @@ import com.wap.storemanagement.fake.FakeFactory
 fun TimePickerView(
     showDialog: Boolean,
     onDismiss: () -> Unit,
-    addSchedule: (String, String) -> Unit
+    addSchedule: (hour: Int,minute: Int) -> Unit
 ) {
     if (showDialog) {
         val options: List<String> = listOf("StartTime", "EndTime")
@@ -65,7 +65,7 @@ fun TimePickerView(
                 CancelAddButton(
                     cancelEvent = { onDismiss() },
                     addEvent = {
-                        addSchedule(hour.toString(), minute.toString())
+                        addSchedule(hour.value.toInt(), minute.value.toInt())
                     }
                 )
             }
