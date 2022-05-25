@@ -70,22 +70,22 @@ class ScheduleViewModel @Inject constructor(
         _isShowTimePicker.value = false
     }
 
-    fun addDateSchedule(hour: Int, minute: Int) {
+    fun addDateSchedule(startHour: Int, startMinute: Int, endHour: Int, endMinute: Int) {
         val schedule = Schedule(
             scheduleId = 5,
             startTime = LocalDateTime.of(
                 currentDate.year,
                 currentDate.month,
                 currentDate.dayOfMonth,
-                hour,
-                minute
+                startHour,
+                startMinute
             ),
             endTime = LocalDateTime.of(
                 currentDate.year,
                 currentDate.month,
                 currentDate.dayOfMonth,
-                hour,
-                minute
+                endHour,
+                endMinute
             ),
             color = "",
             recurWeek = null,

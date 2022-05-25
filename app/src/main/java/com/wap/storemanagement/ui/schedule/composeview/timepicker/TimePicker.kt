@@ -3,23 +3,17 @@ package com.wap.storemanagement.ui.schedule.composeview.timepicker
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.wap.storemanagement.R
 import com.wap.storemanagement.fake.FakeFactory
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -27,7 +21,7 @@ import com.wap.storemanagement.fake.FakeFactory
 fun TimePickerView(
     showDialog: Boolean,
     onDismiss: () -> Unit,
-    addSchedule: (hour: Int,minute: Int) -> Unit
+    addSchedule: (startHour: Int, StartMinute: Int, EndHour: Int, EndMinute: Int) -> Unit
 ) {
     if (showDialog) {
         val options: List<String> = listOf("StartTime", "EndTime")
@@ -35,9 +29,14 @@ fun TimePickerView(
         val roundedCornerPercent = 50
 
         val schedule = FakeFactory.createSchedules()[1]
-        val hour = remember { mutableStateOf(schedule.startTime.hour.toString()) }
-        val minute = remember{ mutableStateOf(schedule.startTime.minute.toString()) }
-        val ampm = remember{ mutableStateOf(timeOption.AM)}
+
+        val startHour = remember { mutableStateOf(schedule.startTime.hour.toString()) }
+        val startMinute = remember{ mutableStateOf(schedule.startTime.minute.toString()) }
+        val startAmPm = remember{ mutableStateOf(timeOption.AM)}
+
+        val endHour = remember { mutableStateOf(schedule.endTime.hour.toString()) }
+        val endMinute = remember{ mutableStateOf(schedule.endTime.minute.toString()) }
+        val endAmPm = remember{ mutableStateOf(timeOption.AM)}
 
         Dialog(
             onDismissRequest = { }
@@ -58,17 +57,33 @@ fun TimePickerView(
                     selectedOption.value = option
                 }
                 InputTime(
-                    hour = hour,
-                    minute = minute,
-                    ampm = ampm
+                    hour = if(selectedOption.value == "StartTime") startHour else endHour,
+                    minute = if(selectedOption.value == "StartTime") startMinute else endMinute,
+                    ampm = if(selectedOption.value == "StartTime") startAmPm else endAmPm,
                 )
                 CancelAddButton(
                     cancelEvent = { onDismiss() },
                     addEvent = {
-                        addSchedule(hour.value.toInt(), minute.value.toInt())
+                        addSchedule(
+                            hourConvert(
+                                option = startAmPm.value,
+                                hour = startHour.value
+                            ),
+                            startMinute.value.toInt(),
+                            hourConvert(
+                                option = endAmPm.value,
+                                hour = endHour.value
+                            ),
+                            endMinute.value.toInt()
+                        )
                     }
                 )
             }
         }
     }
+}
+
+private fun hourConvert(option: timeOption, hour: String) = when {
+    option == timeOption.AM -> hour.toInt()
+    else -> hour.toInt() + 12
 }
