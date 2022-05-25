@@ -57,9 +57,9 @@ fun TimePickerView(
                     selectedOption.value = option
                 }
                 InputTime(
-                    hour = if(selectedOption.value == "StartTime") startHour else endHour,
-                    minute = if(selectedOption.value == "StartTime") startMinute else endMinute,
-                    ampm = if(selectedOption.value == "StartTime") startAmPm else endAmPm
+                    hour = if (selectedOption.value == "StartTime") startHour else endHour,
+                    minute = if (selectedOption.value == "StartTime") startMinute else endMinute,
+                    ampm = if (selectedOption.value == "StartTime") startAmPm else endAmPm
                 )
                 CancelAddButton(
                     cancelEvent = { onDismiss() },
