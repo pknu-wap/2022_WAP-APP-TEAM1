@@ -30,6 +30,10 @@ class ScheduleViewModel @Inject constructor(
     var currentDate = scheduleRepository.currentDate
         private set
 
+    init {
+        setCurrentDateSchedules()
+    }
+
     fun fetchSchedules(date: CalendarDay) {
         _schedules.value = FakeFactory.createSchedules()
         // _schedules.value = scheduleRepository.findSchedulesByStartTime(date.toLocalDateTime())
@@ -50,9 +54,8 @@ class ScheduleViewModel @Inject constructor(
         scheduleRepository.saveCurrentDateSchedules(currentDataSchedules.value ?: emptyList())
     }
 
-    fun getCurrentDateSchedules(): List<Schedule> {
+    private fun setCurrentDateSchedules() {
         _currentDateSchedules.value = scheduleRepository.currentDateSchedules
-        return currentDataSchedules.value ?: emptyList()
     }
 
     private fun saveCurrentDate() = scheduleRepository.saveCurrentDate(currentDate)

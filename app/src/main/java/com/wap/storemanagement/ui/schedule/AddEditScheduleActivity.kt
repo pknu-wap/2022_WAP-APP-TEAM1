@@ -23,7 +23,6 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
 
         binding.composeScheduleTopAppbar.setContent { AddEditScheduleTopAppBar() }
         setCheckDateView()
-
         setScrollScheduleView()
         fetchScrollScheduleView()
 
@@ -41,7 +40,7 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
         binding.composeScheduleScrollSchedule.setContent {
             // ScheduleView(schedules = FakeFactory.createSchedules())
             ScheduleView(
-                schedules = scheduleViewModel.getCurrentDateSchedules()
+                schedules = scheduleViewModel.currentDataSchedules.value ?: emptyList()
             ) {
                 scheduleViewModel.showDialog()
             }
