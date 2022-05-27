@@ -4,9 +4,10 @@
     android:orientation="horizontal">
 
     <data>
-
+        <variable
+            name="item"
+            type="com.wap.domain.entity.ToDo" />
     </data>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
