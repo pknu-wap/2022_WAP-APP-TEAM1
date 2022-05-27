@@ -36,12 +36,12 @@ private fun PeviewInputTime() {
     val schedule = FakeFactory.createSchedules()[1]
     val hour = remember { mutableStateOf(schedule.startTime.hour.toString()) }
     val minute = remember { mutableStateOf(schedule.startTime.minute.toString()) }
-    val ampm = remember { mutableStateOf(timeOption.AM) }
+    val ampm = remember { mutableStateOf(TimeOption.AM) }
 
     InputTime(hour, minute, ampm)
 }
 
-enum class timeOption {
+enum class TimeOption {
     AM,
     PM
 }
@@ -50,7 +50,7 @@ enum class timeOption {
 fun InputTime(
     hour: MutableState<String>,
     minute: MutableState<String>,
-    ampm: MutableState<timeOption>
+    timeOption: MutableState<TimeOption>
 ) {
     val timeFontSize = 22.sp
     val buttonFontSize = 16.sp
@@ -121,10 +121,10 @@ fun InputTime(
         ) {
             Box(
                 modifier = Modifier
-                    .clickable { ampm.value = timeOption.AM }
+                    .clickable { timeOption.value = TimeOption.AM }
                     .border(
                         width = 2.dp,
-                        color = if (ampm.value == timeOption.AM) focusedColor else Color.Transparent,
+                        color = if (timeOption.value == TimeOption.AM) focusedColor else Color.Transparent,
                         shape = RoundedCornerShape(10)
                     )
                     .fillMaxWidth(0.8f)
@@ -138,10 +138,10 @@ fun InputTime(
             }
             Box(
                 modifier = Modifier
-                    .clickable { ampm.value = timeOption.PM }
+                    .clickable { timeOption.value = TimeOption.PM }
                     .border(
                         width = borderWidth,
-                        color = if (ampm.value == timeOption.PM) focusedColor else Color.Transparent,
+                        color = if (timeOption.value == TimeOption.PM) focusedColor else Color.Transparent,
                         shape = RoundedCornerShape(10)
                     )
                     .fillMaxWidth(0.8f)

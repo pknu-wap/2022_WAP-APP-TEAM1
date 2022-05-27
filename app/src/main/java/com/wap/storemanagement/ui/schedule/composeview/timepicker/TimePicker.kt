@@ -16,6 +16,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.wap.storemanagement.fake.FakeFactory
 
+enum class TimeTitle() {
+    StartTime,
+    EndTime
+}
+
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun TimePickerView(
@@ -24,19 +29,20 @@ fun TimePickerView(
     addSchedule: (startHour: Int, StartMinute: Int, EndHour: Int, EndMinute: Int) -> Unit
 ) {
     if (showDialog) {
-        val options: List<String> = listOf("StartTime", "EndTime")
-        val selectedOption = remember { mutableStateOf(options.first()) }
+        val options = TimeTitle.values()
+        // val options: List<String> = listOf("StartTime", "EndTime")
+        val selectedOption = remember { mutableStateOf(TimeTitle.StartTime) }
         val roundedCornerPercent = 50
 
         val schedule = FakeFactory.createSchedules()[1]
 
         val startHour = remember { mutableStateOf(schedule.startTime.hour.toString()) }
         val startMinute = remember { mutableStateOf(schedule.startTime.minute.toString()) }
-        val startAmPm = remember { mutableStateOf(timeOption.AM) }
+        val startAmPm = remember { mutableStateOf(TimeOption.AM) }
 
         val endHour = remember { mutableStateOf(schedule.endTime.hour.toString()) }
         val endMinute = remember { mutableStateOf(schedule.endTime.minute.toString()) }
-        val endAmPm = remember { mutableStateOf(timeOption.AM) }
+        val endAmPm = remember { mutableStateOf(TimeOption.AM) }
 
         Dialog(
             onDismissRequest = { }
@@ -57,9 +63,9 @@ fun TimePickerView(
                     selectedOption.value = option
                 }
                 InputTime(
-                    hour = if (selectedOption.value == "StartTime") startHour else endHour,
-                    minute = if (selectedOption.value == "StartTime") startMinute else endMinute,
-                    ampm = if (selectedOption.value == "StartTime") startAmPm else endAmPm
+                    hour = if (selectedOption.value == TimeTitle.StartTime) startHour else endHour,
+                    minute = if (selectedOption.value == TimeTitle.StartTime) startMinute else endMinute,
+                    timeOption = if (selectedOption.value == TimeTitle.StartTime) startAmPm else endAmPm
                 )
                 CancelAddButton(
                     cancelEvent = { onDismiss() },
@@ -83,7 +89,7 @@ fun TimePickerView(
     }
 }
 
-private fun hourConvert(option: timeOption, hour: String) = when (option) {
-    timeOption.AM -> hour.toInt()
+private fun hourConvert(option: TimeOption, hour: String) = when (option) {
+    TimeOption.AM -> hour.toInt()
     else -> hour.toInt() + 12
 }
