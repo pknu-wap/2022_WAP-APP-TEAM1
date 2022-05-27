@@ -24,6 +24,8 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
         binding.composeScheduleTopAppbar.setContent { AddEditScheduleTopAppBar() }
         setCheckDateView()
         setScrollScheduleView()
+        fetchScrollScheduleView()
+
         binding.composeScheduleSaveButton.setContent { SaveButton() }
         setTimePickerView()
     }
@@ -38,9 +40,21 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
         binding.composeScheduleScrollSchedule.setContent {
             // ScheduleView(schedules = FakeFactory.createSchedules())
             ScheduleView(
-                schedules = scheduleViewModel.getCurrentDateSchedules()
+                schedules = scheduleViewModel.currentDataSchedules.value ?: emptyList()
             ) {
                 scheduleViewModel.showDialog()
+            }
+        }
+    }
+
+    private fun fetchScrollScheduleView() {
+        scheduleViewModel.currentDataSchedules.observe(this) { schedules ->
+            binding.composeScheduleScrollSchedule.setContent {
+                ScheduleView(
+                    schedules = schedules
+                ) {
+                    scheduleViewModel.showDialog()
+                }
             }
         }
     }
@@ -48,9 +62,14 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
     private fun setTimePickerView() {
         scheduleViewModel.isShowTimePicker.observe(this) { isShowTimePicker ->
             binding.composeScheduleTimePicker.setContent {
-                TimePickerView(isShowTimePicker) {
-                    scheduleViewModel.closeDialog()
-                }
+                TimePickerView(
+                    showDialog = isShowTimePicker,
+                    onDismiss = { scheduleViewModel.closeDialog() },
+                    addSchedule = { startHour, startMinute, endHour, endMinute ->
+                        scheduleViewModel.addDateSchedule(startHour, startMinute, endHour, endMinute)
+                        scheduleViewModel.closeDialog()
+                    }
+                )
             }
         }
     }

@@ -20,8 +20,8 @@ interface TimePickerToggleState {
 
 @Stable
 class TimePickerToggleStateImpl(
-    options: List<String>,
-    selectedOption: String,
+    options: Array<TimeTitle>,
+    selectedOption: TimeTitle,
     private val selectedColor: Color,
     private val unselectedColor: Color
 ) : TimePickerToggleState {
@@ -63,8 +63,8 @@ class TimePickerToggleStateImpl(
 
 @Composable
 fun rememberTimePickerToggleState(
-    options: List<String>,
-    selectedOption: String,
+    options: Array<TimeTitle>,
+    selectedOption: TimeTitle,
     selectedColor: Color,
     unselectedColor: Color
 ) = remember {

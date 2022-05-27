@@ -14,6 +14,7 @@ import com.wap.storemanagement.utils.toDate
 import com.wap.storemanagement.utils.toLocalDateTime
 import com.wap.storemanagement.utils.toScheduleDate
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -28,6 +29,10 @@ class ScheduleViewModel @Inject constructor(
     val currentDataSchedules: LiveData<List<Schedule>> = _currentDateSchedules
     var currentDate = scheduleRepository.currentDate
         private set
+
+    init {
+        setCurrentDateSchedules()
+    }
 
     fun fetchSchedules(date: CalendarDay) {
         _schedules.value = FakeFactory.createSchedules()
@@ -49,7 +54,9 @@ class ScheduleViewModel @Inject constructor(
         scheduleRepository.saveCurrentDateSchedules(currentDataSchedules.value ?: emptyList())
     }
 
-    fun getCurrentDateSchedules() = scheduleRepository.currentDateSchedules
+    private fun setCurrentDateSchedules() {
+        _currentDateSchedules.value = scheduleRepository.currentDateSchedules
+    }
 
     private fun saveCurrentDate() = scheduleRepository.saveCurrentDate(currentDate)
 
@@ -62,5 +69,29 @@ class ScheduleViewModel @Inject constructor(
 
     fun closeDialog() {
         _isShowTimePicker.value = false
+    }
+
+    fun addDateSchedule(startHour: Int, startMinute: Int, endHour: Int, endMinute: Int) {
+        val schedule = Schedule(
+            scheduleId = 5,
+            startTime = LocalDateTime.of(
+                currentDate.year,
+                currentDate.month,
+                currentDate.dayOfMonth,
+                startHour,
+                startMinute
+            ),
+            endTime = LocalDateTime.of(
+                currentDate.year,
+                currentDate.month,
+                currentDate.dayOfMonth,
+                endHour,
+                endMinute
+            ),
+            color = "",
+            recurWeek = null,
+            userId = 1L
+        )
+        _currentDateSchedules.value = _currentDateSchedules.value?.plus(schedule) ?: listOf(schedule)
     }
 }
