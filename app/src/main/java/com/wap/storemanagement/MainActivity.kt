@@ -1,50 +1,24 @@
 package com.wap.storemanagement
 
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.wap.base.BaseActivity
 import com.wap.storemanagement.databinding.ActivityMainBinding
-import com.wap.storemanagement.ui.home.HomeFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+@AndroidEntryPoint
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    private fun initBottomNavigation(){
+    private val navController by lazy { findNavController(R.id.fragment_main) }
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, HomeFragment())
-            .commitAllowingStateLoss()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        binding.mainBnv.setOnItemSelectedListener{ item ->
-            when (item.itemId) {
+        setNavHostFragment()
+    }
 
-                R.id.homeFragment -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, HomeFragment())
-                        .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
-                }
-
-                R.id.lookFragment -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, LookFragment())
-                        .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
-                }
-                R.id.searchFragment -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, SearchFragment())
-                        .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
-                }
-                R.id.lockerFragment -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, LockerFragment())
-                        .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
-                }
-            }
-            false
-        }
+    private fun setNavHostFragment() {
+        binding.bottomBarMain.setupWithNavController(navController)
     }
 }

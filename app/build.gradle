@@ -44,7 +44,6 @@ android {
 }
 
 dependencies {
-    compile 'com.andoid.support:appcompat-v7:28.0.0'
     implementation project(path: ':base')
     implementation project(path: ':data')
     implementation project(path: ':domain')
@@ -78,6 +77,10 @@ dependencies {
     // viewmodel
     implementation 'androidx.activity:activity-ktx:1.4.0'
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
+
+    // navigation component
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
