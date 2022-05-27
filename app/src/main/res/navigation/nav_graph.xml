@@ -20,6 +20,25 @@
             android:id="@+id/action_home_to_addEditSchedule"
             app:destination="@id/addEditScheduleActivity"
             app:popUpTo="@id/homeFragment" />
+
+        <!-- bottom navigation -->
+        <action
+            android:id="@+id/action_home_to_todo"
+            app:destination="@id/todoFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/todoFragment"
+        android:name="com.wap.storemanagement.ui.todo.ToDoFragment"
+        android:label="할일"
+        tools:layout="@layout/fragment_todo" >
+
+        <!-- bottom navigation -->
+        <action
+            android:id="@+id/action_todo_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/todoFragment" />
     </fragment>
 
     <activity
