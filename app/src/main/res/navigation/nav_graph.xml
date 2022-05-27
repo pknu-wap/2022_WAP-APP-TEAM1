@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.wap.storemanagement.ui.home.HomeFragment"
+        android:label="홈"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_home_to_setSchedule"
+            app:destination="@id/setScheduleActivity"
+            app:popUpTo="@id/homeFragment" />
+
+        <action
+            android:id="@+id/action_home_to_addEditSchedule"
+            app:destination="@id/addEditScheduleActivity"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+
+    <activity
+        android:id="@+id/setScheduleActivity"
+        android:name="com.wap.storemanagement.ui.set.SetScheduleCalendarActivity"
+        android:label="스케줄추가"
+        tools:layout="@layout/activity_schedule" />
+
+    <activity
+        android:id="@+id/addEditScheduleActivity"
+        android:name="com.wap.storemanagement.ui.schedule.AddEditScheduleActivity"
+        android:label="스케줄관리"
+        tools:layout="@layout/activity_schedule" />
+</navigation>
