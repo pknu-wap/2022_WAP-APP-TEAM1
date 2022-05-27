@@ -10,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    private val navController by lazy { findNavController(R.id.container_main) }
+    private val navController by lazy { findNavController(R.id.fragment_main) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
