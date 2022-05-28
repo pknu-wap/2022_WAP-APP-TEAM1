@@ -15,6 +15,7 @@ import com.wap.storemanagement.fake.FakeFactory
 import com.wap.storemanagement.ui.basecomposeview.AddScheduleCard
 import com.wap.storemanagement.ui.basecomposeview.BaseScheduleLazyColumn
 import com.wap.storemanagement.ui.basecomposeview.ScheduleCard
+import com.wap.storemanagement.ui.basecomposeview.keyForScheduleLazyColumn
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -23,7 +24,7 @@ fun ScheduleView(schedules: List<Schedule>, onClickAdd: () -> Unit) {
     BaseScheduleLazyColumn { scope ->
         scope.items(
             items = schedules,
-            key = { schedule -> schedule.scheduleId }
+            key = { schedule -> schedule.keyForScheduleLazyColumn() }
         ) { schedule ->
             val startTime = schedule.startTime.toLocalTime()
             val endTime = schedule.endTime.toLocalTime()

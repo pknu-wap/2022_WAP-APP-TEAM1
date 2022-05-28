@@ -22,6 +22,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.wap.domain.entity.Schedule
 import com.wap.storemanagement.R
 import java.time.LocalTime
 
@@ -123,3 +124,6 @@ private fun BaseSurface(block: @Composable () -> Unit) {
         block()
     }
 }
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun Schedule.keyForScheduleLazyColumn(): String = startTime.toString() + endTime.toLocalTime().toString()
