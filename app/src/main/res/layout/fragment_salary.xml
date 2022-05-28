@@ -38,9 +38,10 @@
             android:background="@drawable/bg_salary_blue_edge"
             android:contentDescription="@string/set_year"
             android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/body_margin"
             app:layout_constraintTop_toBottomOf="@id/textView_salary_setSalary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_tostartOf="@id/textView_salary_year" />
+            app:layout_constraintEnd_toStartOf="@id/textView_salary_year" />
 
         <TextView
             android:id="@+id/textView_salary_year"

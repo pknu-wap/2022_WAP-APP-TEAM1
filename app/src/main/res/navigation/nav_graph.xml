@@ -22,6 +22,19 @@
             app:popUpTo="@id/homeFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/salaryFragment"
+        android:name="com.wap.storemanagement.ui.salary.SalaryFragment"
+        android:label="급여"
+        tools:layout="@layout/fragment_salary" >
+
+        <!-- bottom navigation -->
+        <action
+            android:id="@+id/action_salary_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+
     <activity
         android:id="@+id/setScheduleActivity"
         android:name="com.wap.storemanagement.ui.set.SetScheduleCalendarActivity"
