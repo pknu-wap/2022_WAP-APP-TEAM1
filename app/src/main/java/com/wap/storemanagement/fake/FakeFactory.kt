@@ -11,7 +11,6 @@ object FakeFactory {
 
     fun createSchedules() = listOf(
         Schedule(
-            scheduleId = 0L,
             startTime = LocalDateTime.of(2022, 5, 5, 12, 0),
             endTime = LocalDateTime.of(2022, 5, 5, 13, 0),
             color = "",
@@ -19,7 +18,6 @@ object FakeFactory {
             userId = 1L
         ),
         Schedule(
-            scheduleId = 1L,
             startTime = LocalDateTime.of(2022, 5, 6, 15, 0),
             endTime = LocalDateTime.of(2022, 5, 6, 17, 0),
             color = "",

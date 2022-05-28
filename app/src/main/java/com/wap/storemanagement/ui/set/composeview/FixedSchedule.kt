@@ -25,10 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.wap.domain.entity.Schedule
 import com.wap.domain.entity.WeekType
 import com.wap.storemanagement.R
-import com.wap.storemanagement.ui.basecomposeview.AddScheduleCard
-import com.wap.storemanagement.ui.basecomposeview.BaseScheduleLazyColumn
-import com.wap.storemanagement.ui.basecomposeview.ScheduleCard
-import com.wap.storemanagement.ui.basecomposeview.SubTitle
+import com.wap.storemanagement.ui.basecomposeview.*
 
 @Composable
 fun CalendarFixedScheduleTitle() {
@@ -65,7 +62,7 @@ fun SelectedRecurSchedules(schedules: List<Schedule>, onClickAdd: () -> Unit) {
     BaseScheduleLazyColumn { scope ->
         scope.items(
             items = schedules,
-            key = { schedule -> schedule.scheduleId }
+            key = { schedule -> schedule.keyForScheduleLazyColumn() }
         ) { schedule ->
             val startTime = schedule.startTime.toLocalTime()
             val endTime = schedule.endTime.toLocalTime()

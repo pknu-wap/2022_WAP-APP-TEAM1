@@ -11,7 +11,6 @@ import com.wap.domain.entity.Schedule
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun ScheduleEntity.toSchedule() = Schedule(
-    scheduleId = scheduleId,
     startTime = toLocalDateTime(startTime),
     endTime = toLocalDateTime(endTime),
     color = color,
@@ -21,7 +20,6 @@ fun ScheduleEntity.toSchedule() = Schedule(
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun Schedule.toEntity() = ScheduleEntity(
-    scheduleId = scheduleId,
     startTime = fromLocalDateTime(startTime),
     endTime = fromLocalDateTime(endTime),
     color = color,

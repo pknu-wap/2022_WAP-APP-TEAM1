@@ -3,7 +3,6 @@ package com.wap.domain.entity
 import java.time.LocalDateTime
 
 data class Schedule(
-    val scheduleId: Long, // 기본키
     val startTime: LocalDateTime,
     val endTime: LocalDateTime,
     val color: String,

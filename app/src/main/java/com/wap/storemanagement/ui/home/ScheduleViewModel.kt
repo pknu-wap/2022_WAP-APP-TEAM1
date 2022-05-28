@@ -73,7 +73,6 @@ class ScheduleViewModel @Inject constructor(
 
     fun addDateSchedule(startHour: Int, startMinute: Int, endHour: Int, endMinute: Int) {
         val schedule = Schedule(
-            scheduleId = 5,
             startTime = LocalDateTime.of(
                 currentDate.year,
                 currentDate.month,

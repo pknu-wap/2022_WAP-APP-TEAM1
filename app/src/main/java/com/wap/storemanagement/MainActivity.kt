@@ -19,6 +19,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun setNavHostFragment() {
-        binding.bottomBarMain.setupWithNavController(navController)
+        binding.bottomNavigationMain.setupWithNavController(navController)
     }
 }
