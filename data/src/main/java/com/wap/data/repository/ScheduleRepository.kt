@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.O)
 class ScheduleRepository @Inject constructor(
-    val scheduleDataSource: ScheduleDataSource
+    private val scheduleDataSource: ScheduleDataSource
 ) : ScheduleDataSource {
 
     private var _currentDate: LocalDateTime = LocalDateTime.now()
@@ -27,6 +27,28 @@ class ScheduleRepository @Inject constructor(
         _currentDate = currentDate
     }
 
+    fun saveViewModelToDB(currentDateSchedules: List<Schedule>) {
+        saveCurrentDateSchedules(currentDateSchedules)
+        currentDateSchedules.forEach { schedule ->
+            when(schedule.scheduleId) {
+                -1L -> createSchedule(schedule)
+                else -> when(isChanged(schedule)) {
+                    true -> updateSchedule(schedule)
+                }
+            }
+        }
+    }
+
+    private fun isChanged(schedule: Schedule): Boolean = (schedule != findScheduleByScheduleId(schedule.scheduleId))
+
+
+    override fun updateSchedule(schedule: Schedule) {
+        scheduleDataSource.updateSchedule(schedule)
+    }
+
+    override fun findScheduleByScheduleId(scheduleId: Long): Schedule = scheduleDataSource.findScheduleByScheduleId(scheduleId)
+
+
     override fun getSchedule(scheduleId: Long): Schedule {
         TODO("Not yet implemented")
     }
@@ -40,7 +62,7 @@ class ScheduleRepository @Inject constructor(
     }
 
     override fun createSchedule(schedule: Schedule) {
-        TODO("Not yet implemented")
+        scheduleDataSource.createSchedule(schedule)
     }
 
     override fun updateStartTime(date: LocalDateTime) {
