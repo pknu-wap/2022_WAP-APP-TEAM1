@@ -19,12 +19,14 @@ interface ScheduleDao {
     @Query("SELECT * FROM SCHEDULE WHERE startTime = :startTime")
     fun findSchedulesByStartDate(startTime: LocalDateTime): List<ScheduleEntity>?
 
+    @Query("SELECT * FROM SCHEDULE WHERE scheduleId= :scheduleId")
+    fun findScheduleByScheduleId(scheduleId: Long): ScheduleEntity
 
     // Update
     @Update
     fun updateSchedule(schedule: ScheduleEntity)
 
-    
+
     // Delete
     @Query("DELETE FROM SCHEDULE WHERE user_id = :userId")
     fun deleteSchedulesByUserId(userId: Long)
