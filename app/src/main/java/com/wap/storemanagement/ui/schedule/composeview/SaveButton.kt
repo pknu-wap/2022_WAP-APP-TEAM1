@@ -5,14 +5,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.wap.storemanagement.ui.basecomposeview.BaseSaveButton
 
 @Composable
-fun SaveButton() {
+fun SaveButton(onClick: () -> Unit) {
     BaseSaveButton {
-        // TODO : OnClick 효과 정의
+        onClick()
     }
 }
 
 @Preview
 @Composable
 fun PreviewSaveButton() {
-    SaveButton()
+    // SaveButton()
 }
