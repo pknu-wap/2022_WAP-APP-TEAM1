@@ -126,10 +126,4 @@ private fun BaseSurface(block: @Composable () -> Unit) {
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun Schedule.keyForScheduleLazyColumn(): String {
-    val startTime = this.startTime.toString()
-    val endTime = this.endTime.toLocalTime().toString()
-
-    return startTime + endTime
-}
-
+fun Schedule.keyForScheduleLazyColumn(): String = startTime.toString() + endTime.toLocalTime().toString()
