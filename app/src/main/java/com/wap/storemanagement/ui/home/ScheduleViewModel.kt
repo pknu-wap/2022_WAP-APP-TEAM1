@@ -60,6 +60,8 @@ class ScheduleViewModel @Inject constructor(
 
     private fun saveCurrentDate() = scheduleRepository.saveCurrentDate(currentDate)
 
+    fun saveButtonEvent() = scheduleRepository.saveViewModelToDB(_currentDateSchedules.value ?: emptyList())
+
     private var _isShowTimePicker: MutableLiveData<Boolean> = MutableLiveData(false)
     val  isShowTimePicker: LiveData<Boolean> = _isShowTimePicker
 
@@ -73,7 +75,7 @@ class ScheduleViewModel @Inject constructor(
 
     fun addDateSchedule(startHour: Int, startMinute: Int, endHour: Int, endMinute: Int) {
         val schedule = Schedule(
-            scheduleId = -1,
+            scheduleId = -1L,
             startTime = LocalDateTime.of(
                 currentDate.year,
                 currentDate.month,
