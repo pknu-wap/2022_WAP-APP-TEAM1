@@ -30,9 +30,9 @@ class ScheduleRepository @Inject constructor(
     fun saveViewModelToDB(currentDateSchedules: List<Schedule>) {
         saveCurrentDateSchedules(currentDateSchedules)
         currentDateSchedules.forEach { schedule ->
-            when(schedule.scheduleId) {
+            when (schedule.scheduleId) {
                 -1L -> createSchedule(schedule)
-                else -> when(isChanged(schedule)) {
+                else -> when (isChanged(schedule)) {
                     true -> updateSchedule(schedule)
                 }
             }
@@ -41,13 +41,11 @@ class ScheduleRepository @Inject constructor(
 
     private fun isChanged(schedule: Schedule): Boolean = (schedule != findScheduleByScheduleId(schedule.scheduleId))
 
-
     override fun updateSchedule(schedule: Schedule) {
         scheduleDataSource.updateSchedule(schedule)
     }
 
     override fun findScheduleByScheduleId(scheduleId: Long): Schedule = scheduleDataSource.findScheduleByScheduleId(scheduleId)
-
 
     override fun getSchedule(scheduleId: Long): Schedule {
         TODO("Not yet implemented")

@@ -26,7 +26,6 @@ interface ScheduleDao {
     @Update
     fun updateSchedule(schedule: ScheduleEntity)
 
-
     // Delete
     @Query("DELETE FROM SCHEDULE WHERE user_id = :userId")
     fun deleteSchedulesByUserId(userId: Long)
