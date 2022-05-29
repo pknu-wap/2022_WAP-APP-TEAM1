@@ -97,4 +97,34 @@ class ScheduleViewModel @Inject constructor(
         )
         _currentDateSchedules.value = _currentDateSchedules.value?.plus(schedule) ?: listOf(schedule)
     }
+
+    lateinit var scheduleForEdit: Schedule
+
+    fun editDateSchedule(startHour: Int, startMinute: Int, endHour: Int, endMinute: Int) {
+        val editScheduleIndex = _currentDateSchedules.value!!.indexOf(scheduleForEdit)
+        val editedSchedule = Schedule(
+            scheduleId = scheduleForEdit.scheduleId,
+            startTime = LocalDateTime.of(
+                scheduleForEdit.startTime.year,
+                scheduleForEdit.startTime.month,
+                scheduleForEdit.startTime.dayOfMonth,
+                startHour,
+                startMinute
+            ),
+            endTime = LocalDateTime.of(
+                scheduleForEdit.endTime.year,
+                scheduleForEdit.endTime.month,
+                scheduleForEdit.endTime.dayOfMonth,
+                endHour,
+                endMinute
+            ),
+            color = scheduleForEdit.color,
+            recurWeek = scheduleForEdit.recurWeek,
+            userId = scheduleForEdit.userId
+        )
+
+        _currentDateSchedules.value = _currentDateSchedules.value?.toMutableList().apply {
+            this?.set(editScheduleIndex, editedSchedule)
+        }
+    }
 }
