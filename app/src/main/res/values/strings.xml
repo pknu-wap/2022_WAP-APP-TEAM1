@@ -30,5 +30,6 @@
     <string name="hour_salary">시급</string>
     <string name="won">원</string>
     <string name="salary">급여</string>
+    <string name="holiday_salary">주휴수당</string>
 
 </resources>
