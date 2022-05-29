@@ -33,5 +33,5 @@ object DataSourceModule {
     @Singleton
     @LocalUserDataSource
     @Provides
-    fun provideScheduleLocalDataSource(userDao: UserDao): UserDataSource = UserLocalDataSource(userDao)
+    fun provideUserLocalDataSource(userDao: UserDao): UserDataSource = UserLocalDataSource(userDao)
 }
