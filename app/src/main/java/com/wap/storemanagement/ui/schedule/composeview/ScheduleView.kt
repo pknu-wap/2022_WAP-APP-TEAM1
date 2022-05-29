@@ -19,8 +19,11 @@ import com.wap.storemanagement.ui.basecomposeview.keyForScheduleLazyColumn
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScheduleView(schedules: List<Schedule>, onClickAdd: () -> Unit) {
-
+fun ScheduleView(
+    schedules: List<Schedule>,
+    onClickAdd: () -> Unit,
+    onClickSchedule: (Schedule) -> Unit,
+) {
     BaseScheduleLazyColumn { scope ->
         scope.items(
             items = schedules,
@@ -28,7 +31,11 @@ fun ScheduleView(schedules: List<Schedule>, onClickAdd: () -> Unit) {
         ) { schedule ->
             val startTime = schedule.startTime.toLocalTime()
             val endTime = schedule.endTime.toLocalTime()
-            ScheduleCard(startTime = startTime, endTime = endTime)
+            ScheduleCard(
+                startTime = startTime,
+                endTime = endTime,
+                onClick = { onClickSchedule(schedule) }
+            )
         }
         scope.item { AddScheduleCard(onClick = onClickAdd) }
     }
