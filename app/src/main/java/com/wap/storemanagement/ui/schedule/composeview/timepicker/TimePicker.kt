@@ -21,73 +21,75 @@ enum class TimeTitle() {
     EndTime
 }
 
+@Composable
+fun Empty() {
+
+}
+
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun TimePickerView(
-    showDialog: Boolean,
     onDismiss: () -> Unit,
-    addSchedule: (startHour: Int, StartMinute: Int, EndHour: Int, EndMinute: Int) -> Unit
+    confirmEvent: (startHour: Int, StartMinute: Int, EndHour: Int, EndMinute: Int) -> Unit
 ) {
-    if (showDialog) {
-        val options = TimeTitle.values()
-        // val options: List<String> = listOf("StartTime", "EndTime")
-        val selectedOption = remember { mutableStateOf(TimeTitle.StartTime) }
-        val roundedCornerPercent = 50
+    val options = TimeTitle.values()
+    val selectedOption = remember { mutableStateOf(TimeTitle.StartTime) }
+    val roundedCornerPercent = 50
 
-        val schedule = FakeFactory.createSchedules()[1]
+    val schedule = FakeFactory.createSchedules()[1]
 
-        val startHour = remember { mutableStateOf(schedule.startTime.hour.toString()) }
-        val startMinute = remember { mutableStateOf(schedule.startTime.minute.toString()) }
-        val startAmPm = remember { mutableStateOf(TimeOption.AM) }
+    val startHour = remember { mutableStateOf(schedule.startTime.hour.toString()) }
+    val startMinute = remember { mutableStateOf(schedule.startTime.minute.toString()) }
+    val startAmPm = remember { mutableStateOf(TimeOption.AM) }
 
-        val endHour = remember { mutableStateOf(schedule.endTime.hour.toString()) }
-        val endMinute = remember { mutableStateOf(schedule.endTime.minute.toString()) }
-        val endAmPm = remember { mutableStateOf(TimeOption.AM) }
+    val endHour = remember { mutableStateOf(schedule.endTime.hour.toString()) }
+    val endMinute = remember { mutableStateOf(schedule.endTime.minute.toString()) }
+    val endAmPm = remember { mutableStateOf(TimeOption.AM) }
 
-        Dialog(
-            onDismissRequest = { }
+    Dialog(
+        onDismissRequest = { }
+    ) {
+        Column(
+            Modifier
+                .size(280.dp, 240.dp)
+                .clip(shape = RoundedCornerShape(roundedCornerPercent / 4))
+                .background(Color.White),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
-                Modifier
-                    .size(280.dp, 240.dp)
-                    .clip(shape = RoundedCornerShape(roundedCornerPercent / 4))
-                    .background(Color.White),
-                verticalArrangement = Arrangement.SpaceBetween,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                TimePickerToggle(
-                    roundedCornerPercent = roundedCornerPercent,
-                    options = options,
-                    selectedOption = selectedOption.value
-                ) { option ->
-                    selectedOption.value = option
-                }
-                InputTime(
-                    hour = if (selectedOption.value == TimeTitle.StartTime) startHour else endHour,
-                    minute = if (selectedOption.value == TimeTitle.StartTime) startMinute else endMinute,
-                    timeOption = if (selectedOption.value == TimeTitle.StartTime) startAmPm else endAmPm
-                )
-                CancelAddButton(
-                    cancelEvent = { onDismiss() },
-                    addEvent = {
-                        addSchedule(
-                            hourConvert(
-                                option = startAmPm.value,
-                                hour = startHour.value
-                            ),
-                            startMinute.value.toInt(),
-                            hourConvert(
-                                option = endAmPm.value,
-                                hour = endHour.value
-                            ),
-                            endMinute.value.toInt()
-                        )
-                    }
-                )
+            TimePickerToggle(
+                roundedCornerPercent = roundedCornerPercent,
+                options = options,
+                selectedOption = selectedOption.value
+            ) { option ->
+                selectedOption.value = option
             }
+            InputTime(
+                hour = if (selectedOption.value == TimeTitle.StartTime) startHour else endHour,
+                minute = if (selectedOption.value == TimeTitle.StartTime) startMinute else endMinute,
+                timeOption = if (selectedOption.value == TimeTitle.StartTime) startAmPm else endAmPm
+            )
+            CancelAddButton(
+                cancelEvent = { onDismiss() },
+                confirmEvent = {
+                    confirmEvent(
+                        hourConvert(
+                            option = startAmPm.value,
+                            hour = startHour.value
+                        ),
+                        startMinute.value.toInt(),
+                        hourConvert(
+                            option = endAmPm.value,
+                            hour = endHour.value
+                        ),
+                        endMinute.value.toInt()
+                    )
+                }
+            )
         }
     }
 }
+
 
 private fun hourConvert(option: TimeOption, hour: String) = when (option) {
     TimeOption.AM -> hour.toInt()

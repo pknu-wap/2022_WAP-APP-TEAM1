@@ -15,7 +15,7 @@ import com.wap.storemanagement.R
 @Composable
 fun CancelAddButton(
     cancelEvent: () -> Unit,
-    addEvent: () -> Unit
+    confirmEvent: () -> Unit
 ) {
     val cancelText = stringResource(id = R.string.schedule_time_picker_cancel_button)
     val addText = stringResource(id = R.string.schedule_time_picker_add_button)
@@ -40,7 +40,7 @@ fun CancelAddButton(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxHeight()
-                .clickable { addEvent() },
+                .clickable { confirmEvent() },
             contentAlignment = Alignment.Center
         ) {
             Text(
