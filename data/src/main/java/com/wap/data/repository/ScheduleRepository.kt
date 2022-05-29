@@ -31,7 +31,7 @@ class ScheduleRepository @Inject constructor(
         saveCurrentDateSchedules(currentDateSchedules)
         currentDateSchedules.forEach { schedule ->
             when (schedule.scheduleId) {
-                -1L -> createSchedule(schedule)
+                newSchedule -> createSchedule(schedule)
                 else -> when (isChanged(schedule)) {
                     true -> updateSchedule(schedule)
                 }
@@ -81,5 +81,9 @@ class ScheduleRepository @Inject constructor(
 
     override fun deleteSchedule(scheduleId: Long) {
         TODO("Not yet implemented")
+    }
+
+    companion object {
+        const val newSchedule = -1L
     }
 }
