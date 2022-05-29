@@ -25,8 +25,7 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
         setCheckDateView()
         setScrollScheduleView()
         fetchScrollScheduleView()
-
-        binding.composeScheduleSaveButton.setContent { SaveButton() }
+        setSaveButton()
         setTimePickerView()
     }
 
@@ -71,6 +70,12 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
                     }
                 )
             }
+        }
+    }
+
+    private fun setSaveButton() {
+        binding.composeScheduleSaveButton.setContent {
+            SaveButton { scheduleViewModel.saveButtonEvent() }
         }
     }
 }

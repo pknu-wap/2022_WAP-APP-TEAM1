@@ -56,4 +56,29 @@ class ScheduleDaoTest {
         // Then equal initial schedule
         assertEquals(listOf(schedule), schedules)
     }
+
+    @Test
+    fun when_updateSchedule_then_success() {
+        // Given insert schedule & modified schedule
+        val schedule = Schedule(
+            scheduleId = 1L,
+            startTime = LocalDateTime.of(2022, 5, 5, 12, 0),
+            endTime = LocalDateTime.of(2022, 5, 5, 13, 0),
+            color = "",
+            recurWeek = WeekType.FRI,
+            userId = 1L
+        ).toEntity()
+
+        val modifiedSchedule = schedule.copy(
+            color = "blue"
+        )
+
+        scheduleDao.insertSchedule(schedule)
+
+        // When update schedule`s color
+        scheduleDao.updateSchedule(modifiedSchedule)
+
+        // Then schedule was updated
+        assertEquals(modifiedSchedule, scheduleDao.findScheduleByScheduleId(schedule.scheduleId))
+    }
 }

@@ -30,8 +30,16 @@ class ScheduleLocalDataSourceImpl @Inject constructor(
     } ?: emptyList()
 
     @RequiresApi(Build.VERSION_CODES.O)
+    override fun findScheduleByScheduleId(scheduleId: Long) = scheduleDao.findScheduleByScheduleId(scheduleId)?.toSchedule()
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun createSchedule(schedule: Schedule) {
         scheduleDao.insertSchedule(schedule.toEntity())
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun updateSchedule(schedule: Schedule) {
+        scheduleDao.updateSchedule(schedule.toEntity())
     }
 
     override fun updateStartTime(date: LocalDateTime) {

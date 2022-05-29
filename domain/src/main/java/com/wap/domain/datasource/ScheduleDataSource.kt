@@ -12,7 +12,11 @@ interface ScheduleDataSource {
 
     fun findSchedulesByStartTime(startTime: LocalDateTime): List<Schedule>
 
+    fun findScheduleByScheduleId(scheduleId: Long): Schedule
+
     fun createSchedule(schedule: Schedule)
+
+    fun updateSchedule(schedule: Schedule)
 
     fun updateStartTime(date: LocalDateTime)
 
