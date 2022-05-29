@@ -52,7 +52,6 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
     private fun fetchScrollScheduleView() {
         scheduleViewModel.currentDataSchedules.observe(this) { schedules ->
             binding.composeScheduleScrollSchedule.setContent {
-                Log.i("fetchSchedule","${scheduleViewModel.currentDataSchedules.value}")
                 ScheduleView(
                     schedules = schedules,
                     onClickAdd = { scheduleViewModel.showDialog(TimePickerState.Add) },
