@@ -39,7 +39,7 @@ fun BaseScheduleLazyColumn(block: (LazyListScope) -> Unit) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScheduleCard(startTime: LocalTime, endTime: LocalTime) {
+fun ScheduleCard(startTime: LocalTime, endTime: LocalTime, onClick: () -> Unit) {
     val checkBoxColor = colorResource(id = R.color.schedule_check_box)
     val grayTextColor = colorResource(id = R.color.gray_text)
     val checkedState = remember { mutableStateOf(false) }
@@ -50,30 +50,39 @@ fun ScheduleCard(startTime: LocalTime, endTime: LocalTime) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            BaseTimeColumn {
-                Text(
-                    text = stringResource(id = R.string.schedule_schedule_card_start_text),
-                    fontSize = 18.sp,
-                    color = grayTextColor
-                )
-                Text(text = startTime.formatToString(), fontSize = 22.sp)
-            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier
+                    .weight(0.8f)
+                    .clickable { onClick() }
+            ) {
+                BaseTimeColumn {
+                    Text(
+                        text = stringResource(id = R.string.schedule_schedule_card_start_text),
+                        fontSize = 18.sp,
+                        color = grayTextColor
+                    )
+                    Text(text = startTime.formatToString(), fontSize = 22.sp)
+                }
 
-            Text(text = "-", fontSize = 22.sp)
+                Text(text = "-", fontSize = 22.sp)
 
-            BaseTimeColumn {
-                Text(
-                    text = stringResource(id = R.string.schedule_schedule_card_end_text),
-                    fontSize = 18.sp,
-                    color = grayTextColor
-                )
-                Text(text = endTime.formatToString(), fontSize = 22.sp)
+                BaseTimeColumn {
+                    Text(
+                        text = stringResource(id = R.string.schedule_schedule_card_end_text),
+                        fontSize = 18.sp,
+                        color = grayTextColor
+                    )
+                    Text(text = endTime.formatToString(), fontSize = 22.sp)
+                }
             }
 
             Checkbox(
                 checked = checkedState.value,
                 onCheckedChange = { checkedState.value = it },
-                colors = CheckboxDefaults.colors(checkBoxColor)
+                colors = CheckboxDefaults.colors(checkBoxColor),
+                modifier = Modifier.weight(0.2f)
             )
         }
     }
