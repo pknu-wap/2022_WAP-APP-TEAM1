@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compose_salary_topBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_height="200dp"/>
+
+        <TextView
+            android:id="@+id/textView_salary_setSalary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/set_salary"
+            android:layout_marginStart="@dimen/body_margin"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/salary_text_color"
+            app:layout_constraintTop_toBottomOf="@id/compose_salary_topBox"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinner_salary_setYear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:background="@drawable/bg_salary_blue_edge"
+            android:contentDescription="@string/set_year"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/body_margin"
+            app:layout_constraintTop_toBottomOf="@id/textView_salary_setSalary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/textView_salary_year" />
+
+        <TextView
+            android:id="@+id/textView_salary_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/body_margin"
+            android:textColor="@color/salary_text_color"
+            android:textStyle="bold"
+            android:text="@string/year"
+            app:layout_constraintTop_toTopOf="@id/spinner_salary_setYear"
+            app:layout_constraintBottom_toBottomOf="@id/spinner_salary_setYear"
+            app:layout_constraintStart_toEndOf="@id/spinner_salary_setYear"
+            app:layout_constraintEnd_toStartOf="@id/spinner_salary_setMonth"/>
+
+        <Spinner
+            android:id="@+id/spinner_salary_setMonth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:background="@drawable/bg_salary_blue_edge"
+            android:contentDescription="@string/set_month"
+            app:layout_constraintTop_toTopOf="@id/spinner_salary_setYear"
+            app:layout_constraintStart_toEndOf="@id/textView_salary_year"
+            app:layout_constraintEnd_toStartOf="@id/textView_salary_month"/>
+
+        <TextView
+            android:id="@+id/textView_salary_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/body_margin"
+            android:textColor="@color/salary_text_color"
+            android:textStyle="bold"
+            android:text="@string/month"
+            app:layout_constraintTop_toTopOf="@id/spinner_salary_setMonth"
+            app:layout_constraintBottom_toBottomOf="@id/spinner_salary_setMonth"
+            app:layout_constraintStart_toEndOf="@id/spinner_salary_setMonth"
+            app:layout_constraintEnd_toStartOf="@id/spinner_salary_setDay"/>
+
+        <Spinner
+            android:id="@+id/spinner_salary_setDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:contentDescription="@string/set_month"
+            android:background="@drawable/bg_salary_blue_edge"
+            app:layout_constraintTop_toTopOf="@id/spinner_salary_setYear"
+            app:layout_constraintStart_toEndOf="@id/textView_salary_month"
+            app:layout_constraintEnd_toStartOf="@id/textView_salary_day"/>
+
+        <TextView
+            android:id="@+id/textView_salary_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/body_margin"
+            android:textColor="@color/salary_text_color"
+            android:textStyle="bold"
+            android:text="@string/salary_day"
+            app:layout_constraintTop_toTopOf="@id/spinner_salary_setDay"
+            app:layout_constraintBottom_toBottomOf="@id/spinner_salary_setDay"
+            app:layout_constraintStart_toEndOf="@id/spinner_salary_setDay"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/textView_salary_hourSalary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hour_salary"
+            android:textColor="@color/salary_text_color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/body_margin"
+            app:layout_constraintTop_toBottomOf="@id/spinner_salary_setYear"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- TODO: hint는 viewModel에서 최저시급을 가져올 것 -->
+        <EditText
+            android:id="@+id/editText_salary_hourSalary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/body_margin"
+            android:hint="9,160"
+            android:background="@drawable/bg_salary_blue_edge"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:gravity="end"
+            android:padding="10dp"
+            android:textColor="@color/salary_text_color"
+            app:layout_constraintTop_toBottomOf="@id/textView_salary_hourSalary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/textView_salary_won" />
+
+        <TextView
+            android:id="@+id/textView_salary_won"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/won"
+            android:layout_margin="@dimen/body_margin"
+            android:textColor="@color/salary_text_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/editText_salary_hourSalary"
+            app:layout_constraintTop_toTopOf="@id/editText_salary_hourSalary"
+            app:layout_constraintBottom_toBottomOf="@id/editText_salary_hourSalary"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

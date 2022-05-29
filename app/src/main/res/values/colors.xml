@@ -28,4 +28,6 @@
     <color name="schedule_add_circle_icon">@color/dark_blue</color>
     <color name="schedule_check_box">@color/dark_blue</color>
     <color name="schedule_base_surface_border">@color/gray</color>
+
+    <color name="salary_text_color">@color/black</color>
 </resources>
