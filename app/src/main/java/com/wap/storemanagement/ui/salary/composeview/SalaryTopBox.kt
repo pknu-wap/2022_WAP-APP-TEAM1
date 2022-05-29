@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,7 +27,7 @@ import com.wap.storemanagement.R
 
 @Composable
 fun TopBox(salary: Int) {
-    var holidayToggleState by remember { mutableStateOf(false)}
+    var holidayToggleState by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier.background(color = colorResource(id = R.color.dark_blue)),
