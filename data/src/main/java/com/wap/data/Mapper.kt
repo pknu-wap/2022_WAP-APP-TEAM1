@@ -40,3 +40,11 @@ fun UserEntity.toUser() = User(userId, name)
 fun ToDo.toEntity() = TodoEntity(toDoId, title, contents, isComplete)
 
 fun TodoEntity.toToDo() = ToDo(toDoId, title, contents, isComplete)
+
+fun List<ToDo>.toEntity() = map { todo ->
+    todo.toEntity()
+}
+
+fun List<TodoEntity>.toToDo() = map { entity ->
+    entity.toToDo()
+}
