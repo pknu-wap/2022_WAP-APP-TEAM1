@@ -19,9 +19,9 @@ import com.wap.data.entity.UserEntity
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase() {
 
-    abstract fun ScheduleDao(): ScheduleDao
+    abstract fun scheduleDao(): ScheduleDao
 
-    abstract fun UserDao(): UserDao
+    abstract fun userDao(): UserDao
 
     abstract fun toDoDao(): TodoDao
 

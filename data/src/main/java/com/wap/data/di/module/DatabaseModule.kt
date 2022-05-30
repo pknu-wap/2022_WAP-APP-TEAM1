@@ -28,11 +28,11 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideScheduleDao(database: AppDatabase) = database.ScheduleDao()
+    fun provideScheduleDao(database: AppDatabase) = database.scheduleDao()
 
     @Provides
     @Singleton
-    fun provideUserDao(database: AppDatabase) = database.UserDao()
+    fun provideUserDao(database: AppDatabase) = database.userDao()
 
     @Provides
     @Singleton
