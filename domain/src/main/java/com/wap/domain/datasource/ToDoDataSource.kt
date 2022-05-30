@@ -7,9 +7,9 @@ interface ToDoDataSource {
 
     suspend fun createToDo(toDo: ToDo)
 
-    suspend fun fetchAllToDoList(): Flow<List<ToDo>>
+    fun fetchAllToDoList(): Flow<List<ToDo>>
 
-    suspend fun fetchToDoListById(toDoId: Long): Flow<ToDo>
+    fun fetchToDoListById(toDoId: Long): Flow<ToDo>
 
     suspend fun updateToDo(toDo: ToDo)
 

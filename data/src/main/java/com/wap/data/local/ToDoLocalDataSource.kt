@@ -16,9 +16,9 @@ class ToDoLocalDataSource @Inject constructor(
         todoDao.createToDo(toDo.toEntity())
     }
 
-    override suspend fun fetchAllToDoList() = todoDao.fetchToDoList().map { entityList -> entityList.toToDo() }
+    override fun fetchAllToDoList() = todoDao.fetchToDoList().map { entityList -> entityList.toToDo() }
 
-    override suspend fun fetchToDoListById(toDoId: Long) = todoDao.fetchToDoById(toDoId).map { entity -> entity.toToDo() }
+    override fun fetchToDoListById(toDoId: Long) = todoDao.fetchToDoById(toDoId).map { entity -> entity.toToDo() }
 
     override suspend fun updateToDo(toDo: ToDo) {
         todoDao.updateToDo(toDo.toEntity())
