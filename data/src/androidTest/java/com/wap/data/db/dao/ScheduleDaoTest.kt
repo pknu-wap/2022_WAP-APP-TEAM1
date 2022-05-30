@@ -25,10 +25,10 @@ class ScheduleDaoTest {
             .allowMainThreadQueries()
             .build()
 
-        db.UserDao()
+        db.userDao()
             .insertUser(UserEntity(1L, ""))
 
-        scheduleDao = db.ScheduleDao()
+        scheduleDao = db.scheduleDao()
     }
 
     @After

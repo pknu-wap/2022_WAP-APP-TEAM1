@@ -21,7 +21,7 @@ class UserDaoTest {
             .allowMainThreadQueries()
             .build()
 
-        userDao = db.UserDao()
+        userDao = db.userDao()
     }
 
     @After
