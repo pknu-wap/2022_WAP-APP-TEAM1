@@ -23,11 +23,16 @@ class ToDoFragment : BaseFragment<FragmentTodoBinding>(R.layout.fragment_todo) {
         super.onViewCreated(view, savedInstanceState)
 
         setAdapter()
+        setInitBinding()
         setCoroutines()
     }
 
     private fun setAdapter() {
         binding.recyclerViewTodo.adapter = toDoAdapter
+    }
+
+    private fun setInitBinding() {
+        binding.vm = toDoViewModel
     }
 
     private fun setCoroutines() {

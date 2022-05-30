@@ -26,6 +26,7 @@
             android:id="@+id/textView_itemToDo_contents"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{item.contents}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/checkBox_itemToDo" />
 
