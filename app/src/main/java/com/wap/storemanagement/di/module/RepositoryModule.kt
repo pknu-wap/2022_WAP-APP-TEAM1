@@ -1,5 +1,7 @@
 package com.wap.storemanagement.di.module
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.wap.data.di.module.DataSourceModule
 import com.wap.data.repository.ScheduleRepository
 import com.wap.domain.datasource.ScheduleDataSource
@@ -13,6 +15,7 @@ import javax.inject.Singleton
 @Module
 object RepositoryModule {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @Singleton
     @Provides
     fun provideScheduleRepository(
