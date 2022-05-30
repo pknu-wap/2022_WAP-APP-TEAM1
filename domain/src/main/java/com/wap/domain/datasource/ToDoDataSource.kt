@@ -5,13 +5,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface ToDoDataSource {
 
-    fun createToDo(toDo: ToDo)
+    suspend fun createToDo(toDo: ToDo)
 
-    fun fetchAllToDoList(): Flow<List<ToDo>>
+    suspend fun fetchAllToDoList(): Flow<List<ToDo>>
 
-    fun fetchToDoListById(toDoId: Long): Flow<ToDo>
+    suspend fun fetchToDoListById(toDoId: Long): Flow<ToDo>
 
-    fun updateToDo(toDo: ToDo)
+    suspend fun updateToDo(toDo: ToDo)
 
-    fun deleteToDo(toDo: ToDo)
+    suspend fun deleteToDo(toDo: ToDo)
 }
