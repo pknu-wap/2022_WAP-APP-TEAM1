@@ -60,7 +60,11 @@ fun SelectWeek() {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun SelectedRecurSchedules(schedules: List<Schedule>, onClickAdd: () -> Unit) {
+fun SelectedRecurSchedules(
+    schedules: List<Schedule>,
+    onClickAdd: () -> Unit,
+    onClickSchedule: (Schedule) -> Unit
+) {
 
     BaseScheduleLazyColumn { scope ->
         scope.items(
@@ -69,7 +73,11 @@ fun SelectedRecurSchedules(schedules: List<Schedule>, onClickAdd: () -> Unit) {
         ) { schedule ->
             val startTime = schedule.startTime.toLocalTime()
             val endTime = schedule.endTime.toLocalTime()
-            ScheduleCard(startTime = startTime, endTime = endTime)
+            ScheduleCard(
+                startTime = startTime,
+                endTime = endTime,
+                onClick = { onClickSchedule(schedule) }
+            )
         }
         scope.item { AddScheduleCard(onClick = onClickAdd) }
     }

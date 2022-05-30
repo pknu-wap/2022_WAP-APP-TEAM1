@@ -2,13 +2,16 @@ package com.wap.storemanagement.ui.schedule
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.compose.runtime.Composable
 import com.wap.base.BaseActivity
 import com.wap.storemanagement.R
 import com.wap.storemanagement.databinding.ActivityScheduleBinding
 import com.wap.storemanagement.ui.home.ScheduleViewModel
 import com.wap.storemanagement.ui.schedule.composeview.*
+import com.wap.storemanagement.ui.schedule.composeview.timepicker.Empty
 import com.wap.storemanagement.ui.schedule.composeview.timepicker.TimePickerView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,10 +42,10 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
         binding.composeScheduleScrollSchedule.setContent {
             // ScheduleView(schedules = FakeFactory.createSchedules())
             ScheduleView(
-                schedules = scheduleViewModel.currentDataSchedules.value ?: emptyList()
-            ) {
-                scheduleViewModel.showDialog()
-            }
+                schedules = scheduleViewModel.currentDataSchedules.value ?: emptyList(),
+                onClickAdd = { scheduleViewModel.showDialog(TimePickerState.Add) },
+                onClickSchedule = { scheduleViewModel.showDialog(TimePickerState.Edit) }
+            )
         }
     }
 
@@ -50,26 +53,50 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
         scheduleViewModel.currentDataSchedules.observe(this) { schedules ->
             binding.composeScheduleScrollSchedule.setContent {
                 ScheduleView(
-                    schedules = schedules
-                ) {
-                    scheduleViewModel.showDialog()
-                }
+                    schedules = schedules,
+                    onClickAdd = { scheduleViewModel.showDialog(TimePickerState.Add) },
+                    onClickSchedule = { schedule ->
+                        scheduleViewModel.showDialog(TimePickerState.Edit)
+                        scheduleViewModel.scheduleForEdit = schedule
+                    }
+                )
             }
         }
     }
 
     private fun setTimePickerView() {
-        scheduleViewModel.isShowTimePicker.observe(this) { isShowTimePicker ->
+        scheduleViewModel.timePickerState.observe(this) { state ->
             binding.composeScheduleTimePicker.setContent {
-                TimePickerView(
-                    showDialog = isShowTimePicker,
-                    onDismiss = { scheduleViewModel.closeDialog() },
-                    addSchedule = { startHour, startMinute, endHour, endMinute ->
-                        scheduleViewModel.addDateSchedule(startHour, startMinute, endHour, endMinute)
-                        scheduleViewModel.closeDialog()
-                    }
-                )
+                when (state) {
+                    TimePickerState.Close -> Empty()
+                    else -> AddEditTimePickerView(state)
+                }
             }
+        }
+    }
+
+    @Composable
+    private fun AddEditTimePickerView(state: TimePickerState) {
+        TimePickerView(
+            onDismiss = { scheduleViewModel.closeDialog() },
+            confirmEvent = { startHour, startMinute, endHour, endMinute ->
+                setConfirmEvent(state, startHour, startMinute, endHour, endMinute)
+                scheduleViewModel.closeDialog()
+            }
+        )
+    }
+
+    private fun setConfirmEvent(
+        state: TimePickerState,
+        startHour: Int,
+        startMinute: Int,
+        endHour: Int,
+        endMinute: Int
+    ) {
+        when (state) {
+            TimePickerState.Add -> scheduleViewModel.addDateSchedule(startHour, startMinute, endHour, endMinute)
+            TimePickerState.Edit -> scheduleViewModel.editDateSchedule(startHour, startMinute, endHour, endMinute)
+            else -> error("무슨 일이지?")
         }
     }
 

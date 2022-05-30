@@ -10,6 +10,7 @@ import com.wap.base.provider.DispatcherProvider
 import com.wap.data.repository.ScheduleRepository
 import com.wap.domain.entity.Schedule
 import com.wap.storemanagement.fake.FakeFactory
+import com.wap.storemanagement.ui.schedule.TimePickerState
 import com.wap.storemanagement.utils.toDate
 import com.wap.storemanagement.utils.toLocalDateTime
 import com.wap.storemanagement.utils.toScheduleDate
@@ -62,15 +63,15 @@ class ScheduleViewModel @Inject constructor(
 
     fun saveButtonEvent() = scheduleRepository.saveViewModelToDB(_currentDateSchedules.value ?: emptyList())
 
-    private var _isShowTimePicker: MutableLiveData<Boolean> = MutableLiveData(false)
-    val  isShowTimePicker: LiveData<Boolean> = _isShowTimePicker
+    private var _timePickerState: MutableLiveData<TimePickerState> = MutableLiveData(TimePickerState.Close)
+    val timePickerState: LiveData<TimePickerState> = _timePickerState
 
-    fun showDialog() {
-        _isShowTimePicker.value = true
+    fun showDialog(option: TimePickerState) {
+        _timePickerState.value = option
     }
 
     fun closeDialog() {
-        _isShowTimePicker.value = false
+        _timePickerState.value = TimePickerState.Close
     }
 
     fun addDateSchedule(startHour: Int, startMinute: Int, endHour: Int, endMinute: Int) {
@@ -95,5 +96,35 @@ class ScheduleViewModel @Inject constructor(
             userId = 1L
         )
         _currentDateSchedules.value = _currentDateSchedules.value?.plus(schedule) ?: listOf(schedule)
+    }
+
+    lateinit var scheduleForEdit: Schedule
+
+    fun editDateSchedule(startHour: Int, startMinute: Int, endHour: Int, endMinute: Int) {
+        val editScheduleIndex = _currentDateSchedules.value!!.indexOf(scheduleForEdit)
+        val editedSchedule = Schedule(
+            scheduleId = scheduleForEdit.scheduleId,
+            startTime = LocalDateTime.of(
+                scheduleForEdit.startTime.year,
+                scheduleForEdit.startTime.month,
+                scheduleForEdit.startTime.dayOfMonth,
+                startHour,
+                startMinute
+            ),
+            endTime = LocalDateTime.of(
+                scheduleForEdit.endTime.year,
+                scheduleForEdit.endTime.month,
+                scheduleForEdit.endTime.dayOfMonth,
+                endHour,
+                endMinute
+            ),
+            color = scheduleForEdit.color,
+            recurWeek = scheduleForEdit.recurWeek,
+            userId = scheduleForEdit.userId
+        )
+
+        _currentDateSchedules.value = _currentDateSchedules.value?.toMutableList().apply {
+            this?.set(editScheduleIndex, editedSchedule)
+        }
     }
 }
