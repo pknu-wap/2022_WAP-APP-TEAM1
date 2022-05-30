@@ -64,11 +64,10 @@ fun TimePickerView(
             ) { option ->
                 selectedOption.value = option
             }
-            InputTime(
-                hour = if (selectedOption.value == TimeTitle.StartTime) startHour else endHour,
-                minute = if (selectedOption.value == TimeTitle.StartTime) startMinute else endMinute,
-                timeOption = if (selectedOption.value == TimeTitle.StartTime) startAmPm else endAmPm
-            )
+            when (selectedOption.value) {
+                TimeTitle.StartTime -> InputTime(hour = startHour, minute = startMinute, timeOption = startAmPm)
+                TimeTitle.EndTime -> InputTime(hour = endHour, minute = endMinute, timeOption = endAmPm)
+            }
             CancelAddButton(
                 cancelEvent = { onDismiss() },
                 confirmEvent = {
