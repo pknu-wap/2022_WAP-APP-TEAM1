@@ -5,3 +5,8 @@ enum class TimePickerState {
     Edit,
     Close
 }
+
+enum class DeleteButtonState {
+    ON,
+    OFF
+}
