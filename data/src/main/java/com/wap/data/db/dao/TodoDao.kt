@@ -8,17 +8,17 @@ import kotlinx.coroutines.flow.Flow
 interface TodoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(dto: TodoEntity)
+    fun createToDo(dto: TodoEntity)
 
     @Query("select * from ToDo")
     fun fetchToDoList(): Flow<List<TodoEntity>>
 
     @Query("select * from ToDo where toDoId = (:toDoId)")
-    fun selectOne(toDoId: Long): TodoEntity
+    fun fetchToDoById(toDoId: Long): Flow<TodoEntity>
 
     @Update
-    suspend fun update(dto: TodoEntity)
+    suspend fun updateToDo(dto: TodoEntity)
 
     @Delete
-    fun delete(dto: TodoEntity)
+    fun deleteToDo(dto: TodoEntity)
 }
