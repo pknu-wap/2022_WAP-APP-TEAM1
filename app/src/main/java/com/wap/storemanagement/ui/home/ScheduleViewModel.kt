@@ -10,6 +10,7 @@ import com.wap.base.provider.DispatcherProvider
 import com.wap.data.repository.ScheduleRepository
 import com.wap.domain.entity.Schedule
 import com.wap.storemanagement.fake.FakeFactory
+import com.wap.storemanagement.ui.schedule.DeleteButtonState
 import com.wap.storemanagement.ui.schedule.TimePickerState
 import com.wap.storemanagement.utils.toDate
 import com.wap.storemanagement.utils.toLocalDateTime
@@ -30,6 +31,10 @@ class ScheduleViewModel @Inject constructor(
     val currentDataSchedules: LiveData<List<Schedule>> = _currentDateSchedules
     var currentDate = scheduleRepository.currentDate
         private set
+    private var _timePickerState: MutableLiveData<TimePickerState> = MutableLiveData(TimePickerState.Close)
+    val timePickerState: LiveData<TimePickerState> = _timePickerState
+    private var _addEditDeleteButtonState: MutableLiveData<DeleteButtonState> = MutableLiveData(DeleteButtonState.OFF)
+    val addEditDeleteButtonState: LiveData<DeleteButtonState> = _addEditDeleteButtonState
 
     init {
         setCurrentDateSchedules()
@@ -62,9 +67,6 @@ class ScheduleViewModel @Inject constructor(
     private fun saveCurrentDate() = scheduleRepository.saveCurrentDate(currentDate)
 
     fun saveButtonEvent() = scheduleRepository.saveViewModelToDB(_currentDateSchedules.value ?: emptyList())
-
-    private var _timePickerState: MutableLiveData<TimePickerState> = MutableLiveData(TimePickerState.Close)
-    val timePickerState: LiveData<TimePickerState> = _timePickerState
 
     fun showDialog(option: TimePickerState) {
         _timePickerState.value = option
