@@ -15,7 +15,10 @@ import com.wap.storemanagement.R
 import com.wap.storemanagement.ui.schedule.DeleteButtonState
 
 @Composable
-fun AddEditScheduleTopAppBar(deleteButtonState: DeleteButtonState) {
+fun AddEditScheduleTopAppBar(
+    deleteButtonState: DeleteButtonState,
+    onClickDeleteButton: () -> Unit
+) {
     val backgroundColor = colorResource(id = R.color.schedule_top_appbar_background)
 
     TopAppBar (
@@ -27,17 +30,23 @@ fun AddEditScheduleTopAppBar(deleteButtonState: DeleteButtonState) {
             }
         },
         actions = {
-            DeleteButton(deleteButtonState = deleteButtonState)
+            DeleteButton(
+                deleteButtonState = deleteButtonState,
+                onClick = onClickDeleteButton
+            )
         }
     )
 }
 
 @Composable
-private fun DeleteButton(deleteButtonState: DeleteButtonState) {
+private fun DeleteButton(
+    deleteButtonState: DeleteButtonState,
+    onClick: () -> Unit
+) {
     when (deleteButtonState) {
         DeleteButtonState.ON ->
             IconButton(
-                onClick = {},
+                onClick = { onClick() },
                 content = { Icon(imageVector = Icons.Default.Delete, contentDescription = "") }
             )
         DeleteButtonState.OFF ->
@@ -52,5 +61,8 @@ private fun DeleteButton(deleteButtonState: DeleteButtonState) {
 @Preview
 @Composable
 fun PreviewAddScheduleTopAppBar() {
-    AddEditScheduleTopAppBar(DeleteButtonState.ON)
+    AddEditScheduleTopAppBar(
+        deleteButtonState = DeleteButtonState.ON,
+        onClickDeleteButton = {}
+    )
 }
