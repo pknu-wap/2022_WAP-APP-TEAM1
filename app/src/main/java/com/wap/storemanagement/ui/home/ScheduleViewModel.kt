@@ -51,12 +51,20 @@ class ScheduleViewModel @Inject constructor(
         _addEditDeleteButtonState = DeleteButtonState.OFF
     }
 
-    fun onChecked () {
+    fun onChecked (index: Int) {
         _checkedState.value = _checkedState.value?.plus(1)
+        val onCheckedSchedule = _currentDateSchedules.value?.get(index)!!.copy(checkedState = true)
+        _currentDateSchedules.value = _currentDateSchedules.value?.toMutableList().apply {
+            this?.set(index, onCheckedSchedule)
+        }
     }
 
-    fun unChecked () {
+    fun unChecked (index: Int) {
         _checkedState.value = _checkedState.value?.minus(1)
+        val unCheckedSchedule = _currentDateSchedules.value?.get(index)!!.copy(checkedState = false)
+        _currentDateSchedules.value = _currentDateSchedules.value?.toMutableList().apply {
+            this?.set(index, unCheckedSchedule)
+        }
     }
 
     init {
@@ -118,6 +126,7 @@ class ScheduleViewModel @Inject constructor(
             ),
             color = "",
             recurWeek = null,
+            checkedState = false,
             userId = 1L
         )
         _currentDateSchedules.value = _currentDateSchedules.value?.plus(schedule) ?: listOf(schedule)
@@ -129,6 +138,7 @@ class ScheduleViewModel @Inject constructor(
         endTime = LocalDateTime.now(),
         color = "",
         recurWeek = null,
+        checkedState = false,
         userId = 1L
     )
 
