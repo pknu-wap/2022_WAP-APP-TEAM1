@@ -8,6 +8,7 @@ data class Schedule(
     val endTime: LocalDateTime,
     val color: String,
     val recurWeek: WeekType? = null,
+    val checked: Boolean,
     val userId: Long, // 외래키
 )
 

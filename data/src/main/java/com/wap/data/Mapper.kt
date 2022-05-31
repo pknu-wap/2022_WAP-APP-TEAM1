@@ -20,7 +20,8 @@ fun ScheduleEntity.toSchedule() = Schedule(
     endTime = toLocalDateTime(endTime),
     color = color,
     recurWeek = toRecurWeek(recurWeek),
-    userId = userId
+    userId = userId,
+    checked = false
 )
 
 @RequiresApi(Build.VERSION_CODES.O)

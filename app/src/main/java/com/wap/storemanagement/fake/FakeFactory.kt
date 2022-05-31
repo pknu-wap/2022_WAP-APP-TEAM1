@@ -16,6 +16,7 @@ object FakeFactory {
             endTime = LocalDateTime.of(2022, 5, 5, 13, 0),
             color = "",
             recurWeek = WeekType.FRI,
+            checked = false,
             userId = 1L
         ),
         Schedule(
@@ -24,6 +25,7 @@ object FakeFactory {
             endTime = LocalDateTime.of(2022, 5, 6, 17, 0),
             color = "",
             recurWeek = WeekType.FRI,
+            checked = false,
             userId = 1L
         )
     )
