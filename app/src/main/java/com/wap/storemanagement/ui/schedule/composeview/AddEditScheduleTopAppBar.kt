@@ -52,5 +52,5 @@ private fun DeleteButton(deleteButtonState: DeleteButtonState) {
 @Preview
 @Composable
 fun PreviewAddScheduleTopAppBar() {
-    AddEditScheduleTopAppBar(DeleteButtonState.OFF)
+    AddEditScheduleTopAppBar(DeleteButtonState.ON)
 }

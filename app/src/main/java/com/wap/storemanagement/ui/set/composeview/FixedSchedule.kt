@@ -76,7 +76,8 @@ fun SelectedRecurSchedules(
             ScheduleCard(
                 startTime = startTime,
                 endTime = endTime,
-                onClick = { onClickSchedule(schedule) }
+                onClick = { onClickSchedule(schedule) },
+                checked = {}
             )
         }
         scope.item { AddScheduleCard(onClick = onClickAdd) }
