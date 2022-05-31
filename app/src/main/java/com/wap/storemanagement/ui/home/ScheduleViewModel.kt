@@ -180,5 +180,6 @@ class ScheduleViewModel @Inject constructor(
     fun deleteCheckedSchedules() {
         val schedules = _currentDateSchedules.value?.toMutableList() ?: emptyList()
         _currentDateSchedules.value = schedules.filter { !it.checked }
+        _checkedState.value = 0
     }
 }
