@@ -44,7 +44,7 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
                 schedules = scheduleViewModel.currentDataSchedules.value ?: emptyList(),
                 onClickAdd = { scheduleViewModel.showDialog(TimePickerState.Add) },
                 onClickSchedule = { scheduleViewModel.showDialog(TimePickerState.Edit) },
-                checkedState = { checkedState -> changeCheckState(checkedState) }
+                checkedState = { checkedState, index -> changeCheckState(checkedState, index) }
             )
         }
     }
@@ -56,7 +56,10 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
                 else -> scheduleViewModel.onDeleteButton()
             }
             binding.composeScheduleTopAppbar.setContent {
-                AddEditScheduleTopAppBar(scheduleViewModel.addEditDeleteButtonState)
+                AddEditScheduleTopAppBar(
+                    deleteButtonState = scheduleViewModel.addEditDeleteButtonState,
+                    onClickDeleteButton = { scheduleViewModel.deleteCheckedSchedules() }
+                )
             }
         }
     }
@@ -71,7 +74,7 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
                         scheduleViewModel.showDialog(TimePickerState.Edit)
                         scheduleViewModel.getSchedule(schedule)
                     },
-                    checkedState = { checkedState -> changeCheckState(checkedState) }
+                    checkedState = { checkedState, index -> changeCheckState(checkedState, index) }
                 )
             }
         }
@@ -119,10 +122,10 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
         }
     }
 
-    private fun changeCheckState(checkedState: CheckBoxState) {
+    private fun changeCheckState(checkedState: CheckBoxState, index: Int) {
         when (checkedState) {
-            CheckBoxState.ON -> scheduleViewModel.onChecked()
-            else -> scheduleViewModel.unChecked()
+            CheckBoxState.ON -> scheduleViewModel.onChecked(index)
+            else -> scheduleViewModel.unChecked(index)
         }
     }
 }

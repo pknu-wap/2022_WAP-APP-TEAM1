@@ -24,7 +24,7 @@ fun ScheduleView(
     schedules: List<Schedule>,
     onClickAdd: () -> Unit,
     onClickSchedule: (Schedule) -> Unit,
-    checkedState: (CheckBoxState) -> Unit
+    checkedState: (CheckBoxState, Int) -> Unit
 ) {
     BaseScheduleLazyColumn { scope ->
         scope.items(
@@ -37,7 +37,7 @@ fun ScheduleView(
                 startTime = startTime,
                 endTime = endTime,
                 onClick = { onClickSchedule(schedule) },
-                checked = { state -> checkedState(state) }
+                checked = { state -> checkedState(state, schedules.indexOf(schedule)) }
             )
         }
         scope.item { AddScheduleCard(onClick = onClickAdd) }

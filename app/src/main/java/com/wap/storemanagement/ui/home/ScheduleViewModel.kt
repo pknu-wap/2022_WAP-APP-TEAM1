@@ -53,7 +53,7 @@ class ScheduleViewModel @Inject constructor(
 
     fun onChecked (index: Int) {
         _checkedState.value = _checkedState.value?.plus(1)
-        val onCheckedSchedule = _currentDateSchedules.value?.get(index)!!.copy(checkedState = true)
+        val onCheckedSchedule = _currentDateSchedules.value?.get(index)!!.copy(checked = true)
         _currentDateSchedules.value = _currentDateSchedules.value?.toMutableList().apply {
             this?.set(index, onCheckedSchedule)
         }
@@ -61,7 +61,7 @@ class ScheduleViewModel @Inject constructor(
 
     fun unChecked (index: Int) {
         _checkedState.value = _checkedState.value?.minus(1)
-        val unCheckedSchedule = _currentDateSchedules.value?.get(index)!!.copy(checkedState = false)
+        val unCheckedSchedule = _currentDateSchedules.value?.get(index)!!.copy(checked = false)
         _currentDateSchedules.value = _currentDateSchedules.value?.toMutableList().apply {
             this?.set(index, unCheckedSchedule)
         }
@@ -126,7 +126,7 @@ class ScheduleViewModel @Inject constructor(
             ),
             color = "",
             recurWeek = null,
-            checkedState = false,
+            checked = false,
             userId = 1L
         )
         _currentDateSchedules.value = _currentDateSchedules.value?.plus(schedule) ?: listOf(schedule)
@@ -138,7 +138,7 @@ class ScheduleViewModel @Inject constructor(
         endTime = LocalDateTime.now(),
         color = "",
         recurWeek = null,
-        checkedState = false,
+        checked = false,
         userId = 1L
     )
 
@@ -168,11 +168,17 @@ class ScheduleViewModel @Inject constructor(
             ),
             color = _scheduleForEdit.color,
             recurWeek = _scheduleForEdit.recurWeek,
+            checked = false,
             userId = _scheduleForEdit.userId
         )
 
         _currentDateSchedules.value = _currentDateSchedules.value?.toMutableList().apply {
             this?.set(editScheduleIndex, editedSchedule)
         }
+    }
+
+    fun deleteCheckedSchedules() {
+        val schedules = _currentDateSchedules.value?.toMutableList() ?: emptyList()
+        _currentDateSchedules.value = schedules.filter { !it.checked }
     }
 }
