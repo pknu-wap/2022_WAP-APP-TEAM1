@@ -10,3 +10,8 @@ enum class DeleteButtonState {
     ON,
     OFF
 }
+
+enum class CheckBoxState {
+    ON,
+    OFF
+}
