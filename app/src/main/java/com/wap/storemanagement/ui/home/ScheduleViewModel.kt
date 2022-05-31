@@ -26,15 +26,38 @@ class ScheduleViewModel @Inject constructor(
     private val scheduleRepository: ScheduleRepository
 ) : BaseViewModel(dispatcherProvider) {
 
+    private var _checkedState: MutableLiveData<Int> = MutableLiveData(0)
+    val checkedState: LiveData<Int> = _checkedState
+
     private var _schedules: MutableLiveData<List<Schedule>> = MutableLiveData()
-    private val _currentDateSchedules: MutableLiveData<List<Schedule>> = MutableLiveData()
+
+    private val _currentDateSchedules = MutableLiveData<List<Schedule>>()
     val currentDataSchedules: LiveData<List<Schedule>> = _currentDateSchedules
+
     var currentDate = scheduleRepository.currentDate
         private set
-    private var _timePickerState: MutableLiveData<TimePickerState> = MutableLiveData(TimePickerState.Close)
+
+    private var _timePickerState = MutableLiveData(TimePickerState.Close)
     val timePickerState: LiveData<TimePickerState> = _timePickerState
-    private var _addEditDeleteButtonState: MutableLiveData<DeleteButtonState> = MutableLiveData(DeleteButtonState.OFF)
-    val addEditDeleteButtonState: LiveData<DeleteButtonState> = _addEditDeleteButtonState
+
+    private var _addEditDeleteButtonState: DeleteButtonState = DeleteButtonState.OFF
+    val addEditDeleteButtonState: DeleteButtonState get() = _addEditDeleteButtonState
+
+    fun onDeleteButton() {
+        _addEditDeleteButtonState = DeleteButtonState.ON
+    }
+
+    fun offDeleteButton() {
+        _addEditDeleteButtonState = DeleteButtonState.OFF
+    }
+
+    fun onChecked () {
+        _checkedState.value = _checkedState.value?.plus(1)
+    }
+
+    fun unChecked () {
+        _checkedState.value = _checkedState.value?.minus(1)
+    }
 
     init {
         setCurrentDateSchedules()
@@ -100,29 +123,42 @@ class ScheduleViewModel @Inject constructor(
         _currentDateSchedules.value = _currentDateSchedules.value?.plus(schedule) ?: listOf(schedule)
     }
 
-    lateinit var scheduleForEdit: Schedule
+    private val defaultSchedule = Schedule(
+        scheduleId = -1L,
+        startTime = LocalDateTime.now(),
+        endTime = LocalDateTime.now(),
+        color = "",
+        recurWeek = null,
+        userId = 1L
+    )
+
+    private var _scheduleForEdit: Schedule = defaultSchedule
+
+    fun getSchedule(schedule: Schedule) {
+        _scheduleForEdit = schedule
+    }
 
     fun editDateSchedule(startHour: Int, startMinute: Int, endHour: Int, endMinute: Int) {
-        val editScheduleIndex = _currentDateSchedules.value!!.indexOf(scheduleForEdit)
+        val editScheduleIndex = _currentDateSchedules.value!!.indexOf(_scheduleForEdit)
         val editedSchedule = Schedule(
-            scheduleId = scheduleForEdit.scheduleId,
+            scheduleId = _scheduleForEdit.scheduleId,
             startTime = LocalDateTime.of(
-                scheduleForEdit.startTime.year,
-                scheduleForEdit.startTime.month,
-                scheduleForEdit.startTime.dayOfMonth,
+                _scheduleForEdit.startTime.year,
+                _scheduleForEdit.startTime.month,
+                _scheduleForEdit.startTime.dayOfMonth,
                 startHour,
                 startMinute
             ),
             endTime = LocalDateTime.of(
-                scheduleForEdit.endTime.year,
-                scheduleForEdit.endTime.month,
-                scheduleForEdit.endTime.dayOfMonth,
+                _scheduleForEdit.endTime.year,
+                _scheduleForEdit.endTime.month,
+                _scheduleForEdit.endTime.dayOfMonth,
                 endHour,
                 endMinute
             ),
-            color = scheduleForEdit.color,
-            recurWeek = scheduleForEdit.recurWeek,
-            userId = scheduleForEdit.userId
+            color = _scheduleForEdit.color,
+            recurWeek = _scheduleForEdit.recurWeek,
+            userId = _scheduleForEdit.userId
         )
 
         _currentDateSchedules.value = _currentDateSchedules.value?.toMutableList().apply {
