@@ -21,11 +21,11 @@ fun AddEditScheduleTopAppBar(
 ) {
     val backgroundColor = colorResource(id = R.color.schedule_top_appbar_background)
 
-    TopAppBar (
+    TopAppBar(
         title = { Text(text = stringResource(R.string.schedule_top_appbar_title)) },
         backgroundColor = backgroundColor,
         navigationIcon = {
-            IconButton(onClick = {  }) {
+            IconButton(onClick = { }) {
                 Icon(Icons.Default.ArrowBackIos, "ArrowBack")
             }
         },

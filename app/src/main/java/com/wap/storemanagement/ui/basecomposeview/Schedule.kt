@@ -92,7 +92,7 @@ fun ScheduleCard(
                         true -> checked(CheckBoxState.ON)
                         false -> checked(CheckBoxState.OFF)
                     }
-                                  },
+                },
                 colors = CheckboxDefaults.colors(checkBoxColor),
                 modifier = Modifier.weight(0.2f)
             )
