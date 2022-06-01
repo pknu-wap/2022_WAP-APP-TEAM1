@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.wap.domain.entity.Schedule
 import com.wap.storemanagement.R
+import com.wap.storemanagement.ui.schedule.CheckBoxState
 import java.time.LocalTime
 
 @Composable
@@ -39,7 +40,12 @@ fun BaseScheduleLazyColumn(block: (LazyListScope) -> Unit) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScheduleCard(startTime: LocalTime, endTime: LocalTime, onClick: () -> Unit) {
+fun ScheduleCard(
+    startTime: LocalTime,
+    endTime: LocalTime,
+    onClick: () -> Unit,
+    checked: (CheckBoxState) -> Unit
+) {
     val checkBoxColor = colorResource(id = R.color.schedule_check_box)
     val grayTextColor = colorResource(id = R.color.gray_text)
     val checkedState = remember { mutableStateOf(false) }
@@ -80,7 +86,13 @@ fun ScheduleCard(startTime: LocalTime, endTime: LocalTime, onClick: () -> Unit) 
 
             Checkbox(
                 checked = checkedState.value,
-                onCheckedChange = { checkedState.value = it },
+                onCheckedChange = {
+                    checkedState.value = it
+                    when (it) {
+                        true -> checked(CheckBoxState.ON)
+                        false -> checked(CheckBoxState.OFF)
+                    }
+                },
                 colors = CheckboxDefaults.colors(checkBoxColor),
                 modifier = Modifier.weight(0.2f)
             )

@@ -16,6 +16,7 @@ import com.wap.storemanagement.ui.basecomposeview.AddScheduleCard
 import com.wap.storemanagement.ui.basecomposeview.BaseScheduleLazyColumn
 import com.wap.storemanagement.ui.basecomposeview.ScheduleCard
 import com.wap.storemanagement.ui.basecomposeview.keyForScheduleLazyColumn
+import com.wap.storemanagement.ui.schedule.CheckBoxState
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -23,6 +24,7 @@ fun ScheduleView(
     schedules: List<Schedule>,
     onClickAdd: () -> Unit,
     onClickSchedule: (Schedule) -> Unit,
+    checkedState: (CheckBoxState, Int) -> Unit
 ) {
     BaseScheduleLazyColumn { scope ->
         scope.items(
@@ -34,7 +36,8 @@ fun ScheduleView(
             ScheduleCard(
                 startTime = startTime,
                 endTime = endTime,
-                onClick = { onClickSchedule(schedule) }
+                onClick = { onClickSchedule(schedule) },
+                checked = { state -> checkedState(state, schedules.indexOf(schedule)) }
             )
         }
         scope.item { AddScheduleCard(onClick = onClickAdd) }

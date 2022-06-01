@@ -2,7 +2,6 @@ package com.wap.storemanagement.ui.schedule
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
@@ -24,7 +23,7 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.composeScheduleTopAppbar.setContent { AddEditScheduleTopAppBar() }
+        setTopAppBar()
         setCheckDateView()
         setScrollScheduleView()
         fetchScrollScheduleView()
@@ -44,8 +43,24 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
             ScheduleView(
                 schedules = scheduleViewModel.currentDataSchedules.value ?: emptyList(),
                 onClickAdd = { scheduleViewModel.showDialog(TimePickerState.Add) },
-                onClickSchedule = { scheduleViewModel.showDialog(TimePickerState.Edit) }
+                onClickSchedule = { scheduleViewModel.showDialog(TimePickerState.Edit) },
+                checkedState = { checkedState, index -> changeCheckState(checkedState, index) }
             )
+        }
+    }
+
+    private fun setTopAppBar() {
+        scheduleViewModel.checkedState.observe(this) { checkedState ->
+            when (checkedState) {
+                0 -> scheduleViewModel.offDeleteButton()
+                else -> scheduleViewModel.onDeleteButton()
+            }
+            binding.composeScheduleTopAppbar.setContent {
+                AddEditScheduleTopAppBar(
+                    deleteButtonState = scheduleViewModel.addEditDeleteButtonState,
+                    onClickDeleteButton = { scheduleViewModel.deleteCheckedSchedules() }
+                )
+            }
         }
     }
 
@@ -57,8 +72,9 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
                     onClickAdd = { scheduleViewModel.showDialog(TimePickerState.Add) },
                     onClickSchedule = { schedule ->
                         scheduleViewModel.showDialog(TimePickerState.Edit)
-                        scheduleViewModel.scheduleForEdit = schedule
-                    }
+                        scheduleViewModel.getSchedule(schedule)
+                    },
+                    checkedState = { checkedState, index -> changeCheckState(checkedState, index) }
                 )
             }
         }
@@ -103,6 +119,13 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
     private fun setSaveButton() {
         binding.composeScheduleSaveButton.setContent {
             SaveButton { scheduleViewModel.saveButtonEvent() }
+        }
+    }
+
+    private fun changeCheckState(checkedState: CheckBoxState, index: Int) {
+        when (checkedState) {
+            CheckBoxState.ON -> scheduleViewModel.onChecked(index)
+            else -> scheduleViewModel.unChecked(index)
         }
     }
 }

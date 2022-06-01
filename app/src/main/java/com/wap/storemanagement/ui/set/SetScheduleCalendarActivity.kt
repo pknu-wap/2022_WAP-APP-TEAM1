@@ -2,7 +2,6 @@ package com.wap.storemanagement.ui.set
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.RequiresApi
 import com.wap.base.BaseActivity
 import com.wap.storemanagement.R
@@ -34,10 +33,10 @@ class SetScheduleCalendarActivity : BaseActivity<ActivitySetBinding>(R.layout.ac
         binding.composeSetSelectedDaySchedules.setContent {
             // TODO: viewModel 작성 후 연결
             SelectedRecurSchedules(
-                schedules = FakeFactory.createSchedules()
-            ) {
-                Log.i("todo", "click 'add button' in set")
-            }
+                schedules = FakeFactory.createSchedules(),
+                onClickAdd = { },
+                onClickSchedule = { }
+            )
         }
     }
 }

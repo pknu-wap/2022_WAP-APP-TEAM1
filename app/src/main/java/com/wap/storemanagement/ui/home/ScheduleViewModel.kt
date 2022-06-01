@@ -10,6 +10,7 @@ import com.wap.base.provider.DispatcherProvider
 import com.wap.data.repository.ScheduleRepository
 import com.wap.domain.entity.Schedule
 import com.wap.storemanagement.fake.FakeFactory
+import com.wap.storemanagement.ui.schedule.DeleteButtonState
 import com.wap.storemanagement.ui.schedule.TimePickerState
 import com.wap.storemanagement.utils.toDate
 import com.wap.storemanagement.utils.toLocalDateTime
@@ -25,11 +26,46 @@ class ScheduleViewModel @Inject constructor(
     private val scheduleRepository: ScheduleRepository
 ) : BaseViewModel(dispatcherProvider) {
 
+    private var _checkedState: MutableLiveData<Int> = MutableLiveData(0)
+    val checkedState: LiveData<Int> = _checkedState
+
     private var _schedules: MutableLiveData<List<Schedule>> = MutableLiveData()
-    private val _currentDateSchedules: MutableLiveData<List<Schedule>> = MutableLiveData()
+
+    private val _currentDateSchedules = MutableLiveData<List<Schedule>>()
     val currentDataSchedules: LiveData<List<Schedule>> = _currentDateSchedules
+
     var currentDate = scheduleRepository.currentDate
         private set
+
+    private var _timePickerState = MutableLiveData(TimePickerState.Close)
+    val timePickerState: LiveData<TimePickerState> = _timePickerState
+
+    private var _addEditDeleteButtonState: DeleteButtonState = DeleteButtonState.OFF
+    val addEditDeleteButtonState: DeleteButtonState get() = _addEditDeleteButtonState
+
+    fun onDeleteButton() {
+        _addEditDeleteButtonState = DeleteButtonState.ON
+    }
+
+    fun offDeleteButton() {
+        _addEditDeleteButtonState = DeleteButtonState.OFF
+    }
+
+    fun onChecked(index: Int) {
+        _checkedState.value = _checkedState.value?.plus(1)
+        val onCheckedSchedule = _currentDateSchedules.value?.get(index)!!.copy(checked = true)
+        _currentDateSchedules.value = _currentDateSchedules.value?.toMutableList().apply {
+            this?.set(index, onCheckedSchedule)
+        }
+    }
+
+    fun unChecked(index: Int) {
+        _checkedState.value = _checkedState.value?.minus(1)
+        val unCheckedSchedule = _currentDateSchedules.value?.get(index)!!.copy(checked = false)
+        _currentDateSchedules.value = _currentDateSchedules.value?.toMutableList().apply {
+            this?.set(index, unCheckedSchedule)
+        }
+    }
 
     init {
         setCurrentDateSchedules()
@@ -63,9 +99,6 @@ class ScheduleViewModel @Inject constructor(
 
     fun saveButtonEvent() = scheduleRepository.saveViewModelToDB(_currentDateSchedules.value ?: emptyList())
 
-    private var _timePickerState: MutableLiveData<TimePickerState> = MutableLiveData(TimePickerState.Close)
-    val timePickerState: LiveData<TimePickerState> = _timePickerState
-
     fun showDialog(option: TimePickerState) {
         _timePickerState.value = option
     }
@@ -93,38 +126,60 @@ class ScheduleViewModel @Inject constructor(
             ),
             color = "",
             recurWeek = null,
+            checked = false,
             userId = 1L
         )
         _currentDateSchedules.value = _currentDateSchedules.value?.plus(schedule) ?: listOf(schedule)
     }
 
-    lateinit var scheduleForEdit: Schedule
+    private val defaultSchedule = Schedule(
+        scheduleId = -1L,
+        startTime = LocalDateTime.now(),
+        endTime = LocalDateTime.now(),
+        color = "",
+        recurWeek = null,
+        checked = false,
+        userId = 1L
+    )
+
+    private var _scheduleForEdit: Schedule = defaultSchedule
+
+    fun getSchedule(schedule: Schedule) {
+        _scheduleForEdit = schedule
+    }
 
     fun editDateSchedule(startHour: Int, startMinute: Int, endHour: Int, endMinute: Int) {
-        val editScheduleIndex = _currentDateSchedules.value!!.indexOf(scheduleForEdit)
+        val editScheduleIndex = _currentDateSchedules.value!!.indexOf(_scheduleForEdit)
         val editedSchedule = Schedule(
-            scheduleId = scheduleForEdit.scheduleId,
+            scheduleId = _scheduleForEdit.scheduleId,
             startTime = LocalDateTime.of(
-                scheduleForEdit.startTime.year,
-                scheduleForEdit.startTime.month,
-                scheduleForEdit.startTime.dayOfMonth,
+                _scheduleForEdit.startTime.year,
+                _scheduleForEdit.startTime.month,
+                _scheduleForEdit.startTime.dayOfMonth,
                 startHour,
                 startMinute
             ),
             endTime = LocalDateTime.of(
-                scheduleForEdit.endTime.year,
-                scheduleForEdit.endTime.month,
-                scheduleForEdit.endTime.dayOfMonth,
+                _scheduleForEdit.endTime.year,
+                _scheduleForEdit.endTime.month,
+                _scheduleForEdit.endTime.dayOfMonth,
                 endHour,
                 endMinute
             ),
-            color = scheduleForEdit.color,
-            recurWeek = scheduleForEdit.recurWeek,
-            userId = scheduleForEdit.userId
+            color = _scheduleForEdit.color,
+            recurWeek = _scheduleForEdit.recurWeek,
+            checked = false,
+            userId = _scheduleForEdit.userId
         )
 
         _currentDateSchedules.value = _currentDateSchedules.value?.toMutableList().apply {
             this?.set(editScheduleIndex, editedSchedule)
         }
+    }
+
+    fun deleteCheckedSchedules() {
+        val schedules = _currentDateSchedules.value?.toMutableList() ?: emptyList()
+        _currentDateSchedules.value = schedules.filter { !it.checked }
+        _checkedState.value = 0
     }
 }
