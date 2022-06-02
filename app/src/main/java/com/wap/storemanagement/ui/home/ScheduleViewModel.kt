@@ -97,7 +97,9 @@ class ScheduleViewModel @Inject constructor(
 
     private fun saveCurrentDate() = scheduleRepository.saveCurrentDate(currentDate)
 
-    fun saveButtonEvent() = scheduleRepository.saveViewModelToDB(_currentDateSchedules.value ?: emptyList())
+    fun saveButtonEvent() = onIo {
+        scheduleRepository.saveViewModelToDB(_currentDateSchedules.value ?: emptyList())
+    }
 
     fun showDialog(option: TimePickerState) {
         _timePickerState.value = option
