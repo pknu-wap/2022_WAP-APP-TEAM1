@@ -16,8 +16,11 @@ interface ScheduleDao {
     @Query("SELECT * FROM SCHEDULE WHERE user_id = :userId")
     fun findSchedulesByUserId(userId: Long): List<ScheduleEntity>?
 
-    @Query("SELECT * FROM SCHEDULE WHERE startTime = :startTime")
-    fun findSchedulesByStartDate(startTime: LocalDateTime): List<ScheduleEntity>?
+    // @Query("SELECT * FROM SCHEDULE WHERE startTime = :startTime")
+    // fun findSchedulesByStartDate(startTime: LocalDateTime): List<ScheduleEntity>?
+
+    @Query("SELECT * FROM SCHEDULE WHERE startTime between :startDateMin and :startDateMax")
+    fun findSchedulesByStartDate(startDateMin: LocalDateTime, startDateMax: LocalDateTime): List<ScheduleEntity>?
 
     @Query("SELECT * FROM SCHEDULE WHERE scheduleId= :scheduleId")
     fun findScheduleByScheduleId(scheduleId: Long): ScheduleEntity
