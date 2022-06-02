@@ -26,7 +26,6 @@ fun ScheduleEntity.toSchedule() = Schedule(
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun Schedule.toEntity() = ScheduleEntity(
-    scheduleId = scheduleId,
     startTime = fromLocalDateTime(startTime),
     endTime = fromLocalDateTime(endTime),
     color = color,
