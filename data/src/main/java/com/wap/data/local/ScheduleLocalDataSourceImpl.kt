@@ -9,11 +9,15 @@ import com.wap.domain.entity.Schedule
 import com.wap.domain.entity.WeekType
 import com.wap.domain.datasource.ScheduleDataSource
 import java.time.LocalDateTime
+import java.time.LocalTime
 import javax.inject.Inject
 
+@RequiresApi(Build.VERSION_CODES.O)
 class ScheduleLocalDataSourceImpl @Inject constructor(
     private val scheduleDao: ScheduleDao
 ) : ScheduleDataSource {
+
+    private fun LocalDateTime.startDateMax() = LocalDateTime.of(this.toLocalDate(), LocalTime.MAX)
 
     override fun getSchedule(scheduleId: Long): Schedule {
         TODO()
@@ -25,7 +29,8 @@ class ScheduleLocalDataSourceImpl @Inject constructor(
     } ?: emptyList()
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun findSchedulesByStartTime(startTime: LocalDateTime) = scheduleDao.findSchedulesByStartDate(startTime)?.map { scheduleEntity ->
+    override fun findSchedulesByStartTime(startTime: LocalDateTime)
+    = scheduleDao.findSchedulesByStartDate(startDateMin = startTime, startDateMax = startTime.startDateMax())?.map { scheduleEntity ->
         scheduleEntity.toSchedule()
     } ?: emptyList()
 
