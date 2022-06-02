@@ -4,12 +4,18 @@ import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.wap.data.db.AppDatabase
+import com.wap.data.entity.UserEntity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Singleton
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -19,12 +25,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
-        context,
-        AppDatabase::class.java,
-        "AppDatabase.db"
-    )
-        .build()
+    fun provideDatabase(@ApplicationContext context: Context) = AppDatabase.getInstance(context)
 
     @Provides
     @Singleton
