@@ -9,7 +9,7 @@ interface UserDao {
     @Insert
     fun insertUser(user: UserEntity)
 
-    @Query("SELECT * FROM user WHERE user_id = :userId")
+    @Query("SELECT * FROM user WHERE id = :userId")
     fun getUserByUserId(userId: Long): UserEntity
 
     @Update
