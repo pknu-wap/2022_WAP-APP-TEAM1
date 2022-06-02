@@ -3,7 +3,6 @@ package com.wap.data.di.module
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.room.Room
 import com.wap.data.db.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -19,12 +18,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
-        context,
-        AppDatabase::class.java,
-        "AppDatabase.db"
-    )
-        .build()
+    fun provideDatabase(@ApplicationContext context: Context) = AppDatabase.getInstance(context)
 
     @Provides
     @Singleton
