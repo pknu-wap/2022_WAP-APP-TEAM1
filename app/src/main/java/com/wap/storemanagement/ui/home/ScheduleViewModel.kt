@@ -9,7 +9,6 @@ import com.wap.base.BaseViewModel
 import com.wap.base.provider.DispatcherProvider
 import com.wap.data.repository.ScheduleRepository
 import com.wap.domain.entity.Schedule
-import com.wap.storemanagement.fake.FakeFactory
 import com.wap.storemanagement.ui.schedule.DeleteButtonState
 import com.wap.storemanagement.ui.schedule.TimePickerState
 import com.wap.storemanagement.utils.toDate
@@ -28,8 +27,6 @@ class ScheduleViewModel @Inject constructor(
 
     private var _checkedState: MutableLiveData<Int> = MutableLiveData(0)
     val checkedState: LiveData<Int> = _checkedState
-
-    private var _schedules: MutableLiveData<List<Schedule>> = MutableLiveData()
 
     private val _currentDateSchedules = MutableLiveData<List<Schedule>>()
     val currentDataSchedules: LiveData<List<Schedule>> = _currentDateSchedules
@@ -71,11 +68,14 @@ class ScheduleViewModel @Inject constructor(
         setCurrentDateSchedules()
     }
 
-    fun fetchSchedules(date: CalendarDay) {
-        _schedules.value = FakeFactory.createSchedules()
-        // _schedules.value = scheduleRepository.findSchedulesByStartTime(date.toLocalDateTime())
+    fun fetchSchedules(date: CalendarDay) = onIo {
+//        val schedules = FakeFactory.createSchedules()
+         val schedules = scheduleRepository.findSchedulesByStartTime(date.toLocalDateTime())
 
-        _currentDateSchedules.value = _schedules.value?.filter { schedule -> isCurrentDateSchedule(date, schedule) } ?: emptyList()
+        onMain {
+            _currentDateSchedules.value = schedules.filter { schedule -> isCurrentDateSchedule(date, schedule) }
+        }
+
         currentDate = date.toLocalDateTime()
     }
 

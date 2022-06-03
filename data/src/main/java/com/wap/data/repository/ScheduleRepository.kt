@@ -55,9 +55,7 @@ class ScheduleRepository @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun findSchedulesByStartTime(startTime: LocalDateTime): List<Schedule> {
-        TODO("Not yet implemented")
-    }
+    override fun findSchedulesByStartTime(startTime: LocalDateTime): List<Schedule> = scheduleDataSource.findSchedulesByStartTime(startTime)
 
     override fun createSchedule(schedule: Schedule) {
         scheduleDataSource.createSchedule(schedule)
