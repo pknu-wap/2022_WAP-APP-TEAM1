@@ -58,7 +58,8 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
             binding.composeScheduleTopAppbar.setContent {
                 AddEditScheduleTopAppBar(
                     deleteButtonState = scheduleViewModel.addEditDeleteButtonState,
-                    onClickDeleteButton = { scheduleViewModel.deleteCheckedSchedules() }
+                    onClickDeleteButton = { scheduleViewModel.deleteCheckedSchedules() },
+                    onClickBackArrow = { finish() }
                 )
             }
         }
@@ -118,7 +119,10 @@ class AddEditScheduleActivity : BaseActivity<ActivityScheduleBinding>(R.layout.a
 
     private fun setSaveButton() {
         binding.composeScheduleSaveButton.setContent {
-            SaveButton { scheduleViewModel.saveButtonEvent() }
+            SaveButton {
+                scheduleViewModel.saveButtonEvent()
+                finish()
+            }
         }
     }
 

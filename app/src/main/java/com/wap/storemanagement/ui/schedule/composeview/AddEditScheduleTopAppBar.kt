@@ -17,7 +17,8 @@ import com.wap.storemanagement.ui.schedule.DeleteButtonState
 @Composable
 fun AddEditScheduleTopAppBar(
     deleteButtonState: DeleteButtonState,
-    onClickDeleteButton: () -> Unit
+    onClickDeleteButton: () -> Unit,
+    onClickBackArrow: () -> Unit
 ) {
     val backgroundColor = colorResource(id = R.color.schedule_top_appbar_background)
 
@@ -25,7 +26,7 @@ fun AddEditScheduleTopAppBar(
         title = { Text(text = stringResource(R.string.schedule_top_appbar_title)) },
         backgroundColor = backgroundColor,
         navigationIcon = {
-            IconButton(onClick = { }) {
+            IconButton(onClick = { onClickBackArrow() }) {
                 Icon(Icons.Default.ArrowBackIos, "ArrowBack")
             }
         },
@@ -63,6 +64,7 @@ private fun DeleteButton(
 fun PreviewAddScheduleTopAppBar() {
     AddEditScheduleTopAppBar(
         deleteButtonState = DeleteButtonState.ON,
-        onClickDeleteButton = {}
+        onClickDeleteButton = {},
+        onClickBackArrow = {}
     )
 }
